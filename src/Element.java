@@ -1,4 +1,3 @@
-package ija.homework1.uml;
 
 public class Element extends Object{
     private String name;

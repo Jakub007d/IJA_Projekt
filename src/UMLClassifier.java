@@ -1,7 +1,3 @@
-package ija.homework1.uml;
-
-import org.junit.platform.engine.support.hierarchical.ThrowableCollector;
-
 public class UMLClassifier extends Element {
     private boolean isUserDefined;
     public UMLClassifier(String name, boolean isUserDefined)
