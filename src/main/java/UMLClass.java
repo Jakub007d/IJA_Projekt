@@ -74,6 +74,7 @@ public class UMLClass extends UMLClassifier {
      * Pokud třída daný atribut neobsahuje, nic neprovádí a vrací -1.
      * Při přesunu na pozici pos se všechny stávající položky (atributy)
      * od pozice pos (včetně) posunou o jednu pozici doprava.
+     *
      * @param attr Přesunovaný atribut.
      * @param pos Nová pozice.
      * @return Úspech operace.

@@ -12,7 +12,7 @@ import java.util.List;
  * Argument je reprezentován třídou UMLAttribute.
  * Lze použít jako součást UML klasifikátoru třída nebo rozhraní.
  *
- * @author
+ * @author xz
  */
 public class UMLOperation extends UMLAttribute {
     private java.util.List<UMLAttribute> argumentList = new ArrayList<UMLAttribute>();

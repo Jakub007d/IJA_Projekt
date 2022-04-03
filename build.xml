@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project name="ija-app" default="info">
+
+    <property name="source.dir" location="src"/>
+    <property name="doc.dir" location="doc"/>
+    <property name="dist.dir" location="dist"/>
+    <property name="build.dir" location="build"/>
+    <property name="lib.dir" location="lib"/>
+
+    <target name="info">
+        <echo message="Hello World - Welcome to Apache Ant!"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="doc" description="generate documentation">
+        <javadoc encoding="UTF-8" access="package" verbose="true" classpath="${source.dir}" sourcepath="${source.dir}" destdir="${doc.dir}"/>
+    </target>
+
+    <target name="jar" depends="clean,compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/xmlDemo.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="ija.xml.XMLDemo"/>
+                <attribute name="Class-Path" value="lib/dom4j-1.5.2.jar"/>
+            </manifest>
+        </jar>
+        <mkdir dir="${dist.dir}/lib"/>
+        <copy file="${lib.dir}/dom4j-1.5.2.jar" todir="${dist.dir}/lib"/>
+    </target>
+
+    <target name="run">
+        <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
+    </target>
+</project>
