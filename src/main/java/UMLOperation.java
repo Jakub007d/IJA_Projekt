@@ -1,3 +1,7 @@
+/*
+ * IJA 2021/22: Aplikace pro zobrazení a editaci diagramů tříd a sekvenčních diagramů
+ * Autor:
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +11,8 @@ import java.util.List;
  * Je odvozena (rozšiřuje) od třídy UMLAttribute, od které přejímá název a návratový typ.
  * Argument je reprezentován třídou UMLAttribute.
  * Lze použít jako součást UML klasifikátoru třída nebo rozhraní.
+ *
+ * @author
  */
 public class UMLOperation extends UMLAttribute {
     private java.util.List<UMLAttribute> argumentList = new ArrayList<UMLAttribute>();
