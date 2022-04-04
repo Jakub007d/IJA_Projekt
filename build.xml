@@ -41,7 +41,7 @@
     </target>
 
     <!-- TODO -->
-    <target name="run">
+    <target name="UMLHandling.run">
         <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
     </target>
 </project>

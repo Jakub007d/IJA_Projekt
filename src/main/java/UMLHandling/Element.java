@@ -1,3 +1,5 @@
+package UMLHandling;
+
 /**
  * Třída reprezentuje pojmenovaný element (thing),
  * který může být součástí jakékoliv části v diagramu.

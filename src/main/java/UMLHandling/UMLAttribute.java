@@ -1,7 +1,11 @@
+package UMLHandling;
+
+import UMLHandling.Element;
+
 /**
  * Třída reprezentuje atribut, který má své jméno a typ.
- * Je odvozena (rozšiřuje) od třídy Element.
- * Typ atributu je reprezentován třidou UMLClassifier.
+ * Je odvozena (rozšiřuje) od třídy UMLHandling.Element.
+ * Typ atributu je reprezentován třidou UMLHandling.UMLClassifier.
  * Lze použít jako atribut UML třídy nebo argument operace.
  */
 public class UMLAttribute extends Element {

@@ -1,9 +1,11 @@
+package UMLHandling;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * Třída (její instance) reprezentuje model třídy z jazyka UML.
- * Rozšiřuje třídu UMLClassifier. Obsahuje seznam atributů a operací (metod). Třída může být abstraktní.
+ * Rozšiřuje třídu UMLHandling.UMLClassifier. Obsahuje seznam atributů a operací (metod). Třída může být abstraktní.
  */
 public class UMLClass extends UMLClassifier {
     private boolean isAbstract = false;

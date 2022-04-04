@@ -1,3 +1,5 @@
+package UMLHandling;
+
 /**
  * Třída reprezentuje klasifikátor v diagramu.
  * Odvozené třídy reprezentují konkrétní

@@ -1,5 +1,7 @@
+package UMLHandling;
+
 /**
- * trieda run
+ * trieda UMLHandling.run
  */
 public class run {
     /**
