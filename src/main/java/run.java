@@ -1,7 +1,5 @@
-package gui.ija_projekt;
-
 /**
- * trieda gui.ija_projekt.run
+ * trieda run
  */
 public class run {
     /**

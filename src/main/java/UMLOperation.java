@@ -1,16 +1,15 @@
-package gui.ija_projekt;/*
+/*
  * IJA 2021/22: Aplikace pro zobrazení a editaci diagramů tříd a sekvenčních diagramů
  * Autor:
  */
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Třída reprezentuje operaci, která má své jméno, návratový typ a seznam argumentů.
- * Je odvozena (rozšiřuje) od třídy gui.ija_projekt.UMLAttribute, od které přejímá název a návratový typ.
- * Argument je reprezentován třídou gui.ija_projekt.UMLAttribute.
+ * Je odvozena (rozšiřuje) od třídy UMLAttribute, od které přejímá název a návratový typ.
+ * Argument je reprezentován třídou UMLAttribute.
  * Lze použít jako součást UML klasifikátoru třída nebo rozhraní.
  *
  * @author xz
@@ -52,7 +51,7 @@ public class UMLOperation extends UMLAttribute {
     public boolean addArgument(UMLAttribute arg)
     {
         // TODO Warning:(49, 17) Condition 'attr.getName().equals(arg)' is always 'false'
-        // TODO Warning:(49, 32) 'equals' between objects of inconvertible types 'String' and 'gui.ija_projekt.UMLAttribute'
+        // TODO Warning:(49, 32) 'equals' between objects of inconvertible types 'String' and 'UMLAttribute'
         for (UMLAttribute attr : this.argumentList) {
             if (attr.getName().equals(arg)) {
                 return false;

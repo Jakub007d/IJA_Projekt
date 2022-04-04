@@ -1,9 +1,7 @@
-package gui.ija_projekt;
-
 /**
  * Třída reprezentuje atribut, který má své jméno a typ.
- * Je odvozena (rozšiřuje) od třídy gui.ija_projekt.Element.
- * Typ atributu je reprezentován třidou gui.ija_projekt.UMLClassifier.
+ * Je odvozena (rozšiřuje) od třídy Element.
+ * Typ atributu je reprezentován třidou UMLClassifier.
  * Lze použít jako atribut UML třídy nebo argument operace.
  */
 public class UMLAttribute extends Element {

@@ -1,5 +1,3 @@
-package gui.ija_projekt;
-
 /**
  * Třída reprezentuje pojmenovaný element (thing),
  * který může být součástí jakékoliv části v diagramu.

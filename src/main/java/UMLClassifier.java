@@ -1,5 +1,3 @@
-package gui.ija_projekt;
-
 /**
  * Třída reprezentuje klasifikátor v diagramu.
  * Odvozené třídy reprezentují konkrétní

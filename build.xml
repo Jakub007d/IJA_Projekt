@@ -41,7 +41,7 @@
     </target>
 
     <!-- TODO -->
-    <target name="gui.ija_projekt.run">
+    <target name="run">
         <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
     </target>
 </project>
