@@ -1,7 +1,7 @@
-package UMLHandling;
+package gui.ija_projekt;
 
 /**
- * trieda UMLHandling.run
+ * trieda gui.ija_projekt.run
  */
 public class run {
     /**

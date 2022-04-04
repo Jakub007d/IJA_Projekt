@@ -1,4 +1,4 @@
-package UMLHandling;
+package gui.ija_projekt;
 
 /**
  * Třída reprezentuje pojmenovaný element (thing),

@@ -41,7 +41,7 @@
     </target>
 
     <!-- TODO -->
-    <target name="UMLHandling.run">
+    <target name="gui.ija_projekt.run">
         <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
     </target>
 </project>

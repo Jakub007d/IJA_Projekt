@@ -1,12 +1,12 @@
-package UMLHandling;
+package gui.ija_projekt;
 
 import java.util.ArrayList;
 
 /**
  * Třída reprezentuje diagram tříd.
- * Je odvozen od třídy UMLHandling.Element (má název).
- * Obsahuje seznam tříd (instance třídy UMLHandling.UMLClass) příp. klasifikátorů
- * pro uživatelsky nedefinované typy (instance třídy UMLHandling.UMLClassifier).
+ * Je odvozen od třídy gui.ija_projekt.Element (má název).
+ * Obsahuje seznam tříd (instance třídy gui.ija_projekt.UMLClass) příp. klasifikátorů
+ * pro uživatelsky nedefinované typy (instance třídy gui.ija_projekt.UMLClassifier).
  */
 public class ClassDiagram extends Element {
     private java.util.List<UMLClassifier> classList = new ArrayList<UMLClassifier>();
@@ -41,7 +41,7 @@ public class ClassDiagram extends Element {
      * Vyhledá v diagramu klasifikátor podle názvu.
      * Pokud neexistuje, vytvoří instanci třídy Classifier
      * reprezentující klasifikátor, který není v diagramu zachycen
-     * (viz UMLHandling.UMLClassifier.forName(java.lang.String)); využito
+     * (viz gui.ija_projekt.UMLClassifier.forName(java.lang.String)); využito
      * např. pro modelování typu proměnné, který v diagramu není.
      * Tato instance je zařazena do struktur diagramu, tzn. že při dalším pokusu o vyhledání se použije tato již vytvořená instance
      * @param name Název klasifikátoru.

@@ -57,7 +57,7 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:UMLHandling.run -->
+                        <!-- Default configuration for running with: mvn clean javafx:gui.ija_projekt.run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>gui.ija_projekt/gui.ija_projekt.HelloApplication</mainClass>
