@@ -1,6 +1,0 @@
-Class Student {
-    -String rc
-    -String meno
-    -Date datum_nar
-    +EditMeno(String)
-}
