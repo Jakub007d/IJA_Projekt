@@ -33,9 +33,12 @@
     </target>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <!-- TODO -->
     <target name="gui.ija_projekt.run">
 =======
+=======
+>>>>>>> parent of 909be90 ([WIP] creating ANT build file)
     <target name="run">
 >>>>>>> parent of 909be90 ([WIP] creating ANT build file)
         <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
