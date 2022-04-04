@@ -7,20 +7,28 @@
     <property name="build.dir" location="build"/>
     <property name="lib.dir" location="lib"/>
 
+    <path id="classpath">
+        <pathelement location="${lib.dir}"/>
+    </path>
+
     <target name="info">
         <echo message="Hello World - Welcome to Apache Ant!"/>
     </target>
 
+    <!-- TODO -->
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
     </target>
 
     <target name="doc" description="generate documentation">
-        <javadoc encoding="UTF-8" access="package" verbose="true" classpath="${source.dir}" sourcepath="${source.dir}" destdir="${doc.dir}"/>
+        <javadoc encoding="UTF-8" sourcepath="${source.dir}" destdir="${doc.dir}">
+            <fileset dir="${source.dir}" includes="**/*.java"/>
+        </javadoc>
     </target>
 
-    <target name="jar" depends="clean,compile">
+    <!-- TODO -->
+    <target name="jar" depends="clean">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/xmlDemo.jar" basedir="${build.dir}">
             <manifest>
@@ -32,6 +40,7 @@
         <copy file="${lib.dir}/dom4j-1.5.2.jar" todir="${dist.dir}/lib"/>
     </target>
 
+    <!-- TODO -->
     <target name="run">
         <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
     </target>
