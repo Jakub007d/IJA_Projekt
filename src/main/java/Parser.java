@@ -28,7 +28,9 @@ public class Parser
          }
          while (dataScanner.hasNextLine()) {
             String data = dataScanner.nextLine();
-            System.out.println(data);
+            String[] line = data.split(" ");
+            System.out.println(line[0]);
+
          }
 
       }

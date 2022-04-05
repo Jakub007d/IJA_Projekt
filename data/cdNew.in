@@ -1,6 +1,12 @@
 
 
 @startuml
+
+class Class01{
+String Jozo
+void()
+}
+
 Class01 "1" *-- "many" Class02 : contains
 
 Class03 o-- Class04 : aggregation
