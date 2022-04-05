@@ -1,0 +1,7 @@
+@Class Jozo{
+    int vek
+    int rc
+    string meno
+
+    void vypocitajvek()
+}
