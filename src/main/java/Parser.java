@@ -7,8 +7,9 @@ import static java.lang.System.exit;
 
 public class Parser
 {
-   public static void main(String[] args)
+   public ClassDiagram parse ()
    {
+      ClassDiagram parsed = new ClassDiagram("UML");
       try {
          boolean umlStarted = false;
          File inData = new File("data/cdNew.in");
@@ -29,7 +30,29 @@ public class Parser
          while (dataScanner.hasNextLine()) {
             String data = dataScanner.nextLine();
             String[] line = data.split(" ");
-            System.out.println(line[0]);
+            if(line[0].equals("class"))
+            {
+               UMLClass tmpCls;
+               tmpCls = parsed.createClass(line[1]);
+               String classAttrRead = dataScanner.nextLine();
+               while(!classAttrRead.equals("}"))
+               {
+                  if(!classAttrRead.equals(""))
+                  {
+                     String[] line1 = classAttrRead.split(" ");
+                     System.out.println(classAttrRead);
+                     if(line1.length == 2) {
+                        System.out.println("SOMTU");
+                        UMLAttribute attr = new UMLAttribute(line1[1], new UMLClassifier(line1[0]));
+                        tmpCls.addAttribute(attr);
+                        classAttrRead = dataScanner.nextLine();
+                     }
+                     else
+                        classAttrRead = dataScanner.nextLine();
+                  }
+
+               }
+            }
 
          }
 
@@ -38,7 +61,9 @@ public class Parser
       {
          System.out.println("Nastala chyba pri nacitavani súboru !");
          e.printStackTrace();
+         parsed=null;
       }
+      return parsed;
    }
 
 

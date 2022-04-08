@@ -10,6 +10,13 @@ public class run {
      * @param args argumenty
      */
     public static void main(String[] args) {
+        Parser parser = new Parser();
+        ClassDiagram classDiagram = new ClassDiagram("");
+        classDiagram = parser.parse();
+        System.out.println(classDiagram.getName());
+        System.out.println((UMLClass)classDiagram.findClassifier("Class01"));
+        UMLClass tmpClass = (UMLClass)classDiagram.findClassifier("Class01");
+        System.out.println(tmpClass.getAttributes());
         System.out.println("Tu bude onedlho kód :D");
         JPanel panel = new JPanel();
         panel.setBackground(Color.CYAN);

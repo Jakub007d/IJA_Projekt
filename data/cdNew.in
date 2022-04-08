@@ -2,9 +2,10 @@
 
 @startuml
 
-class Class01{
+class Class01 {
 String Jozo
-void()
+int vek
+String ferdinand
 }
 
 Class01 "1" *-- "many" Class02 : contains

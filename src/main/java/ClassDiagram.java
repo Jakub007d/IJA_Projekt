@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Třída reprezentuje diagram tříd.
@@ -34,6 +36,7 @@ public class ClassDiagram extends Element{
         this.classList.add(newClass);
         return newClass;
     }
+
 
     /**
      * Vyhledá v diagramu klasifikátor podle názvu.
