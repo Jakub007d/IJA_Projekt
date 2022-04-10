@@ -40,6 +40,11 @@ public class Parser
                   if(!classAttrRead.equals(""))
                   {
                      String[] line1 = classAttrRead.split(" ");
+                     if (line1[0].equals("op"))
+                     {
+                        UMLOperation op = new UMLOperation(line1[2],new UMLClassifier(line1[1]));
+                        tmpCls.addAttribute(op);
+                     }
                      System.out.println(classAttrRead);
                      if(line1.length == 2) {
                         System.out.println("SOMTU");
@@ -52,7 +57,14 @@ public class Parser
                   }
 
                }
+               if(line[0].equals("relation"))
+               {
+                  //prerobit poradie zle je
+                  
+                  parsed.createRelation(line[1],line[2],line[3],(UMLClass) parsed.findClassifier(line[4]),(UMLClass) parsed.findClassifier(line[5]));
+               }
             }
+
 
          }
 

@@ -6,7 +6,12 @@ class Class01 {
 String Jozo
 int vek
 String ferdinand
+op int getName()
 }
+class Class02 {
+String Jozo
+}
+relation Class01 1 many Class02 contains
 
 Class01 "1" *-- "many" Class02 : contains
 

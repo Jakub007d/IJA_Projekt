@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class ClassDiagram extends Element{
     private java.util.List<UMLClassifier> classList = new ArrayList<UMLClassifier>();
+    private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
 
     /**
      * Konstruktor pro vytvoření instance diagramu. Každý diagram má svůj název.
@@ -35,6 +36,11 @@ public class ClassDiagram extends Element{
         UMLClass newClass = new UMLClass(name);
         this.classList.add(newClass);
         return newClass;
+    }
+
+    public void createRelation(String name,String lCardinality, String rCardinality, UMLClass leftClass, UMLClass rightClass)
+    {
+        this.relationShipList.add(new UMLRelationship(name,lCardinality,rCardinality,leftClass,rightClass));
     }
 
 
