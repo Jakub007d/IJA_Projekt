@@ -11,26 +11,27 @@ public class Parser
    {
       ClassDiagram parsed = new ClassDiagram("UML");
       try {
-         boolean umlStarted = false;
-         File inData = new File("data/cdNew.in");
+         File inData = new File("data/cdNew.in"); /* example file */
          Scanner dataScanner = new Scanner(inData);
-         while (!umlStarted) {
+         boolean umlStarted = false; /* flag - true when "@startuml" line is read */
+         while (!umlStarted) {       /* while loop - skips empty lines */
             String data = dataScanner.nextLine();
             if (data.equals("@startuml"))
             {
-               umlStarted= true;
+               umlStarted = true;
                break;
             }
             if(!data.equals(""))
             {
                System.err.println("Chybne zadané dáta");
-               exit(41);
+               exit(42); /* magic number */
             }
          }
          while (dataScanner.hasNextLine()) {
             String data = dataScanner.nextLine();
-            String[] line = data.split(" ");
-            if(line[0].equals("class"))
+            // TODO: regex - nech to splituje po whitespace
+            String[] line = data.split(" ");   /* by som premenovala line na napr tokens, */
+            if(line[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */
             {
                UMLClass tmpCls;
                tmpCls = parsed.createClass(line[1]);

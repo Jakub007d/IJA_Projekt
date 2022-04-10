@@ -21,6 +21,7 @@
         <delete dir="${dist.dir}"/>
     </target>
 
+    <!-- GENERACIA PROGRAMOVEJ DOKUMENTACIE -->
     <target name="doc" description="generate documentation">
         <javadoc encoding="UTF-8" sourcepath="${source.dir}" destdir="${doc.dir}">
             <fileset dir="${source.dir}" includes="**/*.java"/>
