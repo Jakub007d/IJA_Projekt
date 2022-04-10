@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * trieda run
  */
@@ -10,6 +7,7 @@ public class run {
      * @param args argumenty
      */
     public static void main(String[] args) {
+        /*
         Parser parser = new Parser();
         ClassDiagram classDiagram = new ClassDiagram("");
         classDiagram = parser.parse();
@@ -17,6 +15,7 @@ public class run {
         System.out.println((UMLClass)classDiagram.findClassifier("Class01"));
         UMLClass tmpClass = (UMLClass)classDiagram.findClassifier("Class01");
         System.out.println(tmpClass.getAttributes());
+        classDiagram.debugUMLRelationsVypis();
         System.out.println("Tu bude onedlho kód :D");
         JPanel panel = new JPanel();
         panel.setBackground(Color.CYAN);
@@ -34,7 +33,8 @@ public class run {
         panel.add(label1);
         frame.add(panel);
         frame.add(label);
-
+        */
+        new View();
     }
 }
 

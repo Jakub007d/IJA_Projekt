@@ -31,43 +31,39 @@ public class Parser
             String data = dataScanner.nextLine();
             // TODO: regex - nech to splituje po whitespace
             String[] line = data.split(" ");   /* by som premenovala line na napr tokens, */
-            if(line[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */
-            {
+            if(line[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
                UMLClass tmpCls;
                tmpCls = parsed.createClass(line[1]);
                String classAttrRead = dataScanner.nextLine();
-               while(!classAttrRead.equals("}"))
-               {
-                  if(!classAttrRead.equals(""))
-                  {
+               while (!classAttrRead.equals("}")) {
+                  if (!classAttrRead.equals("")) {
                      String[] line1 = classAttrRead.split(" ");
-                     if (line1[0].equals("op"))
-                     {
-                        UMLOperation op = new UMLOperation(line1[2],new UMLClassifier(line1[1]));
+                     if (line1[0].equals("op")) {
+                        UMLOperation op = new UMLOperation(line1[2], new UMLClassifier(line1[1]));
                         tmpCls.addAttribute(op);
                      }
                      System.out.println(classAttrRead);
-                     if(line1.length == 2) {
+                     if (line1.length == 2) {
                         System.out.println("SOMTU");
                         UMLAttribute attr = new UMLAttribute(line1[1], new UMLClassifier(line1[0]));
                         tmpCls.addAttribute(attr);
                         classAttrRead = dataScanner.nextLine();
-                     }
-                     else
+                     } else
                         classAttrRead = dataScanner.nextLine();
                   }
 
                }
-               if(line[0].equals("relation"))
-               {
-                  //prerobit poradie zle je
-                  
-                  parsed.createRelation(line[1],line[2],line[3],(UMLClass) parsed.findClassifier(line[4]),(UMLClass) parsed.findClassifier(line[5]));
-               }
             }
-
-
+            if(line[0].equals("relation"))
+            {
+               //prerobit poradie zle je
+               System.out.println("Zadavam");
+               parsed.createRelation(line[5],line[2],line[3],(UMLClass) parsed.findClassifier(line[1]),(UMLClass) parsed.findClassifier(line[4]));
+            }
          }
+
+
+
 
       }
       catch(FileNotFoundException e)
