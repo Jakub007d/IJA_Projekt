@@ -14,7 +14,7 @@ public class View extends JFrame{
         controler = new Controler(this);
         testClassPanel= new JPanel();
         testClassPanel.setBounds(61,11,81,140);
-        testClassPanel.setLayout(new BoxLayout(testClassPanel, BoxLayout.Y_AXIS));
+        testClassPanel.setLayout(new BoxLayout(testClassPanel, BoxLayout.X_AXIS));
         button = new JButton("Testik");
         button.addActionListener(controler);
         testClassPanel.add(button);

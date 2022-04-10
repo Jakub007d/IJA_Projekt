@@ -87,4 +87,23 @@ public class ClassDiagram extends Element{
             rsReference.printRelation();
         }
     }
+
+    public UMLClass returnClassAtPos(int pos)
+    {
+        if(pos-1 > numberOfClasses())
+        {
+            System.err.println("Out of bounds in CLassList");
+            return null;
+        }
+        else
+        {
+            return (UMLClass) this.classList.get(pos);
+        }
+    }
+
+    public int numberOfClasses()
+    {
+        return this.classList.size();
+    }
+
 }

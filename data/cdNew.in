@@ -8,14 +8,16 @@ int vek
 String ferdinand
 op int getName()
 }
-class Class02 {
+class nova {
 String Jozo
+int vek
+void zabi_Sa()
+}
+class tri {
+boolean jeTak
+String string
+void somIntelij_xd
 }
 relation Class01 1 many Class02 contains
 
-Class01 "1" *-- "many" Class02 : contains
-
-Class03 o-- Class04 : aggregation
-
-Class05 --> "1" Class06
 @enduml
