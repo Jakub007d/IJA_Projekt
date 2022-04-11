@@ -1,34 +1,43 @@
 <?xml version="1.0"?>
-<project name="ija-app" default="info">
+<project name="ija-app" default="compile">
 
-    <property name="source.dir" location="src"/>
-    <property name="doc.dir" location="doc"/>
-    <property name="dist.dir" location="dist"/>
-    <property name="build.dir" location="build"/>
-    <property name="lib.dir" location="lib"/>
+    <property name="source.dir" location="src"/> <!-- zlozka so zdrojovymi subormi -->
+    <property name="doc.dir" location="doc"/> <!-- zlozka pre generovanie dokumentacie -->
+    <property name="dist.dir" location="dist"/> <!-- distributable -->
+    <property name="build.dir" location="build"/> <!-- zlozka pre .class subory -->
+    <property name="lib.dir" location="lib"/> <!-- zlozka s kniznicami -->
+    <property name="jar.name" value="ija-app"/>
 
     <path id="classpath">
         <pathelement location="${lib.dir}"/>
     </path>
 
-    <target name="info">
-        <echo message="Hello World - Welcome to Apache Ant!"/>
-    </target>
-
-    <!-- TODO -->
+    <!-- TODO ? done ? -->
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${dist.dir}"/>
     </target>
-
-    <!-- GENERACIA PROGRAMOVEJ DOKUMENTACIE -->
-    <target name="doc" description="generate documentation">
-        <javadoc encoding="UTF-8" sourcepath="${source.dir}" destdir="${doc.dir}">
-            <fileset dir="${source.dir}" includes="**/*.java"/>
-        </javadoc>
+    <target name="createFileStructure">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
     </target>
 
-    <!-- TODO -->
+    <target name="compile" depends="clean, createFileStructure">
+        <javac srcdir="${source.dir}" destdir="${build.dir}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+
+        <jar destfile="${dist.dir}\${jar.name}.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="run"/>
+            </manifest>
+            <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
+        </jar>
+    </target>
+
+    <!-- TODO toto sa zatial nepouziva ale mozno by sme mohli rozdelit ^compile target na dva -->
     <target name="jar" depends="clean">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/xmlDemo.jar" basedir="${build.dir}">
@@ -41,8 +50,15 @@
         <copy file="${lib.dir}/dom4j-1.5.2.jar" todir="${dist.dir}/lib"/>
     </target>
 
-    <!-- TODO -->
+    <!-- GENERACIA PROGRAMOVEJ DOKUMENTACIE -->
+    <target name="doc" depends="compile" description="generate documentation">
+        <javadoc encoding="UTF-8" sourcepath="${source.dir}" destdir="${doc.dir}">
+            <fileset dir="${source.dir}" includes="**/*.java"/>
+        </javadoc>
+    </target>
+
+    <!-- SPUSTENIE .JAR -->
     <target name="run">
-        <java jar="${dist.dir}/xmlDemo.jar" dir="${dist.dir}" fork="true"/>
+        <java jar="${dist.dir}/${jar.name}.jar" dir="${dist.dir}" fork="true"/>
     </target>
 </project>
