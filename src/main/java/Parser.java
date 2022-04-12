@@ -5,8 +5,18 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
+/**
+ * Trieda slúži na parsovanie vstupných dát.
+ *
+ * @author xdrobe01
+ */
 public class Parser
 {
+   /**
+    *
+    *
+    * @return Diagram tried načítaný zo súboru.
+    */
    public ClassDiagram parse ()
    {
       ClassDiagram parsed = new ClassDiagram("UML");

@@ -1,18 +1,33 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.*;
-import java.awt.Graphics;
 
-public class Controler implements ActionListener {
+/**
+ *
+ *
+ * @author xdrobe01
+ */
+public class Controller implements ActionListener {
     private ClassDiagram classDiagram;
     private View view;
-    public Controler(View view){
+
+    /**
+     *
+     *
+     * @param view
+     */
+    public Controller(View view){
         this.classDiagram = new Parser().parse();
         this.view=view;
         view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
     }
+
+    /**
+     *
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.button)

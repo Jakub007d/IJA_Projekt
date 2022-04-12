@@ -1,6 +1,8 @@
 /**
  * Trieda reprezentujúca účastníka sekvenčného diagramu.
  * Rozširuje triedu UMLClassifier.
+ *
+ * @author xstrak38
  */
 public class UMLParticipant extends UMLClassifier {
     private boolean isActive = false;
@@ -8,6 +10,7 @@ public class UMLParticipant extends UMLClassifier {
 
     /**
      * Vytrvorí inštanciu reprezentujúcu účastníka sekvenčného diagramu.
+     *
      * @param name Názov účastníka.
      */
     public UMLParticipant(String name)
@@ -17,6 +20,7 @@ public class UMLParticipant extends UMLClassifier {
 
     /**
      * Zmení informáciu o prítomnosti ekvivalentného objektu v diagrame tried.
+     *
      * @param presence Prítomnosť v diagrame tried.
      */
     public void setPresence(boolean presence)
@@ -26,6 +30,7 @@ public class UMLParticipant extends UMLClassifier {
 
     /**
      * Test, či je účastník prítomny v diagrame tried.
+     *
      * @return Ak je účastník prítomný v diagrame tried, vracia true. Inak false.
      */
     public boolean isPresentInCD()
@@ -35,6 +40,7 @@ public class UMLParticipant extends UMLClassifier {
 
     /**
      * Zmení informáciu o tom, či je účastník aktívny
+     *
      * @param active Informácia o tom, či je účastník aktívny. (TODO neviem ako inak to pomenovat)
      */
     public void setActive(boolean active)
@@ -44,6 +50,7 @@ public class UMLParticipant extends UMLClassifier {
 
     /**
      * Test, či je účastník aktívny.
+     *
      * @return Ak je účastník aktívny, vracia true. Inak false.
      */
     public boolean isActive()

@@ -1,5 +1,8 @@
 /**
  * Trieda reprezentuje UML správu.
+ * Správa má typ, odosielateľa a prijímateľa.
+ *
+ * @author xstrak38
  */
 public class UMLMessage {
     enum UMLMessageType {
@@ -17,6 +20,7 @@ public class UMLMessage {
 
     /**
      * Konštruktor pre UML správu.
+     *
      * @param sender Užívateľ, ktorý odosiela správu.
      * @param recipient Užívateľ, ktorý prijíma správu.
      * @param messageType Typ správy.

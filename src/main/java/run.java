@@ -1,39 +1,16 @@
 /**
- * trieda run
+ * Hlavná trieda programu.
+ * Obsahuje metódu main.
+ *
+ * @author xdrobe01
  */
 public class run {
     /**
-     * metoda main
+     * Metóda main vytvorí nový View;
+     *
      * @param args argumenty
      */
     public static void main(String[] args) {
-        /*
-        Parser parser = new Parser();
-        ClassDiagram classDiagram = new ClassDiagram("");
-        classDiagram = parser.parse();
-        System.out.println(classDiagram.getName());
-        System.out.println((UMLClass)classDiagram.findClassifier("Class01"));
-        UMLClass tmpClass = (UMLClass)classDiagram.findClassifier("Class01");
-        System.out.println(tmpClass.getAttributes());
-        classDiagram.debugUMLRelationsVypis();
-        System.out.println("Tu bude onedlho kód :D");
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.CYAN);
-        panel.setBounds(0,0,100,100);
-        JFrame frame = new JFrame();
-        JLabel label = new JLabel();
-        JLabel label1 = new JLabel("LOL IM BLUE");
-        label.setText("IJA PROJEKT VERZIA ALPHA 1.0");
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setVerticalAlignment(JLabel.NORTH);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("IJA_Projekt");
-        frame.setSize(500,500);
-        frame.setVisible(true);
-        panel.add(label1);
-        frame.add(panel);
-        frame.add(label);
-        */
         new View();
     }
 }

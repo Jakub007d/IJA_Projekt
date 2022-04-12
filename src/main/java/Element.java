@@ -1,14 +1,17 @@
 /**
- * Třída reprezentuje pojmenovaný element (thing),
- * který může být součástí jakékoliv části v diagramu.
+ * Trieda reprezentuje pomenovaný element (thing),
+ * ktorý môže byť súčasťou akejkoľvek časti diagrame.
+ *
+ * @author xstrak38
  */
 public class Element {
 
     private String name;
 
     /**
-     * Vytvoří instanci se zadaným názvem.
-     * @param name Název elementu.
+     * Vytvorí inštanciu so zadaným názvom.
+     *
+     * @param name Názov elementu.
      */
     public Element(String name)
     {
@@ -16,8 +19,9 @@ public class Element {
     }
 
     /**
-     * Vrátí název elementu.
-     * @return Název elementu.
+     * Vráti názov elementu.
+     *
+     * @return Názov elementu.
      */
     public String getName()
     {
@@ -25,8 +29,9 @@ public class Element {
     }
 
     /**
-     * Přejmenuje element.
-     * @param newName Nový název elementu.
+     * Premenuje element.
+     *
+     * @param newName Nový názov elementu.
      */
     public void rename(String newName)
     {

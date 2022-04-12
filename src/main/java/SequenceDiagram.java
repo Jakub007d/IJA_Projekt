@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 /**
  * Trieda reprezentuje sekvenčný diagram.
+ * Jeodvodený z triedy Element.
+ * Obsahuje zoznam účastníkov diagramu a zoznam správ.
+ *
+ * @author xstrak38
  */
 public class SequenceDiagram extends Element {
     /* zoznam účastníkov sekvenčného diagramu */
@@ -9,15 +13,17 @@ public class SequenceDiagram extends Element {
     private java.util.List<UMLMessage> messageList = new ArrayList<>();
 
     /**
-     * Konstruktor pro vytvoření instance diagramu.
-     * @param name Název diagramu
+     * Konštruktor pre vytvorenie inštancie diagramu.
+     *
+     * @param name Názov diagramu
      */
     public SequenceDiagram(String name) {
         super(name);
     }
 
     /**
-     * Vytvori inštanciu UML účastníka a vloží ju do diagramu.
+     * Vytvorí inštanciu UML účastníka a vloží ju do diagramu.
+     *
      * @param name Názov vytváraného účastníka
      * @return Objekt reprezentujúci účastníka. Ak účasník s daným názvom už existuje, vracia null.
      */
@@ -34,6 +40,7 @@ public class SequenceDiagram extends Element {
 
     /**
      * Testuje, či účasstník zodpovedá inštancii triedy z diagramu tried.
+     *
      * @param classDiagram Diagram tried.
      */
     public void checkPresence(ClassDiagram classDiagram) {

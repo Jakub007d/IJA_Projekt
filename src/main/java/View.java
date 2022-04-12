@@ -1,19 +1,23 @@
 import javax.swing.*;
 
-public class View extends JFrame{
+/**
+ *
+ *
+ * @author xdrobe01
+ */
+public class View extends JFrame {
     public JButton button;
-    Controler controler;
+    Controller controller;
     public JPanel mainPanel;
     public JPanel classPanel;
 
-
     View()
     {
-        controler = new Controler(this);
+        controller = new Controller(this);
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         button = new JButton("Load Data");
-        button.addActionListener(controler);
+        button.addActionListener(controller);
         JLabel nadpis = new JLabel("Testovacie vykreslenie načítaných tried");
         nadpis.setAlignmentX(CENTER_ALIGNMENT);
         button.setAlignmentX(CENTER_ALIGNMENT);
