@@ -1,14 +1,17 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.*;
+import java.awt.Graphics;
 
 public class Controler implements ActionListener {
     private ClassDiagram classDiagram;
     private View view;
-
     public Controler(View view){
         this.classDiagram = new Parser().parse();
         this.view=view;
+        view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -27,6 +30,7 @@ public class Controler implements ActionListener {
             view.setVisible(true);
 
              */
+            view.classPanel.removeAll();
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
                 UMLClass tmpCLassReference = classDiagram.returnClassAtPos(pos);
@@ -35,9 +39,8 @@ public class Controler implements ActionListener {
                 {
                     classPanel.addAttribute(attribute.getName(),attribute.getType().getName());
                 }
-                view.mainPanel.add((JPanel)classPanel);
-                JLabel spacer = new JLabel("     ");
-                view.mainPanel.add(spacer);
+                view.classPanel.add((JPanel)classPanel);
+                view.classPanel.add(Box.createRigidArea(new Dimension(100,0)));
 
             }
             view.setVisible(true);

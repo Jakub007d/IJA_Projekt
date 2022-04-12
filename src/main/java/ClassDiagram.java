@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Třída reprezentuje diagram tříd.
@@ -112,6 +113,10 @@ public class ClassDiagram extends Element{
         {
             return (UMLClass) this.classList.get(pos);
         }
+    }
+
+    public List<UMLClassifier> getRelationShipList() {
+        return relationShipList;
     }
 
     public int numberOfClasses()

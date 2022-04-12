@@ -42,9 +42,7 @@ public class Parser
                         UMLOperation op = new UMLOperation(tokens1[2], new UMLClassifier(tokens1[1]));
                         tmpCls.addAttribute(op);
                      }
-                     System.out.println(classAttrRead);
                      if (tokens1.length == 2) {
-                        System.out.println("SOMTU");
                         UMLAttribute attr = new UMLAttribute(tokens1[1], new UMLClassifier(tokens1[0]));
                         tmpCls.addAttribute(attr);
                         classAttrRead = dataScanner.nextLine();
@@ -56,9 +54,8 @@ public class Parser
             }
             if(tokens[0].equals("relation"))
             {
-               //prerobit poradie zle je
-               System.out.println("Zadavam");
                parsed.createRelation(tokens[5],tokens[2],tokens[3],(UMLClass) parsed.findClassifier(tokens[1]),(UMLClass) parsed.findClassifier(tokens[4]));
+               System.out.println(tokens[5]+tokens[2]+tokens[3]+(UMLClass) parsed.findClassifier(tokens[1])+(UMLClass) parsed.findClassifier(tokens[4]));
             }
          }
 
@@ -68,7 +65,7 @@ public class Parser
       }
       catch(FileNotFoundException e)
       {
-         System.out.println("Nastala chyba pri nacitavani súboru !");
+         System.err.println("Nastala chyba pri nacitavani súboru !");
          e.printStackTrace();
          parsed=null;
       }
