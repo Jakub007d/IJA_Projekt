@@ -17,6 +17,6 @@ Date dateOfSend
 op String getTackId()
 }
 relation Person 1 1 Post_Office isIn
-relation Person many 1 Package live
+relation Person many 1 Package have
 
 @enduml

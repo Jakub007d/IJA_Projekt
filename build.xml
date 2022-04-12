@@ -27,6 +27,7 @@
     <target name="compile" depends="clean, createFileStructure">
         <javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
             <classpath>
+                <pathelement path="${source.dir}"/>
                 <path refid="classpath"/>
             </classpath>
         </javac>
