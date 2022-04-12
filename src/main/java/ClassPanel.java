@@ -14,6 +14,8 @@ public class ClassPanel extends JPanel {
 
     public void paint(Graphics g)
     {
+        super.paintComponent(g);
+        super.paintChildren(g);
         Component[] conponents = this.getComponents();
         int x1=0;
         int y1=0;
