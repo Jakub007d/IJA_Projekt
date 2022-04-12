@@ -29,6 +29,7 @@
             <classpath>
                 <pathelement path="${source.dir}"/>
                 <path refid="classpath"/>
+                <pathelement location="${build.dir}" />
             </classpath>
         </javac>
 
