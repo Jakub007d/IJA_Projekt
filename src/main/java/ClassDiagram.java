@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Třída reprezentuje diagram tříd.
@@ -77,6 +75,21 @@ public class ClassDiagram extends Element{
             }
         }
         return null;
+    }
+
+    /**
+     * Vyhľadá v diagrame klasifikátor podľa názvu.
+     * @param name Názov klasifikaátora.
+     * @return True, ak diagram obsahuje daný klasifikátor, inak false.
+     */
+    public boolean checkClassifierPresence(String name)
+    {   /* mozeme pouzit pri rieseni nekonzistencii */
+        for (UMLClassifier cls : this.classList) {
+            if (cls.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void debugUMLRelationsVypis()
