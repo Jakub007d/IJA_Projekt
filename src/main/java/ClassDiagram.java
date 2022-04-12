@@ -4,16 +4,17 @@ import java.util.List;
 /**
  * Trieda reprezentuje diagram tried.
  * Je odvodená od triedy Element (má názov).
- * Obsahuje seznam tříd (instance třídy UMLClass) příp. klasifikátorů
- * pro uživatelsky nedefinované typy (instance třídy UMLClassifier).
+ * Obsahuje zoznam tried (inštancie triedy UMLClass) príp. klasifikátorov
+ * pre užívateľsky nedefinované typy (inštancie triedy UMLClassifier).
  */
 public class ClassDiagram extends Element{
     private java.util.List<UMLClassifier> classList = new ArrayList<UMLClassifier>();
     private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
 
     /**
-     * Konstruktor pro vytvoření instance diagramu. Každý diagram má svůj název.
-     * @param name Název diagramu.
+     * Konštruktor pre vytvorenie inštancie diagramu. Každý diagram má svoj názov.
+     *
+     * @param name Názov diagramu.
      */
     public ClassDiagram(String name)
     {
@@ -21,9 +22,11 @@ public class ClassDiagram extends Element{
     }
 
     /**
-     * Vytvoří instanci UML třídy a vloží ji do diagramu. Pokud v diagramu již existuje třída stejného názvu, nedělá nic.
-     * @param name Název vytvářené třídy.
-     * @return Objekt (instance) reprezentující třídu. Pokud třída s daným názvem již existuje, vrací null.
+     * Vytvorí inštanciu UML triedy a vloží ju do diagramu.
+     * Ak v diagrame už existuje trieda s rovnakým názvom, nerobí nič.
+     *
+     * @param name Názov vytváranej triedy.
+     * @return Objekt (inštancia) reprezentujúca triedu. Ak trieda s daným názvom už existuje, vráti null.
      */
     public UMLClass createClass(String name)
     {
@@ -37,6 +40,16 @@ public class ClassDiagram extends Element{
         return newClass;
     }
 
+    /**
+     * Vytvorí inštanciu UML vzťahu a vloží do diagramu.
+     * Left a right zodpovedá pozícii v textovom vstupe.
+     *
+     * @param name Názov vzťahu.
+     * @param lCardinality Kardinalita ľavej triedy.
+     * @param rCardinality Kardinalita pravej triedy.
+     * @param leftClass Ľavá trieda.
+     * @param rightClass Pravá trieda.
+     */
     public void createRelation(String name,String lCardinality, String rCardinality, UMLClass leftClass, UMLClass rightClass)
     {
         this.relationShipList.add(new UMLRelationship(name,lCardinality,rCardinality,leftClass,rightClass));
