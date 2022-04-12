@@ -35,6 +35,9 @@
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
         </jar>
+        <copy todir="${dist.dir}\data">
+            <fileset dir="data"/>
+        </copy>
     </target>
 
     <!-- TODO toto sa zatial nepouziva ale mozno by sme mohli rozdelit ^compile target na dva -->

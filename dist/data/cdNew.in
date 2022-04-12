@@ -1,0 +1,23 @@
+
+
+@startuml
+
+class Class01 {
+String Jozo
+int vek
+String ferdinand
+op int getName()
+}
+class nova {
+String Jozo
+int vek
+void zabi_Sa()
+}
+class tri {
+boolean jeTak
+String string
+void somIntelij_xd
+}
+relation Class01 1 many Class02 contains
+
+@enduml

@@ -35,9 +35,9 @@ public class Controler implements ActionListener {
                 {
                     classPanel.addAttribute(attribute.getName(),attribute.getType().getName());
                 }
-                view.testClassPanel.add((JPanel)classPanel);
+                view.mainPanel.add((JPanel)classPanel);
                 JLabel spacer = new JLabel("     ");
-                view.testClassPanel.add(spacer);
+                view.mainPanel.add(spacer);
 
             }
             view.setVisible(true);

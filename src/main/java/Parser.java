@@ -12,7 +12,7 @@ public class Parser
       ClassDiagram parsed = new ClassDiagram("UML");
       try {
          File inData = new File("data/cdNew.in"); /* example file */
-         Scanner dataScanner = new Scanner(inData);
+         Scanner dataScanner = new Scanner(inData,"UTF-8");
          boolean umlStarted = false; /* flag - true when "@startuml" line is read */
          while (!umlStarted) {       /* while loop - skips empty lines */
             String data = dataScanner.nextLine();
@@ -30,22 +30,22 @@ public class Parser
          while (dataScanner.hasNextLine()) {
             String data = dataScanner.nextLine();
             // TODO: regex - nech to splituje po whitespace
-            String[] line = data.split(" ");   /* by som premenovala line na napr tokens, */
-            if(line[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
+            String[] tokens = data.split(" ");   /* by som premenovala line na napr tokens, */
+            if(tokens[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
                UMLClass tmpCls;
-               tmpCls = parsed.createClass(line[1]);
+               tmpCls = parsed.createClass(tokens[1]);
                String classAttrRead = dataScanner.nextLine();
                while (!classAttrRead.equals("}")) {
                   if (!classAttrRead.equals("")) {
-                     String[] line1 = classAttrRead.split(" ");
-                     if (line1[0].equals("op")) {
-                        UMLOperation op = new UMLOperation(line1[2], new UMLClassifier(line1[1]));
+                     String[] tokens1 = classAttrRead.split(" ");
+                     if (tokens1[0].equals("op")) {
+                        UMLOperation op = new UMLOperation(tokens1[2], new UMLClassifier(tokens1[1]));
                         tmpCls.addAttribute(op);
                      }
                      System.out.println(classAttrRead);
-                     if (line1.length == 2) {
+                     if (tokens1.length == 2) {
                         System.out.println("SOMTU");
-                        UMLAttribute attr = new UMLAttribute(line1[1], new UMLClassifier(line1[0]));
+                        UMLAttribute attr = new UMLAttribute(tokens1[1], new UMLClassifier(tokens1[0]));
                         tmpCls.addAttribute(attr);
                         classAttrRead = dataScanner.nextLine();
                      } else
@@ -54,11 +54,11 @@ public class Parser
 
                }
             }
-            if(line[0].equals("relation"))
+            if(tokens[0].equals("relation"))
             {
                //prerobit poradie zle je
                System.out.println("Zadavam");
-               parsed.createRelation(line[5],line[2],line[3],(UMLClass) parsed.findClassifier(line[1]),(UMLClass) parsed.findClassifier(line[4]));
+               parsed.createRelation(tokens[5],tokens[2],tokens[3],(UMLClass) parsed.findClassifier(tokens[1]),(UMLClass) parsed.findClassifier(tokens[4]));
             }
          }
 
