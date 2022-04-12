@@ -3,7 +3,7 @@
 
     <property name="source.dir" location="src"/> <!-- zlozka so zdrojovymi subormi -->
     <property name="doc.dir" location="doc"/> <!-- zlozka pre generovanie dokumentacie -->
-    <property name="dist.dir" location="dist"/> <!-- distributable -->
+    <property name="dest.dir" location="dest"/> <!-- zlozka pre vysledny .jar -->
     <property name="build.dir" location="build"/> <!-- zlozka pre .class subory -->
     <property name="lib.dir" location="lib"/> <!-- zlozka s kniznicami -->
     <property name="jar.name" value="ija-app"/>
@@ -12,46 +12,36 @@
         <pathelement location="${lib.dir}"/>
     </path>
 
-    <!-- TODO ? done ? -->
+    <!-- ZMAZANIE ZLOŽLIEK BUILD A DEST -->
     <target name="clean">
         <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
+        <delete dir="${dest.dir}"/>
     </target>
+    <!-- VYTVORENIE ADRESÁROVEJ ŠTRUKTÚRY -->
     <target name="createFileStructure">
         <mkdir dir="${build.dir}"/>
-        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${dest.dir}"/>
     </target>
 
+    <!-- KOMPILÁCIA A VYTVORENIE SPUSTITEĽNÉHO .JAR -->
     <target name="compile" depends="clean, createFileStructure">
-        <javac srcdir="${source.dir}" destdir="${build.dir}">
+        <javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
             <classpath>
                 <path refid="classpath"/>
             </classpath>
         </javac>
 
-        <jar destfile="${dist.dir}\${jar.name}.jar" basedir="${build.dir}">
+        <jar destfile="${dest.dir}\${jar.name}.jar" basedir="${build.dir}">
             <manifest>
                 <attribute name="Main-Class" value="run"/>
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
         </jar>
-        <copy todir="${dist.dir}\data">
+        <copy todir="${dest.dir}\data">
             <fileset dir="data"/>
         </copy>
     </target>
 
-    <!-- TODO toto sa zatial nepouziva ale mozno by sme mohli rozdelit ^compile target na dva -->
-    <target name="jar" depends="clean">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/xmlDemo.jar" basedir="${build.dir}">
-            <manifest>
-                <attribute name="Main-Class" value="ija.xml.XMLDemo"/>
-                <attribute name="Class-Path" value="lib/dom4j-1.5.2.jar"/>
-            </manifest>
-        </jar>
-        <mkdir dir="${dist.dir}/lib"/>
-        <copy file="${lib.dir}/dom4j-1.5.2.jar" todir="${dist.dir}/lib"/>
-    </target>
 
     <!-- GENERACIA PROGRAMOVEJ DOKUMENTACIE -->
     <target name="doc" depends="compile" description="generate documentation">
@@ -62,6 +52,6 @@
 
     <!-- SPUSTENIE .JAR -->
     <target name="run">
-        <java jar="${dist.dir}/${jar.name}.jar" dir="${dist.dir}" fork="true"/>
+        <java jar="${dest.dir}/${jar.name}.jar" dir="${dest.dir}" fork="true"/>
     </target>
 </project>

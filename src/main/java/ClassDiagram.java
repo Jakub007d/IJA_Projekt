@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Třída reprezentuje diagram tříd.
- * Je odvozen od třídy Element (má název).
+ * Trieda reprezentuje diagram tried.
+ * Je odvodená od triedy Element (má názov).
  * Obsahuje seznam tříd (instance třídy UMLClass) příp. klasifikátorů
  * pro uživatelsky nedefinované typy (instance třídy UMLClassifier).
  */
@@ -41,7 +41,6 @@ public class ClassDiagram extends Element{
     {
         this.relationShipList.add(new UMLRelationship(name,lCardinality,rCardinality,leftClass,rightClass));
     }
-
 
     /**
      * Vyhledá v diagramu klasifikátor podle názvu.
