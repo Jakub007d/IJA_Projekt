@@ -10,7 +10,6 @@ public class SequenceDiagram extends Element {
 
     /**
      * Konstruktor pro vytvoření instance diagramu.
-     * 
      * @param name Název diagramu
      */
     public SequenceDiagram(String name) {
@@ -19,11 +18,8 @@ public class SequenceDiagram extends Element {
 
     /**
      * Vytvori inštanciu UML účastníka a vloží ju do diagramu.
-     * Ak v diagrame
-     * 
      * @param name Názov vytváraného účastníka
-     * @return Objekt reprezentujúci účastníka. Ak účasník s daným názvom už
-     *         existuje, vracia null.
+     * @return Objekt reprezentujúci účastníka. Ak účasník s daným názvom už existuje, vracia null.
      */
     public UMLParticipant createParticipant(String name) {
         for (UMLClassifier participant : this.participantList) {
@@ -38,7 +34,6 @@ public class SequenceDiagram extends Element {
 
     /**
      * Testuje, či účasstník zodpovedá inštancii triedy z diagramu tried.
-     * 
      * @param classDiagram Diagram tried.
      */
     public void checkPresence(ClassDiagram classDiagram) {

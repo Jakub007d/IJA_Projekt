@@ -1,4 +1,7 @@
-public class UMLMessage extends UMLClassifier {
+/**
+ * Trieda reprezentuje UML správu.
+ */
+public class UMLMessage {
     enum UMLMessageType {
         SYN,
         ASYNC,
@@ -12,9 +15,14 @@ public class UMLMessage extends UMLClassifier {
     private UMLParticipant recipient;
     private UMLMessageType messageType;
 
-    public UMLMessage(String name, UMLParticipant sender, UMLParticipant recipient, UMLMessageType messageType)
+    /**
+     * Konštruktor pre UML správu.
+     * @param sender Užívateľ, ktorý odosiela správu.
+     * @param recipient Užívateľ, ktorý prijíma správu.
+     * @param messageType Typ správy.
+     */
+    public UMLMessage(UMLParticipant sender, UMLParticipant recipient, UMLMessageType messageType)
     {
-        super(name);
         this.sender = sender;
         this.recipient = recipient;
         this.messageType = messageType;
