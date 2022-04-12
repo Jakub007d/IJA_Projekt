@@ -28,7 +28,7 @@ public class View extends JFrame {
         mainPanel.add(button);
         mainPanel.add(classPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,500);
+        this.setSize(600,600);
         this.add(mainPanel);
         this.setVisible(true);
     }
