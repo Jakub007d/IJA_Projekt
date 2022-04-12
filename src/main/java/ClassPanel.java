@@ -11,7 +11,7 @@ public class ClassPanel extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.relationShipList=relationShipList;
     }
-    
+
     public void paint(Graphics g)
     {
         Component[] conponents = this.getComponents();
@@ -41,15 +41,13 @@ public class ClassPanel extends JPanel {
                                 if (tmp.getName().equals(rightClass.getName())) {
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
+                                    Graphics2D g2D = (Graphics2D) g;
+                                    g2D.drawLine(x1, y1, x2, y2);
                                 }
                             }
 
                         }
                     }
-                }
-                if (x1 != 0) {
-                    Graphics2D g2D = (Graphics2D) g;
-                    g2D.drawLine(x1, y1, x2, y2);
                 }
             }
         }

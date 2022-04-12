@@ -18,6 +18,6 @@ boolean jeTak
 String string
 void somIntelij_xd
 }
+relation Class01 1 many nova contains
 relation Class01 1 many tri contains
-
 @enduml
