@@ -12,7 +12,7 @@ import static java.lang.System.exit;
  */
 public class Parser
 {
-   /**
+   /** Metóda načída zo súboru testClassDiagram a nasledne prevedie parsovanie.
     *
     *
     * @return Diagram tried načítaný zo súboru.
@@ -21,7 +21,7 @@ public class Parser
    {
       ClassDiagram parsed = new ClassDiagram("UML");
       try {
-         File inData = new File("data/cdNew.in"); /* example file */
+         File inData = new File("data/testClassDiagram.in"); /* example file */
          Scanner dataScanner = new Scanner(inData,"UTF-8");
          boolean umlStarted = false; /* flag - true when "@startuml" line is read */
          while (!umlStarted) {       /* while loop - skips empty lines */
@@ -39,7 +39,6 @@ public class Parser
          }
          while (dataScanner.hasNextLine()) {
             String data = dataScanner.nextLine();
-            // TODO: regex - nech to splituje po whitespace
             String[] tokens = data.split(" ");   /* by som premenovala line na napr tokens, */
             if(tokens[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
                UMLClass tmpCls;
@@ -65,7 +64,6 @@ public class Parser
             if(tokens[0].equals("relation"))
             {
                parsed.createRelation(tokens[5],tokens[2],tokens[3],(UMLClass) parsed.findClassifier(tokens[1]),(UMLClass) parsed.findClassifier(tokens[4]));
-               System.out.println(tokens[5]+tokens[2]+tokens[3]+(UMLClass) parsed.findClassifier(tokens[1])+(UMLClass) parsed.findClassifier(tokens[4]));
             }
          }
 

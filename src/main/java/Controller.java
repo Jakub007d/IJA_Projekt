@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 
 /**
- *
+ * Trieda implementuje Controller, ktorý sa stará o dáta načítané cez parser a stará sa o zmeny v zobrazení
  *
  * @author xdrobe01
  */
@@ -13,9 +13,9 @@ public class Controller implements ActionListener {
     private View view;
 
     /**
+     * Konštruktor triedy Controller.
      *
-     *
-     * @param view
+     * @param view Referencia na triedu View
      */
     public Controller(View view){
         this.classDiagram = new Parser().parse();
@@ -24,27 +24,14 @@ public class Controller implements ActionListener {
     }
 
     /**
+     * Metóda ktorá aktualizuje View po stlačení tlčítka.
      *
-     *
-     * @param e
+     * @param e Event stlacenia tlačítka
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.button)
         {
-            /*
-            UMLClass referenceClass = classDiagram.getClassFromModel();
-            JLabel className = new JLabel(referenceClass.getName());
-            view.testClassPanel.add(className);
-            for(UMLAttribute attr : referenceClass.getAttributes())
-            {
-                JLabel atrb = new JLabel(attr.getType()+" "+attr.getName());
-                view.testClassPanel.add(atrb);
-            }
-
-            view.setVisible(true);
-
-             */
             view.classPanel.removeAll();
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {

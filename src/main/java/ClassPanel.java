@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Trieda dedí z triedy JPanel a stara sa o jednotlive vykreslenie tried a relacie medzi nimi.
+ *
+ * @author xdrobe01
+ */
 public class ClassPanel extends JPanel {
     private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
     ClassPanel(java.util.List<UMLClassifier> relationShipList)
@@ -12,6 +17,10 @@ public class ClassPanel extends JPanel {
         this.relationShipList=relationShipList;
     }
 
+    /**
+     * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
+     * @param g Graficke rozhranie
+     */
     public void paint(Graphics g)
     {
         super.paintComponent(g);

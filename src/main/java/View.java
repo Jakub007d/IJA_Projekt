@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 /**
- *
+ * Triesa View dedí z JFrame a zabezpečuje zobrazenie okna.
  *
  * @author xdrobe01
  */
@@ -11,6 +11,9 @@ public class View extends JFrame {
     public JPanel mainPanel;
     public JPanel classPanel;
 
+    /**
+     * Konštruktor triedy View
+     */
     View()
     {
         controller = new Controller(this);

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
+ * Trieda dedí z triedy JPanel a implementuje špecialny panel používaný pre vykreslenie triedy
  *
  * @author xdrobe01
  */
@@ -19,10 +19,10 @@ public class PanelForClass extends JPanel {
     }
 
     /**
+     * Metóda pridá do panela attribúty a operácie
      *
-     *
-     * @param name
-     * @param type
+     * @param name Názov atribútu
+     * @param type Typ atribútu
      */
     public void addAttribute(String name, String type)
     {
