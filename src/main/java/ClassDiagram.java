@@ -1,17 +1,22 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Třída reprezentuje diagram tříd.
- * Je odvozen od třídy Element (má název).
- * Obsahuje seznam tříd (instance třídy UMLClass) příp. klasifikátorů
- * pro uživatelsky nedefinované typy (instance třídy UMLClassifier).
+ * Trieda reprezentuje diagram tried.
+ * Je odvodená od triedy Element (má názov).
+ * Obsahuje zoznam tried (inštancie triedy UMLClass) príp. klasifikátorov
+ * pre užívateľsky nedefinované typy (inštancie triedy UMLClassifier).
+ *
+ * @author xstrak38, xdrobe01
  */
 public class ClassDiagram extends Element{
     private java.util.List<UMLClassifier> classList = new ArrayList<UMLClassifier>();
+    private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
 
     /**
-     * Konstruktor pro vytvoření instance diagramu. Každý diagram má svůj název.
-     * @param name Název diagramu.
+     * Konštruktor pre vytvorenie inštancie diagramu. Každý diagram má svoj názov.
+     *
+     * @param name Názov diagramu.
      */
     public ClassDiagram(String name)
     {
@@ -19,9 +24,11 @@ public class ClassDiagram extends Element{
     }
 
     /**
-     * Vytvoří instanci UML třídy a vloží ji do diagramu. Pokud v diagramu již existuje třída stejného názvu, nedělá nic.
-     * @param name Název vytvářené třídy.
-     * @return Objekt (instance) reprezentující třídu. Pokud třída s daným názvem již existuje, vrací null.
+     * Vytvorí inštanciu UML triedy a vloží ju do diagramu.
+     * Ak v diagrame už existuje trieda s rovnakým názvom, nerobí nič.
+     *
+     * @param name Názov vytváranej triedy.
+     * @return Objekt (inštancia) reprezentujúca triedu. Ak trieda s daným názvom už existuje, vráti null.
      */
     public UMLClass createClass(String name)
     {
@@ -36,14 +43,31 @@ public class ClassDiagram extends Element{
     }
 
     /**
-     * Vyhledá v diagramu klasifikátor podle názvu.
-     * Pokud neexistuje, vytvoří instanci třídy Classifier
-     * reprezentující klasifikátor, který není v diagramu zachycen
-     * (viz UMLClassifier.forName(java.lang.String)); využito
-     * např. pro modelování typu proměnné, který v diagramu není.
-     * Tato instance je zařazena do struktur diagramu, tzn. že při dalším pokusu o vyhledání se použije tato již vytvořená instance
-     * @param name Název klasifikátoru.
-     * @return Nalezený, příp. vytvořený, klasifikátor.
+     * Vytvorí inštanciu UML vzťahu a vloží do diagramu.
+     * Left a right zodpovedá pozícii v textovom vstupe.
+     *
+     * @param name Názov vzťahu.
+     * @param lCardinality Kardinalita ľavej triedy.
+     * @param rCardinality Kardinalita pravej triedy.
+     * @param leftClass Ľavá trieda.
+     * @param rightClass Pravá trieda.
+     */
+    public void createRelation(String name,String lCardinality, String rCardinality, UMLClass leftClass, UMLClass rightClass)
+    {
+        this.relationShipList.add(new UMLRelationship(name,lCardinality,rCardinality,leftClass,rightClass));
+    }
+
+    /**
+     * Vyhľadá v diagrame klasifikátor podľa názvu.
+     * Ak neexistuje, vytvorí inštanciu triedy Classifier
+     * reprezentujúcu klasifikátor, ktorý nie je v diagrame zachytený
+     * (viz UMLClassifier.forName(java.lang.String)); využité
+     * napr. pre modelovanie typu premennej, ktorá v diagrame nie je.
+     * Táto inštancia je zaradená do štruktúr diagramu,
+     * tzn. že pri dalšom pokuse o vyhľada sa použije táto už vytvorená inštancia.
+     *
+     * @param name Názov klasifikátora.
+     * @return Nájdený, príp. vytvorený klasifikátor.
      */
     public UMLClassifier classifierForName(String name)
     {
@@ -56,9 +80,10 @@ public class ClassDiagram extends Element{
     }
 
     /**
-     * Vyhledá v diagramu klasifikátor podle názvu.
-     * @param name Název klasifikátoru.
-     * @return Nalezený klasifikátor. Pokud v diagramu neexistuje klasifikátor daného jména, vrací null.
+     * Vyhľadá v diagrame klasifikátor podľa názvu.
+     *
+     * @param name Názov klasifikátora.
+     * @return Nájdený klasifikátor. Ak v diagrame neexistuje klasifikátor daného mena, vráti null.
      */
     public UMLClassifier findClassifier(String name)
     {
@@ -69,4 +94,69 @@ public class ClassDiagram extends Element{
         }
         return null;
     }
+
+    /**
+     * Vyhľadá v diagrame klasifikátor podľa názvu.
+     *
+     * @param name Názov klasifikaátora.
+     * @return True, ak diagram obsahuje daný klasifikátor, inak false.
+     */
+    public boolean checkClassifierPresence(String name)
+    {   /* mozeme pouzit pri rieseni nekonzistencii */
+        for (UMLClassifier cls : this.classList) {
+            if (cls.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void debugUMLRelationsVypis()
+    {
+        for (UMLClassifier rel : this.relationShipList)
+        {
+            UMLRelationship rsReference = (UMLRelationship) rel;
+            rsReference.printRelation();
+        }
+    }
+
+    /**
+     * Vyhľadá v diagrame triedu podľa pozície v zozname.
+     *
+     * @param pos pozícia v zozname.
+     * @return Trieda na danej pozícii. Ak pozícia mimo zoznamu, vráti null.
+     */
+    public UMLClass returnClassAtPos(int pos)
+    {
+        if(pos-1 > numberOfClasses())
+        {
+            System.err.println("Out of bounds in CLassList");
+            return null;
+        }
+        else
+        {
+            return (UMLClass) this.classList.get(pos);
+        }
+    }
+
+    /**
+     * Poskytuje zoznam vzťahov v diagrame.
+     *
+     * @return Zoznam vzťahov v diagrame.
+     */
+    public List<UMLClassifier> getRelationShipList()
+    {
+        return relationShipList;
+    }
+
+    /**
+     * Zisťuje počet tried v diagrame.
+     *
+     * @return počet tried v diagrame.
+     */
+    public int numberOfClasses()
+    {
+        return this.classList.size();
+    }
+
 }

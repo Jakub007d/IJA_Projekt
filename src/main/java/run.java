@@ -1,13 +1,17 @@
 /**
- * trieda run
+ * Hlavná trieda programu.
+ * Obsahuje metódu main.
+ *
+ * @author xdrobe01
  */
 public class run {
     /**
-     * metoda main
+     * Metóda main vytvorí nový View;
+     *
      * @param args argumenty
      */
     public static void main(String[] args) {
-        System.out.println("Tu bude onedlho kód :D");
+        new View();
     }
 }
 

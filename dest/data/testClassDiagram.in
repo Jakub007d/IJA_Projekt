@@ -1,0 +1,22 @@
+@startuml
+
+class Person {
+String name
+int age
+String idNumber
+op int getName()
+}
+class Post_Office {
+String name
+String openingHours
+op String getOpeningHours()
+}
+class Package {
+String trackId
+Date dateOfSend
+op String getTackId()
+}
+relation Person 1 1 Post_Office isIn
+relation Person many 1 Package have
+
+@enduml

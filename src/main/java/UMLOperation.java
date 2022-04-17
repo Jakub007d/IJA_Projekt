@@ -1,26 +1,23 @@
-/*
- * IJA 2021/22: Aplikace pro zobrazení a editaci diagramů tříd a sekvenčních diagramů
- * Autor:
- */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Třída reprezentuje operaci, která má své jméno, návratový typ a seznam argumentů.
- * Je odvozena (rozšiřuje) od třídy UMLAttribute, od které přejímá název a návratový typ.
- * Argument je reprezentován třídou UMLAttribute.
- * Lze použít jako součást UML klasifikátoru třída nebo rozhraní.
+ * Trieda reprezentuje operáciu, ktorá má svoje meno, návratový typ a zoznam argumentov.
+ * Je odvodená (rozširuje) od triedy UMLAttribute, od ktorej preberá názov a návratový typ.
+ * Agrument je reprezentovaný triedou UMLAttribute.
+ * Je možné použiť ako súčasť UML klasifikátora trieda alebo rozhranie.
  *
- * @author xz
+ * @author xstrak38
  */
 public class UMLOperation extends UMLAttribute {
     private java.util.List<UMLAttribute> argumentList = new ArrayList<UMLAttribute>();
 
     /**
-     * Konstruktor pro vytvoření operace s daným názvem a návratovým typem.
-     * @param name Název operace.
-     * @param type Návratový typ operace.
+     * Konštruktor pre vytvorenie operácie s daným názvom a návratovým typom.
+     *
+     * @param name Názov operácie.
+     * @param type Návratový typ operácie.
      */
     public UMLOperation(String name, UMLClassifier type)
     {
@@ -28,11 +25,12 @@ public class UMLOperation extends UMLAttribute {
     }
 
     /**
-     * Tovární metoda pro vytvoření instance operace.
-     * @param name Název operace.
-     * @param type Návratový typ operace.
-     * @param args Seznam argumentů operace.
-     * @return Objekt reprezentující operaci v diagramu UML.
+     * Továrna metóda pre vytvorenie inštancie operácie.
+     *
+     * @param name Názov operácie.
+     * @param type Návratový typ operácie.
+     * @param args Zoznam argumentov operácie.
+     * @return Objekt reprezentujúci operáciu v diagrame UML.
      */
     public static UMLOperation create(String name, UMLClassifier type, UMLAttribute... args)
     {
@@ -42,18 +40,17 @@ public class UMLOperation extends UMLAttribute {
     }
 
     /**
-     * Přidá nový argument do seznamu argumentů.
-     * Argument se vloží na konec seznamu.
-     * Pokud v seznamu již existuje argument stejného názvu, operaci neprovede.
-     * @param arg Vkládaný argument.
-     * @return Úspěch operace - true, pokud se podařilo vložit, jinak false.
+     * Pridá nový argument do zoznamu argumentov.
+     * Argument sa vloží na koniec zoznamu.
+     * Ak v zozname už existuje argument rovnakého názvu, operáciu nevykoná.
+     *
+     * @param arg Vkladaný argument.
+     * @return Úspech operácie - true, ak sa podarilo vložiť, inak false.
      */
     public boolean addArgument(UMLAttribute arg)
     {
-        // TODO Warning:(49, 17) Condition 'attr.getName().equals(arg)' is always 'false'
-        // TODO Warning:(49, 32) 'equals' between objects of inconvertible types 'String' and 'UMLAttribute'
         for (UMLAttribute attr : this.argumentList) {
-            if (attr.getName().equals(arg)) {
+            if (attr.getName().equals(arg.getName())) {
                 return false;
             }
         }
@@ -62,8 +59,9 @@ public class UMLOperation extends UMLAttribute {
     }
 
     /**
-     * Vrací nemodifikovatelný seznam argumentů. Lze využít pro zobrazení.
-     * @return Nemodifikovatelný seznam argumentů.
+     * Vráti nemodifikovateľný zoznam argumentov.
+     * Je možné využiť pre zobrazenie.
+     * @return Nemodifikovateľný zoznam argumentov.
      */
     public java.util.List<UMLAttribute> getArguments()
     {

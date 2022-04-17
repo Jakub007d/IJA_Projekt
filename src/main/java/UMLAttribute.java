@@ -1,16 +1,19 @@
 /**
- * Třída reprezentuje atribut, který má své jméno a typ.
- * Je odvozena (rozšiřuje) od třídy Element.
- * Typ atributu je reprezentován třidou UMLClassifier.
- * Lze použít jako atribut UML třídy nebo argument operace.
+ * Trieda reprezentuje atribút, ktorý má svoje meno a typ.
+ * Je odvodený od triedy Element.
+ * Typ atribútu je reprezentovaný triedou UMLClassifier.
+ * Je možné použiť ako atribút UML triedy alebo argument operácie.
+ *
+ * @author xstrak38
  */
 public class UMLAttribute extends Element {
     private UMLClassifier type;
 
     /**
-     * Vytvoří instanci atributu.
-     * @param name Název atributu.
-     * @param type Typ atributu.
+     * Vytvorí inštanciu atribútu.
+     *
+     * @param name Názov atribútu.
+     * @param type Typ atribútu.
      */
     public UMLAttribute(String name, UMLClassifier type)
     {
@@ -19,8 +22,9 @@ public class UMLAttribute extends Element {
     }
 
     /**
-     * Poskytuje informaci o typu atributu.
-     * @return Typ atributu.
+     * Poskytuje informáciu o type atribútu.
+     *
+     * @return Typ atribútu.
      */
     public UMLClassifier getType()
     {
@@ -28,8 +32,9 @@ public class UMLAttribute extends Element {
     }
 
     /**
-     * Vrací řetězec reprezentující stav atributu v podobě "nazev:typ".
-     * @return Řetězec reprezentující atribut.
+     * Vráti reťazec reprezentujúci stav atribútu v podobe "nazov:typ".
+     *
+     * @return Reťazaec reprezentujúci atribút.
      */
     public String toString()
     {
