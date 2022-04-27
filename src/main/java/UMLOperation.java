@@ -63,10 +63,40 @@ public class UMLOperation extends UMLAttribute {
     /**
      * Vráti nemodifikovateľný zoznam argumentov.
      * Je možné využiť pre zobrazenie.
+     *
      * @return Nemodifikovateľný zoznam argumentov.
      */
     public java.util.List<UMLAttribute> getArguments()
     {
         return Collections.unmodifiableList(this.argumentList);
+    }
+
+    /**
+     * Vráti zoznam typov argumentov operácie.
+     * Možné využiť v diagrame tried.
+     *
+     * @return Zoznam typov argumentov.
+     */
+    public java.util.List<UMLClassifier> getArgumentTypes()
+    {
+        java.util.List<UMLClassifier> argumentTypes = new ArrayList<>();
+        for (UMLAttribute attr : this.argumentList) {
+            UMLClassifier type = attr.getType();
+            argumentTypes.add(type);
+        }
+        return argumentTypes;
+    }
+
+    /**
+     * Vráti reťazec reprezentujúci operáciu v tvare "nazov_operacie(argumenty_operacie) : navratovy_typ"
+     *
+     * @return Reťazec reprezentujúci operáciu.
+     */
+    public String toString()
+    {
+        String operationName = super.getName();
+        String operationReturnType = String.valueOf(this.getType());
+        String operationArgTypes = String.valueOf(this.getArgumentTypes());
+        return operationName+"("+operationArgTypes+") : "+operationReturnType;
     }
 }

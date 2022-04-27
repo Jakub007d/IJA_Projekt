@@ -34,7 +34,7 @@ public class UMLAttribute extends Element {
     }
 
     /**
-     * Vráti reťazec reprezentujúci stav atribútu v podobe "nazov:typ".
+     * Vráti reťazec reprezentujúci stav atribútu v podobe "nazov: typ".
      *
      * @return Reťazaec reprezentujúci atribút.
      */
@@ -42,6 +42,6 @@ public class UMLAttribute extends Element {
     {
         String nazev = super.getName();
         String typ = String.valueOf(this.type);
-        return nazev+":"+typ;
+        return nazev+": "+typ;
     }
 }

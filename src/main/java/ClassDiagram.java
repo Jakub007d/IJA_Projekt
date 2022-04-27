@@ -66,7 +66,7 @@ public class ClassDiagram extends Element{
      * (viz UMLClassifier.forName(java.lang.String)); využité
      * napr. pre modelovanie typu premennej, ktorá v diagrame nie je.
      * Táto inštancia je zaradená do štruktúr diagramu,
-     * tzn. že pri dalšom pokuse o vyhľada sa použije táto už vytvorená inštancia.
+     * tzn. že pri dalšom pokuse o vyhľadanie sa použije táto už vytvorená inštancia.
      *
      * @param name Názov klasifikátora.
      * @return Nájdený, príp. vytvorený klasifikátor.
