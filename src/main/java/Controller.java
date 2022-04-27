@@ -24,7 +24,7 @@ public class Controller implements ActionListener {
     }
 
     /**
-     * Metóda ktorá aktualizuje View po stlačení tlčítka.
+     * Metóda, ktorá aktualizuje View po stlačení tlčítka.
      *
      * @param e Event stlacenia tlačítka
      */

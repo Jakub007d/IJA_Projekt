@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Trieda reprezentuje sekvenčný diagram.
- * Jeodvodený z triedy Element.
+ * Je odvodený z triedy Element.
  * Obsahuje zoznam účastníkov diagramu a zoznam správ.
  *
  * @author xstrak38
