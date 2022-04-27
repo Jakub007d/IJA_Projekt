@@ -34,7 +34,6 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.button)
         {
-            view.classPanel.removeAll();
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
                 UMLClass tmpCLassReference = classDiagram.returnClassAtPos(pos);

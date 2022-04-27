@@ -18,5 +18,6 @@ op String getTackId()
 }
 relation Person 1 1 Post_Office isIn
 relation Person many 1 Package have
+relation Post_Office many 1 Package have
 
 @enduml
