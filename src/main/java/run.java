@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Hlavná trieda programu.
  * Obsahuje metódu main.

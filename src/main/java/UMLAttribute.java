@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentuje atribút, ktorý má svoje meno a typ.
  * Je odvodený od triedy Element.

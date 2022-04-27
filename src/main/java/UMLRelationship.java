@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentuje vzťah, ktorý je medzi dvoma triedami a má príslušné kardinality.
  * Rozširuje triedu UMLCLassifier.

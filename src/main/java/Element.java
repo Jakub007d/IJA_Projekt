@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentuje pomenovaný element (thing),
  * ktorý môže byť súčasťou akejkoľvek časti diagrame.

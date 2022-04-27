@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentuje klasifikátor v diagrame.
  * Odvodené triedy reprezentujú konkrétne

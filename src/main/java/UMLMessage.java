@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentuje UML správu.
  * Správa má typ, odosielateľa a prijímateľa.

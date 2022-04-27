@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Trieda reprezentujúca účastníka sekvenčného diagramu.
  * Rozširuje triedu UMLClassifier.
