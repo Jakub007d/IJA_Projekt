@@ -35,7 +35,7 @@
 
         <jar destfile="${dest.dir}\${jar.name}.jar" basedir="${build.dir}">
             <manifest>
-                <attribute name="Main-Class" value="run"/>
+                <attribute name="Main-Class" value="main.java.run"/>
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
         </jar>
