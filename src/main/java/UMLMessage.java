@@ -9,12 +9,12 @@ package main.java;
 public class UMLMessage {
     enum UMLMessageType {
         SYN,
-        ASYNC,
-        RETURN,
-        CREATE,
-        DESTROY,
-        ACTIVATE,
-        DEACTIVATE;
+        SYNDESTROY,
+        SYNCREATE,
+        ASYN,
+        ASYNDESTROY,
+        ASYNCREATE,
+        RETURN;
     }
     private UMLParticipant sender;
     private UMLParticipant recipient;
