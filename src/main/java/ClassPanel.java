@@ -2,6 +2,10 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
 /**
@@ -9,11 +13,11 @@ import java.util.ArrayList;
  *
  * @author xdrobe01
  */
-public class ClassPanel extends JPanel {
+public class ClassPanel extends JPanel implements MouseListener {
     private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
     ClassPanel(java.util.List<UMLClassifier> relationShipList)
     {
-        this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
+        this.addMouseListener(this);
         this.setBackground(Color.gray);
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.relationShipList=relationShipList;
@@ -23,6 +27,7 @@ public class ClassPanel extends JPanel {
      * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
      * @param g Graficke rozhranie
      */
+
     public void paint(Graphics g)
     {
         super.paintComponent(g);
@@ -48,6 +53,8 @@ public class ClassPanel extends JPanel {
                     if (panel.getName().equals(leftClass.getName())) {
                         x1 = panel.getX();
                         y1 = panel.getY();
+                        x1 = x1 + panel.getWidth();
+                        y1 = y1 + panel.getHeight()/2;
                         for (Component tmp : conponents) {
                             if(tmp.getName() != null)
                             {
@@ -55,6 +62,7 @@ public class ClassPanel extends JPanel {
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
                                     Graphics2D g2D = (Graphics2D) g;
+                                    g2D.drawString(rel.getRelationName(),x1,y1);
                                     g2D.drawLine(x1, y1, x2, y2);
                                 }
                             }
@@ -65,4 +73,32 @@ public class ClassPanel extends JPanel {
             }
         }
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        repaint();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        repaint();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        repaint();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        repaint();
+
+    }
+
+
 }

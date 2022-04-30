@@ -79,5 +79,9 @@ public class UMLRelationship extends UMLClassifier {
     {
         System.out.println(getLeftClass().getName()+" "+getLeftCardinality()+" "+getName()+" "+getRightCardinality()+" "+getRightClass().getName());
     }
+    public String getRelationName()
+    {
+        return super.getName();
+    }
 
 }
