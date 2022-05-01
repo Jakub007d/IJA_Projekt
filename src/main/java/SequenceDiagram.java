@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author xstrak38
  */
 public class SequenceDiagram extends Element {
-    /* zoznam účastníkov sekvenčného diagramu */
+    /* zoznam účastníkov sekvenčného diagramu, TODO: mozno by to mal byt List<String> s polozkami "objectName:name" */
     private java.util.List<UMLParticipant> participantList = new ArrayList<>();
     private java.util.List<UMLMessage> messageList = new ArrayList<>();
 

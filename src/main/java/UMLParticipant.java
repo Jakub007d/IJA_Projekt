@@ -8,6 +8,8 @@ package main.java;
  */
 public class UMLParticipant extends UMLClassifier {
     private boolean isActive = false;
+    private String objectName; /* nazov objektu */
+    private String className;  /* nazov triedy  */
     private boolean isPresentInCD; /* inicializovat na flase? */
 
     /**
@@ -18,6 +20,16 @@ public class UMLParticipant extends UMLClassifier {
     public UMLParticipant(String name)
     {
         super(name);
+        //https://www.baeldung.com/string/split
+        String[] tmp = name.split(":",2);
+        this.objectName = tmp[0];
+        this.className = tmp[1];
+    }
+
+    public UMLParticipant(String objectName, String className) {
+        super(objectName+":"+className);
+        this.objectName = objectName;
+        this.className = className;
     }
 
     /**

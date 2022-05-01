@@ -14,6 +14,7 @@ public class run {
      */
     public static void main(String[] args) {
         new View();
+        new SDView("moj-diagram-name-example.txt");
 
         //TEST
         ClassDiagram d = new ClassDiagram("diagam");
