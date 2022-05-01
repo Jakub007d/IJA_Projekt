@@ -53,7 +53,7 @@
     </target>
 
     <!-- SPUSTENIE .JAR -->
-    <target name="run">
+    <target name="run" depends="compile">
         <java jar="${dest.dir}/${jar.name}.jar" dir="${dest.dir}" fork="true"/>
     </target>
 </project>
