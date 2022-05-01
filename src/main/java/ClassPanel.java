@@ -23,6 +23,21 @@ public class ClassPanel extends JPanel implements MouseListener {
         this.relationShipList=relationShipList;
     }
 
+    private Point cardinalityTextPos(int x,int y,Point firstPoint)
+    {
+        Point secondPoint = new Point(x, y);
+        int newX= this.textPosition((int)firstPoint.getX(),(int)secondPoint.getX());
+        int newY= this.textPosition((int)firstPoint.getY(),(int)secondPoint.getY());
+        return new Point(newX,newY);
+    }
+    private int textPosition(int firstValue,int secondValue)
+    {
+        int retVal;
+        retVal=firstValue+secondValue;
+        float tx = (float)retVal/2;
+        retVal=(int)tx;
+        return retVal;
+    }
     /**
      * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
      * @param g Graficke rozhranie
@@ -61,8 +76,13 @@ public class ClassPanel extends JPanel implements MouseListener {
                                 if (tmp.getName().equals(rightClass.getName())) {
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
+                                    Point textPosition = new Point(this.textPosition(x1,x2),this.textPosition(y1,y2));
+                                    Point lCardinalityPosition = this.cardinalityTextPos(x1,y1,textPosition);
+                                    Point rCardinalityPosition = this.cardinalityTextPos(x2,y2,textPosition);
                                     Graphics2D g2D = (Graphics2D) g;
-                                    g2D.drawString(rel.getRelationName(),x1,y1);
+                                    g2D.drawString(rel.getRelationName(),(int)textPosition.getX(),(int)textPosition.getY());
+                                    g2D.drawString(rel.getLeftCardinality(),(int)lCardinalityPosition.getX(),(int)lCardinalityPosition.getY());
+                                    g2D.drawString(rel.getRightCardinality(),(int)rCardinalityPosition.getX(),(int)rCardinalityPosition.getY());
                                     g2D.drawLine(x1, y1, x2, y2);
                                 }
                             }

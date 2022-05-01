@@ -28,6 +28,7 @@ public class PanelForClass extends JPanel {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.setBackground(Color.yellow);
         JLabel className = new JLabel(name);
+        className.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.add(className);
         this.width=this.getWidth();
