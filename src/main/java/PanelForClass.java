@@ -27,9 +27,9 @@ public class PanelForClass extends JPanel {
         this.nameOfPanel=name;
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.setBackground(Color.yellow);
-        JLabel className = new JLabel(name);
+        JTextField className = new JTextField(name);
         className.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        this.setBorder(BorderFactory.createLineBorder(Color.black, 4));
         this.add(className);
         this.width=this.getWidth();
         this.height=this.getHeight();
@@ -70,7 +70,7 @@ public class PanelForClass extends JPanel {
      */
     public void addAttribute(String name, String type)
     {
-        this.add(new JLabel(type+" "+name));
+        this.add(new JTextField(type+" "+name));
         this.width=this.getWidth();
         this.height=this.getHeight();
     }

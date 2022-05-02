@@ -22,7 +22,10 @@ public class ClassPanel extends JPanel implements MouseListener {
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.relationShipList=relationShipList;
     }
-
+    public void updateRelList(java.util.List<UMLClassifier> relationShipList)
+    {
+        this.relationShipList = relationShipList;
+    }
     private Point cardinalityTextPos(int x,int y,Point firstPoint)
     {
         Point secondPoint = new Point(x, y);
@@ -74,6 +77,7 @@ public class ClassPanel extends JPanel implements MouseListener {
                             if(tmp.getName() != null)
                             {
                                 if (tmp.getName().equals(rightClass.getName())) {
+                                    rel.printRelation();
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
                                     Point textPosition = new Point(this.textPosition(x1,x2),this.textPosition(y1,y2));

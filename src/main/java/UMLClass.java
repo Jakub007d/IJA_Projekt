@@ -101,6 +101,7 @@ public class UMLClass extends UMLClassifier {
         }
     }
 
+
     /**
      * Vracia nemodifikovateľný zoznam atribútov.
      * Je možné využiť pre zobrazenie atribútov triedy.
@@ -110,5 +111,10 @@ public class UMLClass extends UMLClassifier {
     public java.util.List<UMLAttribute> getAttributes()
     {
         return Collections.unmodifiableList(this.attributeList);
+    }
+
+    public void deleteAttributes()
+    {
+        this.attributeList.clear();
     }
 }

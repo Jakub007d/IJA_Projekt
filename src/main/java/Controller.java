@@ -13,7 +13,6 @@ import java.awt.*;
 public class Controller implements ActionListener {
     private ClassDiagram classDiagram;
     private View view;
-
     /**
      * Konštruktor triedy Controller.
      *
@@ -22,7 +21,7 @@ public class Controller implements ActionListener {
     public Controller(View view){
         this.classDiagram = new Parser().parse();
         this.view=view;
-        view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
+        this.view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
     }
 
     /**
@@ -34,6 +33,7 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.button)
         {
+            view.classPanel.removeAll();
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
                 UMLClass tmpCLassReference = classDiagram.returnClassAtPos(pos);
@@ -47,6 +47,47 @@ public class Controller implements ActionListener {
 
             }
             view.setVisible(true);
+        }
+        if (e.getSource() == view.saveButton)
+        {
+            for (Component component : view.classPanel.getComponents())
+            {
+                if (component.getName() != null)
+                {
+                    System.out.println(component.getName());
+                    UMLClass classReference = (UMLClass) this.classDiagram.findClassifier(component.getName());
+                    Container container = (Container) component;
+                    boolean firstDone = false;
+                    for (Component innerComponent : container.getComponents())
+                    {
+                        JTextField toSaveAttr = (JTextField) innerComponent;
+                        if(!firstDone)
+                        {
+                            component.setName(toSaveAttr.getText());
+                            classReference.deleteAttributes();
+                            classReference.rename(toSaveAttr.getText());
+                            firstDone=true;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                String[] readyToAttr = toSaveAttr.getText().split(" ");
+                                UMLAttribute toAddAttribute = new UMLAttribute(readyToAttr[1],new UMLClassifier(readyToAttr[0]));
+                                classReference.addAttribute(toAddAttribute);
+                            }
+                            catch (Exception exception)
+                            {
+
+                            }
+
+                        }
+                    }
+                    ClassPanel refClassPanel = (ClassPanel) this.view.classPanel;
+                    refClassPanel.updateRelList(classDiagram.getRelationShipList());
+                    this.view.classPanel = (JPanel) refClassPanel;
+                }
+            }
         }
     }
 }
