@@ -8,8 +8,8 @@
     <property name="lib.dir" location="lib"/> <!-- zlozka s kniznicami -->
     <property name="jar.name" value="ija-app"/>
 
-    <path id="classpath">
-        <pathelement location="${lib.dir}"/>
+    <path id="gson">
+        <pathelement location="${lib.dir}/gson-2.9.0.jar"/>
     </path>
 
     <!-- ZMAZANIE ZLOŽLIEK BUILD A DEST -->
@@ -28,7 +28,7 @@
         <javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
             <classpath>
                 <pathelement path="${source.dir}"/>
-                <path refid="classpath"/>
+                <path refid="gson"/>
                 <pathelement location="${build.dir}" />
             </classpath>
         </javac>
@@ -37,7 +37,7 @@
             <manifest>
                 <attribute name="Main-Class" value="main.java.run"/>
             </manifest>
-            <zipgroupfileset dir="${lib.dir}" includes="**/*.jar"/>
+            <zipgroupfileset dir="${lib.dir}" includes="gson-2.9.0.jar"/>
         </jar>
         <copy todir="${dest.dir}\data">
             <fileset dir="data"/>

@@ -1,5 +1,6 @@
 package main.java;
 
+import com.google.gson.Gson;
 /**
  * Hlavná trieda programu.
  * Obsahuje metódu main.
@@ -17,7 +18,7 @@ public class run {
         new SDView("moj-diagram-name-example.txt");
 
         //TEST
-        ClassDiagram d = new ClassDiagram("diagam");
+        ClassDiagram d = new ClassDiagram("My Class Diagram");
 
         UMLClassifier clsInt = d.classifierForName("int");
         UMLClassifier clsString = d.classifierForName("String");
@@ -31,7 +32,19 @@ public class run {
         System.out.println(op1.getArgumentTypes());
         System.out.println(atribute1);
         System.out.println(atribute2);
+
+        Gson gson = new Gson();
+        String classDiagramAsJson = gson.toJson(d);
+        System.out.println("class diagram JSON: "+classDiagramAsJson);
+
         //TEST KONIEC
+        //TEST SD
+
+        SequenceDiagram sd = new SequenceDiagram("My Sequence Diagram");
+
+
+
+        //TEST SD KONIEC
 
     }
 }
