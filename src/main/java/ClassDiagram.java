@@ -12,8 +12,8 @@ import java.util.List;
  * @author xstrak38, xdrobe01
  */
 public class ClassDiagram extends Element{
-    private java.util.List<UMLClassifier> classList = new ArrayList<UMLClassifier>();
-    private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
+    private java.util.List<UMLClass> classList = new ArrayList<UMLClass>();
+    private java.util.List<UMLRelationship> relationShipList = new ArrayList<UMLRelationship>();
 
     /**
      * Konštruktor pre vytvorenie inštancie diagramu. Každý diagram má svoj názov.
@@ -43,6 +43,10 @@ public class ClassDiagram extends Element{
         this.classList.add(newClass);
         return newClass;
     }
+    public void addClass (UMLClass umlClass)
+    {
+        this.classList.add(umlClass);
+    }
 
     /**
      * Vytvorí inštanciu UML vzťahu a vloží do diagramu.
@@ -71,6 +75,7 @@ public class ClassDiagram extends Element{
      * @param name Názov klasifikátora.
      * @return Nájdený, príp. vytvorený klasifikátor.
      */
+    /*
     public UMLClassifier classifierForName(String name)
     {
         UMLClassifier cls = findClassifier(name);
@@ -80,7 +85,7 @@ public class ClassDiagram extends Element{
         }
         return cls;
     }
-
+*/
     /**
      * Vyhľadá v diagrame klasifikátor podľa názvu.
      *
@@ -146,7 +151,7 @@ public class ClassDiagram extends Element{
      *
      * @return Zoznam vzťahov v diagrame.
      */
-    public List<UMLClassifier> getRelationShipList()
+    public List<UMLRelationship> getRelationShipList()
     {
         return relationShipList;
     }

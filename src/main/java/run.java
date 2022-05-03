@@ -1,6 +1,9 @@
 package main.java;
 
 import com.google.gson.Gson;
+
+import java.io.FileWriter;
+
 /**
  * Hlavná trieda programu.
  * Obsahuje metódu main.
@@ -18,24 +21,17 @@ public class run {
         new SDView("moj-diagram-name-example.txt");
 
         //TEST
-        ClassDiagram d = new ClassDiagram("My Class Diagram");
-
-        UMLClassifier clsInt = d.classifierForName("int");
-        UMLClassifier clsString = d.classifierForName("String");
-
-        UMLAttribute atribute1 = new UMLAttribute("arg1", clsInt);
-        UMLAttribute atribute2 = new UMLAttribute("arg2",clsString);
-
-        UMLOperation op1 = UMLOperation.create("operaciaNazov",clsInt,atribute1,atribute2);
-        System.out.println(op1);
-        System.out.println(op1.getArguments());
-        System.out.println(op1.getArgumentTypes());
-        System.out.println(atribute1);
-        System.out.println(atribute2);
+        ClassDiagram d = new Parser().parse();
 
         Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("data/testClassDiagram.json")) {
+            gson.toJson(d, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ClassDiagram classs = new JsonParser().parse();
         String classDiagramAsJson = gson.toJson(d);
-        System.out.println("class diagram JSON: "+classDiagramAsJson);
+        UMLClass classo = classs.returnClassAtPos(0);
 
         //TEST KONIEC
         //TEST SD

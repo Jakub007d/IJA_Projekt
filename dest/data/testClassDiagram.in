@@ -4,7 +4,7 @@ class Person {
 + String name
 - int age
 + String idNumber
-+ op int getName <- String name
++ op int getName <-String name int kôkôt
 }
 class Post_Office {
 + String name

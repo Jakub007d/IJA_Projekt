@@ -14,15 +14,15 @@ import java.util.ArrayList;
  * @author xdrobe01
  */
 public class ClassPanel extends JPanel implements MouseListener {
-    private java.util.List<UMLClassifier> relationShipList = new ArrayList<UMLClassifier>();
-    ClassPanel(java.util.List<UMLClassifier> relationShipList)
+    private java.util.List<UMLRelationship> relationShipList = new ArrayList<UMLRelationship>();
+    ClassPanel(java.util.List<UMLRelationship> relationShipList)
     {
         this.addMouseListener(this);
         this.setBackground(Color.gray);
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.relationShipList=relationShipList;
     }
-    public void updateRelList(java.util.List<UMLClassifier> relationShipList)
+    public void updateRelList(java.util.List<UMLRelationship> relationShipList)
     {
         this.relationShipList = relationShipList;
     }

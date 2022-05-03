@@ -20,7 +20,9 @@ public class Parser
     * @return Diagram tried načítaný zo súboru.
     */
    public ClassDiagram parse ()
+
    {
+
       ClassDiagram parsed = new ClassDiagram("UML");
       try {
          File inData = new File("data/testClassDiagram.in"); /* example file */
@@ -43,8 +45,7 @@ public class Parser
             String data = dataScanner.nextLine();
             String[] tokens = data.split(" ");   /* by som premenovala line na napr tokens, */
             if(tokens[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
-               UMLClass tmpCls;
-               tmpCls = parsed.createClass(tokens[1]);
+               UMLClass tmpCls = new UMLClass(tokens[1]);
                String classAttrRead = dataScanner.nextLine();
                while (!classAttrRead.equals("}")) {
                   if (!classAttrRead.equals("")) {
@@ -53,20 +54,27 @@ public class Parser
 
                         if (tokens1[4].equals("."))
                         {
-                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]));
-                           tmpCls.addAttribute(op);
+                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]),tokens1[0]);
+                           tmpCls.addOperation(op);
                         }
                         else
                         {
-                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]));
-                           UMLAttribute arg = new UMLAttribute(tokens1[6],new UMLClassifier(tokens1[5]));
-                           op.addArgument(arg);
-                           tmpCls.addAttribute(op);
+                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]),tokens1[0]);
+                           tokens1 = classAttrRead.split("<-");
+                           tokens1 = tokens1[1].split(" ");
+                           for (int i = 0; i <= tokens1.length-1;i=i+2)
+                           {
+
+                              UMLAttribute arg = new UMLAttribute(tokens1[i+1],new UMLClassifier(tokens1[i]));
+                              op.addArgument(arg);
+
+                           }
+                           tmpCls.addOperation(op);
                         }
 
                      }
                      if (tokens1.length == 3) {
-                        UMLAttribute attr = new UMLAttribute(tokens1[2], new UMLClassifier(tokens1[1]));
+                        UMLAttribute attr = new UMLAttribute(tokens1[2], new UMLClassifier(tokens1[1]),tokens1[0]);
                         tmpCls.addAttribute(attr);
                         classAttrRead = dataScanner.nextLine();
                      } else
@@ -74,7 +82,9 @@ public class Parser
                   }
 
                }
+               parsed.addClass(tmpCls);
             }
+
             if(tokens[0].equals("relation"))
             {
                parsed.createRelation(tokens[5],tokens[2],tokens[3],(UMLClass) parsed.findClassifier(tokens[1]),(UMLClass) parsed.findClassifier(tokens[4]));
@@ -93,7 +103,6 @@ public class Parser
       }
       return parsed;
    }
-
 
 
 }

@@ -10,6 +10,7 @@ package main.java;
  */
 public class UMLAttribute extends Element {
     private UMLClassifier type;
+    private String accessModifier;
 
     /**
      * Vytvorí inštanciu atribútu.
@@ -21,6 +22,12 @@ public class UMLAttribute extends Element {
     {
         super(name);
         this.type=type;
+    }
+    public UMLAttribute(String name, UMLClassifier type,String accessModifier)
+    {
+        super(name);
+        this.type=type;
+        this.accessModifier=accessModifier;
     }
 
     /**
@@ -43,5 +50,9 @@ public class UMLAttribute extends Element {
         String nazev = super.getName();
         String typ = String.valueOf(this.type);
         return nazev+": "+typ;
+    }
+
+    public String getAccessModifier() {
+        return accessModifier;
     }
 }

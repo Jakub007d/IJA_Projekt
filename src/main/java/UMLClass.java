@@ -13,7 +13,7 @@ import java.util.Collections;
 public class UMLClass extends UMLClassifier {
     private boolean isAbstract = false;
     private java.util.List<UMLAttribute> attributeList = new ArrayList<UMLAttribute>();
-
+    private java.util.List<UMLOperation> operationList = new ArrayList<UMLOperation>();
     /**
      * Vytvorí inštanciu reprezentujúsu model triedy z jazyka UML. Trieda nie je abstraktná.
      *
@@ -59,6 +59,16 @@ public class UMLClass extends UMLClassifier {
             return false;
         } else {
             this.attributeList.add(attr);
+            return true;
+        }
+    }
+    public boolean addOperation(UMLOperation operation)
+    {
+        if(this.operationList.contains(operation))
+        {
+            return false;
+        } else {
+            this.operationList.add(operation);
             return true;
         }
     }
@@ -116,9 +126,16 @@ public class UMLClass extends UMLClassifier {
     {
         return Collections.unmodifiableList(this.attributeList);
     }
-
+    public java.util.List<UMLOperation> getOperations()
+    {
+        return Collections.unmodifiableList(this.operationList);
+    }
     public void deleteAttributes()
     {
         this.attributeList.clear();
+    }
+    public void deleteOperations()
+    {
+        this.operationList.clear();
     }
 }

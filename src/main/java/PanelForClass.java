@@ -70,7 +70,7 @@ public class PanelForClass extends JPanel {
      */
     public void addAttribute(String name, String type)
     {
-        this.add(new JTextField(type+" "+name));
+        this.add(new JTextField(type+name));
         this.width=this.getWidth();
         this.height=this.getHeight();
     }

@@ -19,7 +19,7 @@ public class Controller implements ActionListener {
      * @param view Referencia na triedu View
      */
     public Controller(View view){
-        this.classDiagram = new Parser().parse();
+        this.classDiagram = new JsonParser().parse();
         this.view=view;
         this.view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
     }
@@ -37,11 +37,17 @@ public class Controller implements ActionListener {
 
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
-                UMLClass tmpCLassReference = classDiagram.returnClassAtPos(pos);
+                System.out.println(pos);
+                UMLClass tmpCLassReference = this.classDiagram.returnClassAtPos(pos);
                 PanelForClass classPanel = new PanelForClass(tmpCLassReference.getName());
                 for(UMLAttribute attribute : tmpCLassReference.getAttributes())
                 {
-                    classPanel.addAttribute(attribute.toString(),"");
+                    classPanel.addAttribute(attribute.toString(),attribute.getAccessModifier());
+                }
+                for(UMLAttribute operation : tmpCLassReference.getOperations())
+                {
+                    System.out.println("ERES HIERE");
+                    classPanel.addAttribute(operation.toString(),operation.getAccessModifier());
                 }
                 view.classPanel.add((JPanel)classPanel);
                 view.classPanel.add(Box.createRigidArea(new Dimension(100,0)));
@@ -73,7 +79,8 @@ public class Controller implements ActionListener {
                             try
                             {
                                 String[] readyToAttr = toSaveAttr.getText().split(" ");
-                                UMLAttribute toAddAttribute = new UMLAttribute(readyToAttr[1],new UMLClassifier(readyToAttr[0]));
+                                String accesibility = Character.toString(readyToAttr[0].charAt(0));
+                                UMLAttribute toAddAttribute = new UMLAttribute(readyToAttr[0].substring(1).replace(":",""),new UMLClassifier(readyToAttr[1]),accesibility);
                                 classReference.addAttribute(toAddAttribute);
                                 toSaveAttr.setBackground(Color.white);
                             }

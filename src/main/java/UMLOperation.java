@@ -21,11 +21,14 @@ public class UMLOperation extends UMLAttribute {
      * @param name Názov operácie.
      * @param type Návratový typ operácie.
      */
+    public UMLOperation(String name, UMLClassifier type, String accesModifier)
+    {
+        super(name, type,accesModifier);
+    }
     public UMLOperation(String name, UMLClassifier type)
     {
         super(name, type);
     }
-
     /**
      * Továrna metóda pre vytvorenie inštancie operácie.
      *
