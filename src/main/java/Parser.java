@@ -49,12 +49,24 @@ public class Parser
                while (!classAttrRead.equals("}")) {
                   if (!classAttrRead.equals("")) {
                      String[] tokens1 = classAttrRead.split(" ");
-                     if (tokens1[0].equals("op")) {
-                        UMLOperation op = new UMLOperation(tokens1[2], new UMLClassifier(tokens1[1]));
-                        tmpCls.addAttribute(op);
+                     if (tokens1[1].equals("op")) {
+
+                        if (tokens1[4].equals("."))
+                        {
+                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]));
+                           tmpCls.addAttribute(op);
+                        }
+                        else
+                        {
+                           UMLOperation op = new UMLOperation(tokens1[3], new UMLClassifier(tokens1[2]));
+                           UMLAttribute arg = new UMLAttribute(tokens1[6],new UMLClassifier(tokens1[5]));
+                           op.addArgument(arg);
+                           tmpCls.addAttribute(op);
+                        }
+
                      }
-                     if (tokens1.length == 2) {
-                        UMLAttribute attr = new UMLAttribute(tokens1[1], new UMLClassifier(tokens1[0]));
+                     if (tokens1.length == 3) {
+                        UMLAttribute attr = new UMLAttribute(tokens1[2], new UMLClassifier(tokens1[1]));
                         tmpCls.addAttribute(attr);
                         classAttrRead = dataScanner.nextLine();
                      } else

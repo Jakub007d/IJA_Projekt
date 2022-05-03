@@ -62,6 +62,10 @@ public class UMLClass extends UMLClassifier {
             return true;
         }
     }
+    public boolean containAttribute(UMLAttribute attr)
+    {
+        return this.attributeList.contains(attr);
+    }
 
     /**
      * Vracia pozíciu v zozname atribútov.
