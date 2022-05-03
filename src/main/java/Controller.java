@@ -34,13 +34,14 @@ public class Controller implements ActionListener {
         if(e.getSource() == view.button)
         {
             view.classPanel.removeAll();
+
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
                 UMLClass tmpCLassReference = classDiagram.returnClassAtPos(pos);
                 PanelForClass classPanel = new PanelForClass(tmpCLassReference.getName());
                 for(UMLAttribute attribute : tmpCLassReference.getAttributes())
                 {
-                    classPanel.addAttribute(attribute.getName(),attribute.getType().getName());
+                    classPanel.addAttribute(attribute.toString(),"");
                 }
                 view.classPanel.add((JPanel)classPanel);
                 view.classPanel.add(Box.createRigidArea(new Dimension(100,0)));
@@ -54,7 +55,6 @@ public class Controller implements ActionListener {
             {
                 if (component.getName() != null)
                 {
-                    System.out.println(component.getName());
                     UMLClass classReference = (UMLClass) this.classDiagram.findClassifier(component.getName());
                     Container container = (Container) component;
                     boolean firstDone = false;
@@ -63,8 +63,8 @@ public class Controller implements ActionListener {
                         JTextField toSaveAttr = (JTextField) innerComponent;
                         if(!firstDone)
                         {
-                            component.setName(toSaveAttr.getText());
-                            classReference.deleteAttributes();
+                            component.setName(toSaveAttr.getText()); // TODO
+                            classReference.deleteAttributes(); // TODO
                             classReference.rename(toSaveAttr.getText());
                             firstDone=true;
                         }
@@ -75,10 +75,12 @@ public class Controller implements ActionListener {
                                 String[] readyToAttr = toSaveAttr.getText().split(" ");
                                 UMLAttribute toAddAttribute = new UMLAttribute(readyToAttr[1],new UMLClassifier(readyToAttr[0]));
                                 classReference.addAttribute(toAddAttribute);
+                                toSaveAttr.setBackground(Color.white);
                             }
                             catch (Exception exception)
                             {
-
+                                toSaveAttr.setText("Zle zadaný atribút");
+                                toSaveAttr.setBackground(Color.red);
                             }
 
                         }
