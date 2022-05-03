@@ -59,14 +59,14 @@ public class UMLClassifier extends Element {
 
     /**
      * Vracia reťazec reprezentujúci klasifikátor
-     * v podobe "nazev(userDefined)", kde userDefined je true alebo false.
+     * v podobe "nazev", kde userDefined je true alebo false.
      *
      * @return Reťazec reprezentujúci klasifikátor.
      */
     public String toString()
     {
         String nazev = super.getName();
-        String userDefined = String.valueOf(this.isUserDefined);
-        return nazev+"("+userDefined+")";
+        //String userDefined = String.valueOf(this.isUserDefined);
+        return nazev;
     }
 }
