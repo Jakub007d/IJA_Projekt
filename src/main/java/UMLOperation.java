@@ -96,8 +96,8 @@ public class UMLOperation extends UMLAttribute {
     {
         String operationName = super.getName();
         String operationReturnType = String.valueOf(this.getType());
-        String operationArgTypes = String.valueOf(this.getArgumentTypes());
-        operationArgTypes = operationArgTypes.substring(1,operationArgTypes.length()-1); //odstrani [ ]
-        return operationName+"("+operationArgTypes+") : "+operationReturnType;
+        String operationArguments = String.valueOf(this.argumentList);
+        operationArguments = operationArguments.substring(1,operationArguments.length()-1); //odstrani [ ]
+        return operationName+"("+operationArguments+") : "+operationReturnType;
     }
 }
