@@ -55,4 +55,8 @@ public class UMLAttribute extends Element {
     public String getAccessModifier() {
         return accessModifier;
     }
+
+    public void setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
+    }
 }

@@ -62,6 +62,10 @@ public class UMLOperation extends UMLAttribute {
         this.argumentList.add(arg);
         return true;
     }
+    public void deleteArguments()
+    {
+        this.argumentList.removeAll(this.argumentList);
+    }
 
     /**
      * Vráti nemodifikovateľný zoznam argumentov.

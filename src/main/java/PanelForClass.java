@@ -12,25 +12,37 @@ import java.awt.event.MouseMotionAdapter;
  * @author xdrobe01
  */
 public class PanelForClass extends JPanel {
+    private UMLClass classReference;
     private String nameOfPanel;
+    private JPanel operationsPanel = new JPanel();
+    private JPanel attributesPanel = new JPanel();
     int width;
     int height;
     Point classCorner;
     Point prevPoint;
-    PanelForClass(String name)
+    PanelForClass(UMLClass umlClass)
     {
-        classCorner = new Point(this.getX(),this.getY());
+        this.classReference = umlClass;
         ClickListener clickListener = new ClickListener();
         DragListener dragListener = new DragListener();
+        JTextField className = new JTextField(this.classReference.getName());
+
+        classCorner = new Point(this.getX(),this.getY());
+        operationsPanel.setLayout(new BoxLayout(operationsPanel,BoxLayout.Y_AXIS));
+        operationsPanel.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        attributesPanel.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        attributesPanel.setLayout(new BoxLayout(attributesPanel,BoxLayout.Y_AXIS));
+        className.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+
         this.addMouseListener(clickListener);
         this.addMouseMotionListener(dragListener);
-        this.nameOfPanel=name;
+        this.nameOfPanel=this.classReference.getName();
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.setBackground(Color.yellow);
-        JTextField className = new JTextField(name);
-        className.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
         this.setBorder(BorderFactory.createLineBorder(Color.black, 4));
         this.add(className);
+        this.add(this.attributesPanel);
+        this.add(this.operationsPanel);
         this.width=this.getWidth();
         this.height=this.getHeight();
     }
@@ -39,6 +51,10 @@ public class PanelForClass extends JPanel {
         super.paintComponent(g);
         super.paintChildren(g);
         this.setLocation((int)this.classCorner.getX(),(int)this.classCorner.getY());
+    }
+
+    public UMLClass getClassReference() {
+        return classReference;
     }
 
     private class ClickListener extends MouseAdapter{
@@ -68,13 +84,27 @@ public class PanelForClass extends JPanel {
      * @param name Názov atribútu
      * @param type Typ atribútu
      */
-    public void addAttribute(String name, String type)
+    public void addAttribute(String name, String type,String attrName)
     {
-        this.add(new JTextField(type+name));
+        JTextField attr = new JTextField(type+name);
+        attr.setName(attrName);
+        this.attributesPanel.add(attr);
         this.width=this.getWidth();
         this.height=this.getHeight();
+        this.revalidate();
+        this.repaint();
     }
 
+    public void addOperation(String name, String type, String operationName)
+    {
+        JTextField op = new JTextField(type+name);
+        op.setName(operationName);
+        this.operationsPanel.add(op);
+        this.width=this.getWidth();
+        this.height=this.getHeight();
+        this.revalidate();
+        this.repaint();
+    }
     /**
      * Sprístupní informáciu o názve Panela.
      *

@@ -45,7 +45,17 @@ public class Parser
             String data = dataScanner.nextLine();
             String[] tokens = data.split(" ");   /* by som premenovala line na napr tokens, */
             if(tokens[0].equals("class"))              /* lebo na prve precitanie to bolo confusing */ {
-               UMLClass tmpCls = new UMLClass(tokens[1]);
+               UMLClass tmpCls;
+               if(!tokens[2].equals("{"))
+               {
+                  tmpCls = new UMLClass(tokens[1],(UMLClass) parsed.findClassifier(tokens[3]));
+                  if(tmpCls.getParentClass() == null)
+                  System.err.println("Dedí z null!");
+               }
+               else
+               {
+                  tmpCls = new UMLClass(tokens[1]);
+               }
                String classAttrRead = dataScanner.nextLine();
                while (!classAttrRead.equals("}")) {
                   if (!classAttrRead.equals("")) {

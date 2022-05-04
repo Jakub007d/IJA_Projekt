@@ -58,10 +58,12 @@ public class ClassPanel extends JPanel implements MouseListener {
         if(conponents.length != 0)
         {
             for (Component panel : conponents) {
+
                 for (UMLClassifier relation : this.relationShipList) {
                     UMLRelationship rel = (UMLRelationship) relation;
                     UMLClass leftClass = rel.getLeftClass();
                     UMLClass rightClass = rel.getRightClass();
+                    System.out.println(leftClass.getName());
                     if(leftClass.getName()==null)
                         continue;
                     if(rightClass.getName()==null)

@@ -62,6 +62,14 @@ public class UMLRelationship extends UMLClassifier {
         return this.rightClass;
     }
 
+    public void setLeftClass(UMLClass leftClass) {
+        this.leftClass = leftClass;
+    }
+
+    public void setRightClass(UMLClass rightClass) {
+        this.rightClass = rightClass;
+    }
+
     /**
      * Sprístupní informáciu o triede vľavo.
      *

@@ -6,18 +6,12 @@ class Person {
 + String idNumber
 + op int getName <-String name int kôkôt
 }
-class Post_Office {
+class Jozko extends Person {
 + String name
-+ String openingHours
-+ op String getOpeningHours .
+- int age
++ String idNumber
 }
-class Package {
-+ String trackId
-+ Date dateOfSend
-+ op String getTackId .
-}
-relation Person 1 1 Post_Office isIn
-relation Person many 1 Package have
-relation Post_Office many 1 Package have
+
+relation Person 1 1 Jozko is
 
 @enduml

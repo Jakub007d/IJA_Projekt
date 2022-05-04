@@ -1,9 +1,12 @@
 package main.java;
 
+import com.google.gson.Gson;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.io.FileWriter;
 
 /**
  * Trieda implementuje Controller, ktorý sa stará o dáta načítané cez parser a stará sa o zmeny v zobrazení
@@ -39,15 +42,14 @@ public class Controller implements ActionListener {
             {
                 System.out.println(pos);
                 UMLClass tmpCLassReference = this.classDiagram.returnClassAtPos(pos);
-                PanelForClass classPanel = new PanelForClass(tmpCLassReference.getName());
+                PanelForClass classPanel = new PanelForClass(tmpCLassReference);
                 for(UMLAttribute attribute : tmpCLassReference.getAttributes())
                 {
-                    classPanel.addAttribute(attribute.toString(),attribute.getAccessModifier());
+                    classPanel.addAttribute(attribute.toString(),attribute.getAccessModifier(),attribute.getName());
                 }
                 for(UMLAttribute operation : tmpCLassReference.getOperations())
                 {
-                    System.out.println("ERES HIERE");
-                    classPanel.addAttribute(operation.toString(),operation.getAccessModifier());
+                    classPanel.addOperation(operation.toString(),operation.getAccessModifier(),operation.getName());
                 }
                 view.classPanel.add((JPanel)classPanel);
                 view.classPanel.add(Box.createRigidArea(new Dimension(100,0)));
@@ -57,46 +59,127 @@ public class Controller implements ActionListener {
         }
         if (e.getSource() == view.saveButton)
         {
+
             for (Component component : view.classPanel.getComponents())
             {
                 if (component.getName() != null)
                 {
-                    UMLClass classReference = (UMLClass) this.classDiagram.findClassifier(component.getName());
+                    UMLClass classReference = ((PanelForClass) component).getClassReference();
                     Container container = (Container) component;
-                    boolean firstDone = false;
+                    boolean classNameDone = false;
+                    boolean attributesDone = false;
                     for (Component innerComponent : container.getComponents())
                     {
-                        JTextField toSaveAttr = (JTextField) innerComponent;
-                        if(!firstDone)
+                        if(!classNameDone)
                         {
-                            component.setName(toSaveAttr.getText()); // TODO
-                            classReference.deleteAttributes(); // TODO
-                            classReference.rename(toSaveAttr.getText());
-                            firstDone=true;
+                            classDiagram.UpdateRelationShip(classReference);
+                            classReference.rename(((JTextField) innerComponent).getText());
+                            classNameDone=true;
                         }
-                        else
+                         else if (!attributesDone)
                         {
-                            try
-                            {
-                                String[] readyToAttr = toSaveAttr.getText().split(" ");
-                                String accesibility = Character.toString(readyToAttr[0].charAt(0));
-                                UMLAttribute toAddAttribute = new UMLAttribute(readyToAttr[0].substring(1).replace(":",""),new UMLClassifier(readyToAttr[1]),accesibility);
-                                classReference.addAttribute(toAddAttribute);
-                                toSaveAttr.setBackground(Color.white);
-                            }
-                            catch (Exception exception)
-                            {
-                                toSaveAttr.setText("Zle zadaný atribút");
-                                toSaveAttr.setBackground(Color.red);
-                            }
+                            Container attributes = (Container) innerComponent;
+                            for (Component attribute : attributes.getComponents()) {
+                                try {
+                                    if (((JTextField)attribute).getText().equals(""))
+                                    {
+                                        classReference.removeAttribute(attribute.getName());
+                                    }
+                                    else {
+                                        String[] readyToAttr = ((JTextField) attribute).getText().split(" ");
+                                        String accesibility = Character.toString(readyToAttr[0].charAt(0));
+                                        String attributeName = readyToAttr[0].substring(1).replace(":", "");
+                                        String attributeType = readyToAttr[1];
+                                        UMLAttribute attributeReference = classReference.containAttribute(attributeName);
+                                        if (attributeReference != null) {
+                                            if (!(attributeReference.getType()).getName().equals(attributeType))
+                                                (attributeReference.getType()).rename(attributeType);
+                                            if (!attributeReference.getAccessModifier().equals(accesibility))
+                                                attributeReference.setAccessModifier(accesibility);
+                                        } else {
+                                            attributeReference = new UMLAttribute(attributeName, new UMLClassifier(attributeType), accesibility);
+                                            classReference.addAttribute(attributeReference);
+                                        }
+                                    }
 
+                                    attribute.setBackground(Color.white);
+                                } catch (Exception exception) {
+                                    ((JTextField)attribute).setText("Zle zadaný atribút");
+                                    attribute.setBackground(Color.red);
+                                    classReference.removeAttribute(attribute.getName());
+                                }
+                            }
+                            attributesDone = true;
+                        }
+                         else
+                        {
+                            Container operations = (Container) innerComponent;
+                            for (Component operation : operations.getComponents()) {
+                                try {
+                                    if (((JTextField)operation).getText().equals(""))
+                                    {
+                                        classReference.removeOperation(operation.getName());
+                                    }
+                                    else {
+                                        String fromTextField = ((JTextField) operation).getText();
+                                        String oldName = (((JTextField) operation).getName());
+                                        System.out.println(fromTextField);
+                                        String operationArgs = fromTextField.substring(fromTextField.indexOf("(") + 1, fromTextField.indexOf(")"));
+                                        operationArgs = operationArgs.replace(" ","");
+                                        operationArgs = operationArgs.replace(","," ");
+                                        String[] operationArgTokens = operationArgs.split(" ");
+                                        String toRemoveSubstring = fromTextField.substring(fromTextField.indexOf("("), fromTextField.indexOf(")")+1);
+                                        fromTextField = fromTextField.replace(toRemoveSubstring,"");
+                                        fromTextField = fromTextField.replace(" ","");
+                                        fromTextField = fromTextField.replace(":"," ");
+                                        String[] readyToOperation = fromTextField.split(" ");
+                                        String accesibility = Character.toString(readyToOperation[0].charAt(0));
+                                        String operationName = readyToOperation[0].substring(1);
+                                        String operationType = readyToOperation[1];
+                                        UMLOperation operationReference = classReference.containOperation(operationName);
+                                        if (operationReference != null) {
+                                            if (!(operationReference.getType()).getName().equals(operationType))
+                                                (operationReference.getType()).rename(operationType);
+                                            if (!operationReference.getAccessModifier().equals(accesibility))
+                                                operationReference.setAccessModifier(accesibility);
+                                            operationReference.deleteArguments();
+                                            for(String argument : operationArgTokens)
+                                            {
+                                                String[] argumentTokens = argument.split(":");
+                                                System.out.println(argumentTokens[0]+argumentTokens[1]+"________________________LOL________");
+                                                operationReference.addArgument(new UMLAttribute(argumentTokens[0],new UMLClassifier(argumentTokens[1])));
+                                            }
+                                        } else {
+                                            operationReference = new UMLOperation(operationName, new UMLClassifier(operationType), accesibility);
+                                            for(String argument : operationArgTokens)
+                                            {
+                                                String[] argumentTokens = argument.split(":");
+                                                operationReference.addArgument(new UMLAttribute(argumentTokens[0],new UMLClassifier(argumentTokens[1])));
+                                            }
+                                            classReference.removeOperation(oldName);
+                                            classReference.addAttribute(operationReference);
+                                        }
+
+                                    }
+
+                                    operation.setBackground(Color.white);
+                                } catch (Exception exception) {
+                                    System.err.println(exception);
+                                }
+
+                            }
                         }
                     }
-                    ClassPanel refClassPanel = (ClassPanel) this.view.classPanel;
-                    refClassPanel.updateRelList(classDiagram.getRelationShipList());
-                    this.view.classPanel = (JPanel) refClassPanel;
                 }
             }
+            Gson gson = new Gson();
+            try (FileWriter writer = new FileWriter("data/testClassDiagramSave.json")) {
+                gson.toJson(classDiagram, writer);
+            } catch (Exception i) {
+                i.printStackTrace();
+            }
         }
+        classDiagram.classDiagramDebug();
+        classDiagram.debugUMLRelationsVypis();
     }
 }

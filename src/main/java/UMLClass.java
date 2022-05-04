@@ -87,11 +87,37 @@ public class UMLClass extends UMLClassifier {
             return true;
         }
     }
-    public boolean containAttribute(UMLAttribute attr)
+    public UMLAttribute containAttribute(String name)
     {
-        return this.attributeList.contains(attr);
+        for (UMLAttribute attribute : this.attributeList)
+        {
+            if(attribute.getName().equals(name))
+            {
+                return attribute;
+            }
+        }
+        return null;
+    }
+    public UMLOperation containOperation(String name)
+    {
+        for (UMLOperation operation : this.operationList)
+        {
+            if(operation.getName().equals(name))
+            {
+                return operation;
+            }
+        }
+        return null;
+    }
+    public void removeAttribute(String name)
+    {
+        this.attributeList.remove(this.containAttribute(name));
     }
 
+    public void removeOperation(String name)
+    {
+        this.operationList.remove(this.containOperation(name));
+    }
     /**
      * Vracia pozíciu v zozname atribútov.
      * Pozícia sa indexuje od hodnoty 0. Ak trieda daný atribút neobsahuje, vráti -1.
@@ -153,4 +179,5 @@ public class UMLClass extends UMLClassifier {
     {
         this.operationList.clear();
     }
+
 }

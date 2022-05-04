@@ -102,6 +102,7 @@ public class ClassDiagram extends Element{
         return null;
     }
 
+
     /**
      * Vyhľadá v diagrame klasifikátor podľa názvu.
      *
@@ -164,6 +165,30 @@ public class ClassDiagram extends Element{
     public int numberOfClasses()
     {
         return this.classList.size();
+    }
+
+    public void classDiagramDebug()
+    {
+        for (UMLClass trieda : this.classList)
+        {
+            System.out.println(trieda.getName()+"DEBUG");
+
+        }
+    }
+    public void UpdateRelationShip(UMLClass umlClass)
+    {
+        for (UMLRelationship relation : this.relationShipList)
+        {
+            if (relation.getLeftClass().getName().equals(umlClass.getName()))
+            {
+                relation.setLeftClass(umlClass);
+            }
+            if (relation.getRightClass().getName().equals(umlClass.getName()))
+            {
+                relation.setRightClass(umlClass);
+            }
+
+        }
     }
 
 }

@@ -21,7 +21,7 @@ public class SDPopupMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "New Project clicked!");
                 //TODO: zeby tam miesto toho ^ dialogu vykresilo nejaky stvorcek
-                PanelForClass classPanel = new PanelForClass("test:Test");
+                PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
                 SDViewMainPanel.add((JPanel)classPanel);
                 SDViewMainPanel.setVisible(true);
             }

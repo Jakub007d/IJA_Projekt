@@ -30,8 +30,6 @@ public class run {
             e.printStackTrace();
         }
         ClassDiagram classs = new JsonParser().parse();
-        String classDiagramAsJson = gson.toJson(d);
-        UMLClass classo = classs.returnClassAtPos(0);
 
         //TEST KONIEC
         //TEST SD
