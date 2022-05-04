@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author xstrak38
  */
 public class SequenceDiagram extends Element {
-    /* zoznam účastníkov sekvenčného diagramu, TODO: mozno by to mal byt List<String> s polozkami "objectName:name" */
+    /* zoznam účastníkov sekvenčného diagramu */
     private java.util.List<UMLParticipant> participantList = new ArrayList<>();
     private java.util.List<UMLMessage> messageList = new ArrayList<>();
 
@@ -41,14 +41,46 @@ public class SequenceDiagram extends Element {
     }
 
     /**
-     * Testuje, či účasstník zodpovedá inštancii triedy z diagramu tried.
+     * Testuje, či účastník zodpovedá inštancii triedy z diagramu tried.
+     * Nastaví účastníkom sekvenčného diagramu atribút "isPresentInCD"
+     * na true, ak sa ekvivalentná trieda nachádza v diagrame tried,
+     * inak false.
      *
      * @param classDiagram Diagram tried.
      */
-    public void checkPresence(ClassDiagram classDiagram) {
+    public void checkParticipantPresence(ClassDiagram classDiagram) {
         for (UMLParticipant participant : this.participantList) {
             // toto je na chvilku zamyslenia
-            participant.setPresence(classDiagram.checkClassifierPresence(participant.getName()));
+            participant.setPresence(classDiagram.checkClassifierPresence(participant.getClassName()));
+        }
+    }
+
+    // TODO: toto je dost zle, treba prerobit struktury pre SD
+    public void checkOperationPresence(ClassDiagram classDiagram) {
+        for (UMLMessage message : this.messageList) {
+            switch (message.getMessageType()) {
+                case ASYN:
+                case SYN:
+                    String[] tmp = message.getMessage().split("\\(",2);
+                    //                     ^
+                    //                 "metoda(argumenty)"
+                    String messageMethodName = tmp[0]; // "metoda"
+                    String messageRecipient = message.getRecipient().getClassName();
+                    try {
+                        UMLClass tmpRecClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
+                        for (UMLAttribute attribute : tmpRecClass.getAttributes()) {
+                            if (attribute.getName().equals(messageMethodName)) {
+                                message.setMethodExists(true);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception e) {
+                        System.out.println(e);
+                    }
+
+                    break;
+            }
         }
     }
 }

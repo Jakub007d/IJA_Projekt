@@ -8,22 +8,26 @@ public class SDPopupMenu extends JFrame {
     JPopupMenu SDPopup;
 
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
-    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel){
+    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel) {
         this.SDPopup = new JPopupMenu();
 
-        // New project menu item
-        JMenuItem menuItem = new JMenuItem("New Project...");
+        // Pridanie noveho ucastnika
+        JMenuItem menuItem = new JMenuItem("Add participant");
         menuItem.setMnemonic(KeyEvent.VK_P);
-        menuItem.getAccessibleContext().setAccessibleDescription(
-                "New Project");
-        menuItem.addActionListener(new ActionListener() {
 
+        menuItem.addActionListener(new ActionListener()
+        {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "New Project clicked!");
                 //TODO: zeby tam miesto toho ^ dialogu vykresilo nejaky stvorcek
                 PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
                 SDViewMainPanel.add((JPanel)classPanel);
+                UMLParticipant myTestParticipant = new UMLParticipant("test:Main");
+                SDGuiParticipant myGUITestParticipant = new SDGuiParticipant(10,10,myTestParticipant);
+                SDViewMainPanel.add(myGUITestParticipant);
                 SDViewMainPanel.setVisible(true);
+                SDViewMainPanel.repaint();
+                myGUITestParticipant.repaint();
             }
         });
         SDPopup.add(menuItem);
