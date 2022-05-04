@@ -11,6 +11,7 @@ import java.util.Collections;
  * @author xstrak38
  */
 public class UMLClass extends UMLClassifier {
+    private UMLClass parentClass = null;
     private boolean isAbstract = false;
     private java.util.List<UMLAttribute> attributeList = new ArrayList<UMLAttribute>();
     private java.util.List<UMLOperation> operationList = new ArrayList<UMLOperation>();
@@ -24,6 +25,20 @@ public class UMLClass extends UMLClassifier {
         super(name);
     }
 
+    public UMLClass(String name,UMLClass parentClass)
+    {
+        super(name);
+        this.parentClass = parentClass;
+
+    }
+
+    public UMLClass getParentClass() {
+        return this.parentClass;
+    }
+    public boolean isChild()
+    {
+        return this.parentClass != null;
+    }
     /**
      * Test, či objekt reprezentuje model abstraktnej triedy.
      *
