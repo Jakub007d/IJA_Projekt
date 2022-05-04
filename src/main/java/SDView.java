@@ -5,7 +5,7 @@ import javax.swing.*;
 public class SDView {
 
     public JPanel SDViewMainPanel;
-    static JPopupMenu SDPopupMenu;
+    //static JPopupMenu SDPopupMenu;
 
     SDView(String name) {
         JFrame frame = new JFrame();

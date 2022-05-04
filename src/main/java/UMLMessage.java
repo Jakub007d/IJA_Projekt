@@ -19,18 +19,45 @@ public class UMLMessage {
     private UMLParticipant sender;
     private UMLParticipant recipient;
     private UMLMessageType messageType;
+    private String message;
+    private boolean methodExists = false;
 
     /**
      * Konštruktor pre UML správu.
-     *
-     * @param sender Užívateľ, ktorý odosiela správu.
+     *  @param sender Užívateľ, ktorý odosiela správu.
      * @param recipient Užívateľ, ktorý prijíma správu.
      * @param messageType Typ správy.
+     * @param message Správa.
      */
-    public UMLMessage(UMLParticipant sender, UMLParticipant recipient, UMLMessageType messageType)
+    public UMLMessage(UMLParticipant sender, UMLParticipant recipient, UMLMessageType messageType, String message)
     {
         this.sender = sender;
         this.recipient = recipient;
         this.messageType = messageType;
+        this.message = message; // TODO toto by asi malo byt daco ine a mali by sme dedit operation alebo take nieco idk
+    }
+
+    public void setMethodExists(boolean methodExists) {
+        this.methodExists = methodExists;
+    }
+
+    public boolean isMethodExists() {
+        return this.methodExists;
+    }
+
+    public UMLParticipant getSender() {
+        return this.sender;
+    }
+
+    public UMLParticipant getRecipient() {
+        return this.recipient;
+    }
+
+    public UMLMessageType getMessageType() {
+        return this.messageType;
+    }
+
+    public String getMessage() {
+        return this.message;
     }
 }

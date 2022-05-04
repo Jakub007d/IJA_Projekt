@@ -7,7 +7,7 @@ package main.java;
  * @author xstrak38
  */
 public class UMLParticipant extends UMLClassifier {
-    private boolean isActive = false;
+    private boolean isActive = false; /* aktivace objektu TODO ! */
     private String objectName; /* nazov objektu */
     private String className;  /* nazov triedy  */
     private boolean isPresentInCD; /* inicializovat na flase? */
@@ -25,8 +25,8 @@ public class UMLParticipant extends UMLClassifier {
         this.objectName = tmp[0];
         this.className = tmp[1];
     }
-
-    public UMLParticipant(String objectName, String className) {
+    public UMLParticipant(String objectName, String className)
+    {
         super(objectName+":"+className);
         this.objectName = objectName;
         this.className = className;
@@ -47,7 +47,7 @@ public class UMLParticipant extends UMLClassifier {
      *
      * @return Ak je účastník prítomný v diagrame tried, vracia true. Inak false.
      */
-    public boolean isPresentInCD()
+    public boolean getPresence() /*renamed from isPresentInCD()*/
     {
         return isPresentInCD;
     }
@@ -70,5 +70,15 @@ public class UMLParticipant extends UMLClassifier {
     public boolean isActive()
     {
         return isActive;
+    }
+
+    /**
+     * Sprístupní informáciu o názve triedy daného účastníka.
+     *
+     * @return Názov triedy (className).
+     */
+    public String getClassName()
+    {
+        return className;
     }
 }

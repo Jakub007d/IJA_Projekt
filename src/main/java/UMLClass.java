@@ -6,7 +6,7 @@ import java.util.Collections;
 /**
  * Trieda reprezentuje model triedy z jazyka UML.
  * Rozšiřuje triedu UMLClassifier.
- * Obsahuje zoznam atribútova a operácií (metód). Trieda môže byť abstraktná.
+ * Obsahuje zoznam atribútov a operácií (metód). Trieda môže byť abstraktná.
  *
  * @author xstrak38
  */
