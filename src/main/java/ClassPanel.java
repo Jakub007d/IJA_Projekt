@@ -131,10 +131,21 @@ public class ClassPanel extends JPanel implements MouseListener {
             }
         }
     }
+    public void addClassWithName(String name)
+    {
+        this.add(new PanelForClass(new UMLClass(name)));
+        classDiagram.addClass(new UMLClass(name));
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         repaint();
+        if(e.getButton() == MouseEvent.BUTTON3)
+        {
+            NewClassPopUp pop = new NewClassPopUp(this);
+            pop.show(this,e.getX(),e.getY());
+
+        }
     }
 
     @Override
