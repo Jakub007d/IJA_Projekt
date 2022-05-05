@@ -24,7 +24,7 @@ public class Controller implements ActionListener {
     public Controller(View view){
         this.classDiagram = new JsonParser().parse();
         this.view=view;
-        this.view.classPanel = new ClassPanel(classDiagram.getRelationShipList());
+        this.view.classPanel = new ClassPanel(classDiagram);
     }
 
     /**
@@ -75,6 +75,7 @@ public class Controller implements ActionListener {
                             classDiagram.UpdateRelationShip(classReference);
                             classReference.rename(((JTextField) innerComponent).getText());
                             classNameDone=true;
+                            component.setName(((JTextField) innerComponent).getText());
                         }
                          else if (!attributesDone)
                         {

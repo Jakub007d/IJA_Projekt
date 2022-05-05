@@ -4,24 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Objects;
 
 /**
  * Trieda dedí z triedy JPanel a implementuje špecialny panel používaný pre vykreslenie triedy
  *
  * @author xdrobe01
  */
-public class PanelForClass extends JPanel {
+public class PanelForClass extends JPanel implements MouseListener {
     private UMLClass classReference;
     private String nameOfPanel;
     private JPanel operationsPanel = new JPanel();
     private JPanel attributesPanel = new JPanel();
+    private PanelForClass self = this;
     int width;
     int height;
     Point classCorner;
     Point prevPoint;
     PanelForClass(UMLClass umlClass)
     {
+        this.addMouseListener(this);
         this.classReference = umlClass;
         ClickListener clickListener = new ClickListener();
         DragListener dragListener = new DragListener();
@@ -57,10 +61,41 @@ public class PanelForClass extends JPanel {
         return classReference;
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON3)
+        {
+            ClassDiagramPopUp pop = new ClassDiagramPopUp("AddAttr",this);
+            pop.show(this,e.getX(),e.getY());
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
     private class ClickListener extends MouseAdapter{
         public void mousePressed(MouseEvent e)
         {
             prevPoint = e.getPoint();
+
         }
     }
 
@@ -105,6 +140,11 @@ public class PanelForClass extends JPanel {
         this.revalidate();
         this.repaint();
     }
+    public String getClassName()
+    {
+        String returnValue = classReference.getName();
+        return Objects.requireNonNullElse(returnValue, "");
+    }
     /**
      * Sprístupní informáciu o názve Panela.
      *
@@ -113,5 +153,31 @@ public class PanelForClass extends JPanel {
     public String getName()
     {
         return this.nameOfPanel;
+    }
+    public void addAttributeTextField(String toBeAdded)
+    {
+        if(toBeAdded != null && !toBeAdded.equals("")) {
+            String[] TokensToName = toBeAdded.split(" ");
+            String name = TokensToName[0].substring(1);
+            name = name.replace(":","");
+            JTextField attr = new JTextField(toBeAdded);
+            attr.setName(name);
+            this.attributesPanel.add(attr);
+            this.revalidate();
+            this.repaint();
+        }
+    }
+    public void addOperationTextField(String toBeAdded)
+    {
+        if(toBeAdded != null && !toBeAdded.equals("")) {
+            String[] TokensToName = toBeAdded.split(" ");
+            String name = TokensToName[0].substring(1);
+            JTextField operation = new JTextField(toBeAdded);
+            name = name.replace(":","");
+            operation.setName(name);
+            this.operationsPanel.add(operation);
+            this.revalidate();
+            this.repaint();
+        }
     }
 }
