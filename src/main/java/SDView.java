@@ -2,19 +2,20 @@ package main.java;
 
 import javax.swing.*;
 
-public class SDView {
+public class SDView extends JFrame {
 
     public JPanel SDViewMainPanel;
     //static JPopupMenu SDPopupMenu;
 
     SDView(String name) {
-        JFrame frame = new JFrame();
-        frame.setTitle("Sequence Diagram: "+name);
-        frame.setSize(420,420);
-        frame.setVisible(true);
+        //JFrame frame = new JFrame();
+        this.setTitle("Sequence Diagram: "+name);
+        this.setSize(420,420);
         SDViewMainPanel = new JPanel();
-        frame.add(SDViewMainPanel);
-        new SDPopupMenu(frame,SDViewMainPanel);
+        this.add(SDViewMainPanel);
+        new SDPopupMenu(this,SDViewMainPanel);
+        new SDGuiMenuBar(this);
+        this.setVisible(true);
 
     }
 }
