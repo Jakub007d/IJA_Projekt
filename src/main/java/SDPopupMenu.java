@@ -10,6 +10,7 @@ public class SDPopupMenu extends JFrame {
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
     public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel) {
         this.SDPopup = new JPopupMenu();
+        JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
         JMenuItem menuItem = new JMenuItem("Add participant");
@@ -23,6 +24,7 @@ public class SDPopupMenu extends JFrame {
 
                 PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
                 SDViewMainPanel.add((JPanel)classPanel);
+
                 UMLParticipant myTestParticipant = new UMLParticipant("test:Main");
                 SDGuiParticipant myGUITestParticipant = new SDGuiParticipant(100,10,myTestParticipant);
                 SDViewMainPanel.add(myGUITestParticipant);
@@ -36,9 +38,30 @@ public class SDPopupMenu extends JFrame {
         menuItem = new JMenuItem("New File...");
         menuItem.setMnemonic(KeyEvent.VK_F);
         menuItem.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "New File clicked!");
+                //JOptionPane.showMessageDialog(frame, "New File clicked!");
+
+                Object[] possibilities = {"ham", "spam", "yam"};
+                String s = (String)JOptionPane.showInputDialog(
+                        frame,
+                        "Complete the sentence:\n"
+                                + "\"Green eggs and...\"",
+                        "Customized Dialog",
+                        JOptionPane.PLAIN_MESSAGE,null,
+                        possibilities,
+                        "ham");
+
+                //If a string was returned, say so.
+                if ((s != null) && (s.length() > 0)) {
+                    tmp.setText("Green eggs and... " + s + "!");
+                } else {
+                    //If you're here, the return value was null/empty.
+                    tmp.setText("Come on, finish the sentence!");
+                }
+                SDViewMainPanel.add(tmp);
+
+                String m = JOptionPane.showInputDialog("Anyone there?");
+                System.out.println(m);
             }
         });
         SDPopup.add(menuItem);
