@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Trieda reprezentuje sekvenčný diagram.
@@ -21,6 +22,10 @@ public class SequenceDiagram extends Element {
      */
     public SequenceDiagram(String name) {
         super(name);
+    }
+
+    public List<UMLParticipant> getParticipantList() {
+        return participantList;
     }
 
     /**
@@ -48,7 +53,8 @@ public class SequenceDiagram extends Element {
      *
      * @param classDiagram Diagram tried.
      */
-    public void checkParticipantPresence(ClassDiagram classDiagram) {
+    public void checkParticipantPresence(ClassDiagram classDiagram)
+    {
         for (UMLParticipant participant : this.participantList) {
             // toto je na chvilku zamyslenia
             participant.setPresence(classDiagram.checkClassifierPresence(participant.getClassName()));
@@ -56,7 +62,8 @@ public class SequenceDiagram extends Element {
     }
 
     // TODO: toto je dost zle, treba prerobit struktury pre SD
-    public void checkOperationPresence(ClassDiagram classDiagram) {
+    public void checkOperationPresence(ClassDiagram classDiagram)
+    {
         for (UMLMessage message : this.messageList) {
             switch (message.getMessageType()) {
                 case ASYN:
@@ -69,8 +76,8 @@ public class SequenceDiagram extends Element {
                     try {
                         UMLClass tmpRecClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
                         for (UMLAttribute attribute : tmpRecClass.getAttributes()) {
-                            if (attribute.getName().equals(messageMethodName)) {
-                                message.setMethodExists(true);
+                            if (!attribute.getName().equals(messageMethodName)) {
+                                message.setMethodExists(false);
                                 break;
                             }
                         }
@@ -78,9 +85,19 @@ public class SequenceDiagram extends Element {
                     catch (Exception e) {
                         System.out.println(e);
                     }
-
                     break;
             }
         }
+    }
+
+    /**
+     * Zisťuje, či sú správy a účastníci sekvenčného diagramu konzistentné s diagramom tried.
+     *
+     * @param classDiagram Zobrazený diagram tried.
+     */
+    public void checkConsistence(ClassDiagram classDiagram)
+    {
+        this.checkParticipantPresence(classDiagram); /* Nastaví účastníkom sekvenčného diagramu atribút "isPresentInCD" */
+        this.checkOperationPresence(classDiagram);   /* Nastaví správam v sekvenčnom diagrame atribút "methodExists" */
     }
 }

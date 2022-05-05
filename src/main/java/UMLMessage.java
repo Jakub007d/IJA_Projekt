@@ -14,17 +14,17 @@ public class UMLMessage {
         ASYN,
         ASYNDESTROY,
         ASYNCREATE,
-        RETURN;
+        RETURN
     }
     private UMLParticipant sender;
     private UMLParticipant recipient;
     private UMLMessageType messageType;
     private String message;
-    private boolean methodExists = false;
+    private boolean methodExists = true;
 
     /**
      * Konštruktor pre UML správu.
-     *  @param sender Užívateľ, ktorý odosiela správu.
+     * @param sender Užívateľ, ktorý odosiela správu.
      * @param recipient Užívateľ, ktorý prijíma správu.
      * @param messageType Typ správy.
      * @param message Správa.
