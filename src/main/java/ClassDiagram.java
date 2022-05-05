@@ -47,6 +47,15 @@ public class ClassDiagram extends Element{
     {
         this.classList.add(umlClass);
     }
+    public UMLClass getClassByName(String name)
+    {
+        for (UMLClass umlCLass : this.classList)
+        {
+            if (umlCLass.getName() == name)
+                return umlCLass;
+        }
+        return null;
+    }
 
     /**
      * Vytvorí inštanciu UML vzťahu a vloží do diagramu.
@@ -191,4 +200,7 @@ public class ClassDiagram extends Element{
         }
     }
 
+    public List<UMLClass> getClassList() {
+        return classList;
+    }
 }

@@ -15,12 +15,14 @@ import java.util.ArrayList;
  */
 public class ClassPanel extends JPanel implements MouseListener {
     private java.util.List<UMLRelationship> relationShipList = new ArrayList<UMLRelationship>();
-    ClassPanel(java.util.List<UMLRelationship> relationShipList)
+    private ClassDiagram classDiagram;
+    ClassPanel(ClassDiagram classDiagram)
     {
+        this.classDiagram = classDiagram;
         this.addMouseListener(this);
         this.setBackground(Color.gray);
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-        this.relationShipList=relationShipList;
+        this.relationShipList=classDiagram.getRelationShipList();
     }
     public void updateRelList(java.util.List<UMLRelationship> relationShipList)
     {
@@ -41,6 +43,15 @@ public class ClassPanel extends JPanel implements MouseListener {
         retVal=(int)tx;
         return retVal;
     }
+    private void drawTriangle(Graphics g, int x,int y)
+    {
+        int bottomY = y+10;
+        int bottomX1 = x-10;
+        int bottomX2 = x+10;
+        int [] xs = {x,bottomX1,bottomX2};
+        int [] ys = {y,bottomY,bottomY};
+        g.drawPolygon(xs,ys,3);
+    }
     /**
      * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
      * @param g Graficke rozhranie
@@ -58,27 +69,28 @@ public class ClassPanel extends JPanel implements MouseListener {
         if(conponents.length != 0)
         {
             for (Component panel : conponents) {
-
                 for (UMLClassifier relation : this.relationShipList) {
                     UMLRelationship rel = (UMLRelationship) relation;
                     UMLClass leftClass = rel.getLeftClass();
                     UMLClass rightClass = rel.getRightClass();
                     System.out.println(leftClass.getName());
+
                     if(leftClass.getName()==null)
                         continue;
                     if(rightClass.getName()==null)
                         continue;
                     if(panel.getName()==null)
                         continue;
-                    if (panel.getName().equals(leftClass.getName())) {
+                    if (((PanelForClass)panel).getClassName().equals(leftClass.getName())) {
                         x1 = panel.getX();
                         y1 = panel.getY();
                         x1 = x1 + panel.getWidth();
                         y1 = y1 + panel.getHeight()/2;
                         for (Component tmp : conponents) {
+
                             if(tmp.getName() != null)
                             {
-                                if (tmp.getName().equals(rightClass.getName())) {
+                                if (((PanelForClass) tmp).getClassName().equals(rightClass.getName())) {
                                     rel.printRelation();
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
@@ -93,6 +105,26 @@ public class ClassPanel extends JPanel implements MouseListener {
                                 }
                             }
 
+                        }
+                    }
+                }
+                if (panel.getName() != null)
+                {
+                    UMLClass childClass = ((PanelForClass) panel).getClassReference();
+                    UMLClass parentClass = childClass.getParentClass();
+                    x1 = panel.getX()+ panel.getWidth()/2;
+                    y1 = panel.getY();
+                    if (parentClass != null) {
+                        for (Component secondClass : conponents) {
+                            if (secondClass.getName() != null) {
+                                if (((PanelForClass) secondClass).getClassName().equals(parentClass.getName())) {
+                                    x2 = secondClass.getX() +secondClass.getWidth()/2;
+                                    y2 = secondClass.getY() + secondClass.getHeight();
+                                    Graphics2D g2D = (Graphics2D) g;
+                                    g2D.drawLine(x1, y1, x2, y2);
+                                    drawTriangle(g,x2,y2);
+                                }
+                            }
                         }
                     }
                 }
