@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
     JButton addAttribute = new JButton("Add Attribute");
     JButton addOperation = new JButton("Add Operation");
+    JButton deleteClass = new JButton("Delete Class");
     JTextField textField = new JTextField();
     PanelForClass panelForClass;
     public ClassDiagramPopUp(String label, PanelForClass panelForClass)
@@ -16,9 +17,11 @@ public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
         textField.setColumns(7);
         this.addAttribute.addActionListener(this);
         this.addOperation.addActionListener(this);
+        this.deleteClass.addActionListener(this);
         this.add(textField);
         this.add(this.addAttribute);
         this.add(this.addOperation);
+        this.add(this.deleteClass);
     }
 
     @Override
@@ -32,8 +35,11 @@ public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
 
         if(e.getSource() == addOperation)
         {
-            System.out.println("LOL");
             this.panelForClass.addOperationTextField(this.textField.getText());
+        }
+        if(e.getSource() == deleteClass)
+        {
+            this.panelForClass.deleteClass();
         }
     }
 }

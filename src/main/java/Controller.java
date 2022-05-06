@@ -42,7 +42,7 @@ public class Controller implements ActionListener {
             {
                 System.out.println(pos);
                 UMLClass tmpCLassReference = this.classDiagram.returnClassAtPos(pos);
-                PanelForClass classPanel = new PanelForClass(tmpCLassReference);
+                PanelForClass classPanel = new PanelForClass(tmpCLassReference,classDiagram);
                 for(UMLAttribute attribute : tmpCLassReference.getAttributes())
                 {
                     classPanel.addAttribute(attribute.toString(),attribute.getAccessModifier(),attribute.getName());
@@ -158,7 +158,8 @@ public class Controller implements ActionListener {
                                                 operationReference.addArgument(new UMLAttribute(argumentTokens[0],new UMLClassifier(argumentTokens[1])));
                                             }
                                             classReference.removeOperation(oldName);
-                                            classReference.addAttribute(operationReference);
+                                            classReference.addOperation(operationReference);
+                                            System.out.println(operationReference.toString());
                                         }
 
                                     }
@@ -180,7 +181,6 @@ public class Controller implements ActionListener {
                 i.printStackTrace();
             }
         }
-        classDiagram.classDiagramDebug();
-        classDiagram.debugUMLRelationsVypis();
+
     }
 }
