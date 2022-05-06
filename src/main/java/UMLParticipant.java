@@ -11,6 +11,7 @@ public class UMLParticipant extends UMLClassifier {
     private String objectName; /* nazov objektu */
     private String className;  /* nazov triedy  */
     private boolean isPresentInCD; /* inicializovat na flase? */
+    private UMLClass umlClass;
 
     /**
      * Vytrvorí inštanciu reprezentujúcu účastníka sekvenčného diagramu.
@@ -80,5 +81,10 @@ public class UMLParticipant extends UMLClassifier {
     public String getClassName()
     {
         return className;
+    }
+
+    public void setUmlClass(UMLClass umlClass) {
+        this.umlClass = umlClass;
+        this.className = umlClass.getName();
     }
 }

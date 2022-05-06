@@ -36,10 +36,20 @@ public class run {
 
         SequenceDiagram sd = new SequenceDiagram("My Sequence Diagram");
 
+        sd.createParticipant("tvoja:Mamka");
+        sd.createParticipant("moja:Mamka");
+        sd.createParticipant("moja:Person");
+        sd.checkConsistence(d);
+
+        for (UMLParticipant p : sd.getParticipantList()) {
+            System.out.println(p.getName()+p.getPresence());
+        }
 
 
         //TEST SD KONIEC
 
+        UMLConstructor constructor = UMLConstructor.create("NAZOVTRIEDY", "+", new UMLAttribute("psicek", new UMLClassifier("dunco")));
+        System.out.println(constructor);
     }
 }
 

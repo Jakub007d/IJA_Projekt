@@ -58,6 +58,7 @@ public class SequenceDiagram extends Element {
         for (UMLParticipant participant : this.participantList) {
             // toto je na chvilku zamyslenia
             participant.setPresence(classDiagram.checkClassifierPresence(participant.getClassName()));
+            participant.setUmlClass(classDiagram.getClassByName(participant.getClassName()));
         }
     }
 
