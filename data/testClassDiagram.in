@@ -1,17 +1,30 @@
 @startuml
 
-class Person {
+class Element {
 + String name
-- int age
-+ String idNumber
-+ op int getName <-String name int kôkôt
++ op String Element <-String name
++ op int getName <-_
++ op void rename <-String name
 }
-class Jozko extends Person {
-+ String name
-- int age
-+ String idNumber
+class UMLClassifier extends Element {
++ op void UMLClassifier <-String name
++ op boolean isUserDefined <-_
 }
-
-relation Person 1 1 Jozko is
-
+class UMLAttribute extends Element {
++ UMLClassifier type
++ op UMLClassifier getType <-_
+}
+class UMLCass extends UMLClassifier {
++ List<UMLAttributes> attributes
++ op boolean addAttribute <-UMLAttribute attr
++ op int getAttrPosition <-UMLAttribute attr
+}
+class ClassDiagram extends Element {
++ List<UMLClassifier> classes
++ op UMLCLass createClass <-String name
++ op UMLClassifier classifierForName <-String name
+}
+relation UMLAttribute _ DirectedAsociation UMLClassifier is
+relation UMLAttribute DirectedAsociation _ UMLCass is
+relation UMLClassifier DirectedAsociation _ ClassDiagram is
 @enduml

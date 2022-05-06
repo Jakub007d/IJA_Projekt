@@ -203,4 +203,8 @@ public class ClassDiagram extends Element{
     public List<UMLClass> getClassList() {
         return classList;
     }
+    public void deleteClass(String name)
+    {
+        this.classList.removeIf(umlClass -> umlClass.getName().equals(name));
+    }
 }

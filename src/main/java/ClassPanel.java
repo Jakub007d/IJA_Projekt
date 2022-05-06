@@ -43,7 +43,7 @@ public class ClassPanel extends JPanel implements MouseListener {
         retVal=(int)tx;
         return retVal;
     }
-    private void drawTriangle(Graphics g, int x,int y)
+    private void drawTriangle(Graphics g, int x,int y, boolean isInheritance)
     {
         int bottomY = y+10;
         int bottomX1 = x-10;
@@ -51,6 +51,32 @@ public class ClassPanel extends JPanel implements MouseListener {
         int [] xs = {x,bottomX1,bottomX2};
         int [] ys = {y,bottomY,bottomY};
         g.drawPolygon(xs,ys,3);
+
+        if(isInheritance)
+            g.setColor(Color.black);
+        else
+            g.setColor(Color.white);
+        g.fillPolygon(xs,ys,3);
+        g.setColor(Color.black);
+    }
+
+    private void drawDiamont(Graphics g, int x,int y, boolean isFilled)
+    {
+        int bottomY = y+10;
+        int bottomX1 = x-10;
+        int bottomX2 = x+10;
+        int downY = bottomY+10;
+
+        int [] xs = {x,bottomX1,x,bottomX2};
+        int [] ys = {y,bottomY,downY,bottomY};
+        g.drawPolygon(xs,ys,4);
+
+        if(isFilled)
+            g.setColor(Color.white);
+        else
+            g.setColor(Color.black);
+        g.fillPolygon(xs,ys,4);
+        g.setColor(Color.black);
     }
     /**
      * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
@@ -101,6 +127,34 @@ public class ClassPanel extends JPanel implements MouseListener {
                                     g2D.drawString(rel.getRelationName(),(int)textPosition.getX(),(int)textPosition.getY());
                                     g2D.drawString(rel.getLeftCardinality(),(int)lCardinalityPosition.getX(),(int)lCardinalityPosition.getY());
                                     g2D.drawString(rel.getRightCardinality(),(int)rCardinalityPosition.getX(),(int)rCardinalityPosition.getY());
+                                    if(rel.getLeftCardinality().equals("DirectedAsociation"))
+                                    {
+                                        drawTriangle(g,x1,y1,false);
+                                        y1=y1+10;
+                                    }
+                                    if(rel.getRightCardinality().equals("DirectedAsociation"))
+                                    {
+                                        drawTriangle(g,x2,y2,false);
+                                    }
+                                    if(rel.getLeftCardinality().equals("Aggregation"))
+                                    {
+                                        drawDiamont(g,x1,y1,true);
+                                        y1=y1+20;
+                                    }
+                                    if(rel.getRightCardinality().equals("Aggregation"))
+                                    {
+                                        drawDiamont(g,x2,y2,true);
+                                    }
+                                    if(rel.getLeftCardinality().equals("Composition"))
+                                    {
+                                        drawDiamont(g,x1,y1,false);
+                                        y1=y1+20;
+                                    }
+                                    if(rel.getRightCardinality().equals("Composition"))
+                                    {
+                                        drawDiamont(g,x2,y2,false);
+                                    }
+
                                     g2D.drawLine(x1, y1, x2, y2);
                                 }
                             }
@@ -121,8 +175,8 @@ public class ClassPanel extends JPanel implements MouseListener {
                                     x2 = secondClass.getX() +secondClass.getWidth()/2;
                                     y2 = secondClass.getY() + secondClass.getHeight();
                                     Graphics2D g2D = (Graphics2D) g;
-                                    g2D.drawLine(x1, y1, x2, y2);
-                                    drawTriangle(g,x2,y2);
+                                    g2D.drawLine(x1, y1, x2, y2+10);
+                                    drawTriangle(g,x2,y2,true);
                                 }
                             }
                         }
@@ -133,7 +187,7 @@ public class ClassPanel extends JPanel implements MouseListener {
     }
     public void addClassWithName(String name)
     {
-        this.add(new PanelForClass(new UMLClass(name)));
+        this.add(new PanelForClass(new UMLClass(name),classDiagram));
         classDiagram.addClass(new UMLClass(name));
     }
 

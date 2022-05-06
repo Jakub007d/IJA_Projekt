@@ -74,9 +74,13 @@ public class Parser
                            tokens1 = tokens1[1].split(" ");
                            for (int i = 0; i <= tokens1.length-1;i=i+2)
                            {
+                              if(!tokens1[i].equals("_") && !tokens1[i].equals(""))
+                              {
+                                 System.out.println(tokens1);
+                                 UMLAttribute arg = new UMLAttribute(tokens1[i+1],new UMLClassifier(tokens1[i]));
+                                 op.addArgument(arg);
+                              }
 
-                              UMLAttribute arg = new UMLAttribute(tokens1[i+1],new UMLClassifier(tokens1[i]));
-                              op.addArgument(arg);
 
                            }
                            tmpCls.addOperation(op);

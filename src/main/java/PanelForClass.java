@@ -15,6 +15,7 @@ import java.util.Objects;
  */
 public class PanelForClass extends JPanel implements MouseListener {
     private UMLClass classReference;
+    private ClassDiagram classDiagram;
     private String nameOfPanel;
     private JPanel operationsPanel = new JPanel();
     private JPanel attributesPanel = new JPanel();
@@ -23,8 +24,9 @@ public class PanelForClass extends JPanel implements MouseListener {
     int height;
     Point classCorner;
     Point prevPoint;
-    PanelForClass(UMLClass umlClass)
+    PanelForClass(UMLClass umlClass, ClassDiagram classDiagram)
     {
+        this.classDiagram = classDiagram;
         this.addMouseListener(this);
         this.classReference = umlClass;
         ClickListener clickListener = new ClickListener();
@@ -179,5 +181,10 @@ public class PanelForClass extends JPanel implements MouseListener {
             this.revalidate();
             this.repaint();
         }
+    }
+    public void deleteClass()
+    {
+        classDiagram.deleteClass(classReference.getName());
+        this.setVisible(false);
     }
 }
