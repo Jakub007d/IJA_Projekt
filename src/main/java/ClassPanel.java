@@ -61,14 +61,14 @@ public class ClassPanel extends JPanel implements MouseListener {
     {
         super.paintComponent(g);
         super.paintChildren(g);
-        Component[] conponents = this.getComponents();
-        int x1=0;
-        int y1=0;
-        int x2 =0;
+        Component[] components = this.getComponents();
+        int x1 = 0;
+        int y1 = 0;
+        int x2 = 0;
         int y2 = 0;
-        if(conponents.length != 0)
+        if(components.length != 0)
         {
-            for (Component panel : conponents) {
+            for (Component panel : components) {
                 for (UMLClassifier relation : this.relationShipList) {
                     UMLRelationship rel = (UMLRelationship) relation;
                     UMLClass leftClass = rel.getLeftClass();
@@ -86,7 +86,7 @@ public class ClassPanel extends JPanel implements MouseListener {
                         y1 = panel.getY();
                         x1 = x1 + panel.getWidth();
                         y1 = y1 + panel.getHeight()/2;
-                        for (Component tmp : conponents) {
+                        for (Component tmp : components) {
 
                             if(tmp.getName() != null)
                             {
@@ -115,7 +115,7 @@ public class ClassPanel extends JPanel implements MouseListener {
                     x1 = panel.getX()+ panel.getWidth()/2;
                     y1 = panel.getY();
                     if (parentClass != null) {
-                        for (Component secondClass : conponents) {
+                        for (Component secondClass : components) {
                             if (secondClass.getName() != null) {
                                 if (((PanelForClass) secondClass).getClassName().equals(parentClass.getName())) {
                                     x2 = secondClass.getX() +secondClass.getWidth()/2;

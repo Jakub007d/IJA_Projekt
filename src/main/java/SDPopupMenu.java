@@ -9,10 +9,12 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JMenuItem addSomething;
 
     JPopupMenu SDPopup;
+    JPanel SDViewMainPanel;
 
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
     public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel) {
         this.SDPopup = new JPopupMenu();
+        this.SDViewMainPanel = SDViewMainPanel;
         //JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
@@ -51,6 +53,9 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==addParticipant) {
             System.out.println("*beep boop* you are trying to add participant");
+//            PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
+//            SDViewMainPanel.add((JPanel)classPanel);
+//            repaint();
         }
         if (e.getSource()==addSomething) {
             System.out.println("*beep boop* you are trying to add something");

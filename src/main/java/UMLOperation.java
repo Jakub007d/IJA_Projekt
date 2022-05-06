@@ -20,10 +20,11 @@ public class UMLOperation extends UMLAttribute {
      *
      * @param name Názov operácie.
      * @param type Návratový typ operácie.
+     * @param accessModifier Modifikátor prístupu.
      */
-    public UMLOperation(String name, UMLClassifier type, String accesModifier) /*TODO RENAME ACCES -> ACCESS*/
+    public UMLOperation(String name, UMLClassifier type, String accessModifier) /*TODO RENAME ACCES -> ACCESS*/
     {
-        super(name, type,accesModifier);
+        super(name, type, accessModifier);
     }
     public UMLOperation(String name, UMLClassifier type)
     {
@@ -77,6 +78,11 @@ public class UMLOperation extends UMLAttribute {
     {
         return Collections.unmodifiableList(this.argumentList);
     }
+
+    public void setArgumentList(List<UMLAttribute> argumentList) {
+        this.argumentList = argumentList;
+    }
+
 
     /**
      * Vráti zoznam typov argumentov operácie.

@@ -21,13 +21,13 @@ public class UMLAttribute extends Element {
     public UMLAttribute(String name, UMLClassifier type)
     {
         super(name);
-        this.type=type;
+        this.type = type;
     }
-    public UMLAttribute(String name, UMLClassifier type,String accessModifier)
+    public UMLAttribute(String name, UMLClassifier type, String accessModifier)
     {
         super(name);
-        this.type=type;
-        this.accessModifier=accessModifier;
+        this.type = type;
+        this.accessModifier = accessModifier;
     }
 
     /**
