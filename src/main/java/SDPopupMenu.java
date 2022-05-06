@@ -3,68 +3,27 @@ package main.java;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class SDPopupMenu extends JFrame {
+public class SDPopupMenu extends JPopupMenu implements ActionListener {
+
+    JMenuItem addParticipant;
+    JMenuItem addSomething;
 
     JPopupMenu SDPopup;
 
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
     public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel) {
         this.SDPopup = new JPopupMenu();
-        JLabel tmp = new JLabel();
+        //JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
-        JMenuItem menuItem = new JMenuItem("Add participant");
-        menuItem.setMnemonic(KeyEvent.VK_P);
+        addParticipant = new JMenuItem("Add participant");
+        addParticipant.addActionListener(this);
+        SDPopup.add(addParticipant);
 
-        menuItem.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "New Project clicked!");
-                //TODO: zeby tam miesto toho ^ dialogu vykresilo nejaky stvorcek
-
-                PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
-                SDViewMainPanel.add((JPanel)classPanel);
-
-                UMLParticipant myTestParticipant = new UMLParticipant("test:Main");
-                SDGuiParticipant myGUITestParticipant = new SDGuiParticipant(100,10,myTestParticipant);
-                SDViewMainPanel.add(myGUITestParticipant);
-                SDViewMainPanel.setVisible(true);
-                SDViewMainPanel.repaint();
-                myGUITestParticipant.repaint();
-            }
-        });
-        SDPopup.add(menuItem);
         // New File menu item
-        menuItem = new JMenuItem("New File...");
-        menuItem.setMnemonic(KeyEvent.VK_F);
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(frame, "New File clicked!");
-
-                Object[] possibilities = {"ham", "spam", "yam"};
-                String s = (String)JOptionPane.showInputDialog(
-                        frame,
-                        "Complete the sentence:\n"
-                                + "\"Green eggs and...\"",
-                        "Customized Dialog",
-                        JOptionPane.PLAIN_MESSAGE,null,
-                        possibilities,
-                        "ham");
-
-                //If a string was returned, say so.
-                if ((s != null) && (s.length() > 0)) {
-                    tmp.setText("Green eggs and... " + s + "!");
-                } else {
-                    //If you're here, the return value was null/empty.
-                    tmp.setText("Come on, finish the sentence!");
-                }
-                SDViewMainPanel.add(tmp);
-
-                String m = JOptionPane.showInputDialog("Anyone there?");
-                System.out.println(m);
-            }
-        });
-        SDPopup.add(menuItem);
+        addSomething = new JMenuItem("sth sth ...");
+        addSomething.addActionListener(this);
+        SDPopup.add(addSomething);
 
         frame.addMouseListener(new MouseAdapter() {
 
@@ -85,6 +44,17 @@ public class SDPopupMenu extends JFrame {
                 }
             }
         });
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==addParticipant) {
+            System.out.println("*beep boop* you are trying to add participant");
+        }
+        if (e.getSource()==addSomething) {
+            System.out.println("*beep boop* you are trying to add something");
+        }
 
     }
 }
