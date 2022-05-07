@@ -12,6 +12,7 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JPopupMenu SDPopup;
 
     JPanel SDViewMainPanel;
+    JFrame SDView;
 
     SequenceDiagram sequenceDiagram;
 
@@ -20,6 +21,7 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         this.SDPopup = new JPopupMenu();
         this.SDViewMainPanel = SDViewMainPanel;
         this.sequenceDiagram = sequenceDiagram;
+        this.SDView = frame;
         //JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
@@ -69,13 +71,30 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
                 System.out.println(pos);
                 UMLParticipant tmpParticipant = this.sequenceDiagram.participantAtPosition(pos);
                 SDGuiParticipant participantPanel = new SDGuiParticipant(10+100*pos,10,tmpParticipant);
+                participantPanel.setPreferredSize(new Dimension(100,100));
+                participantPanel.setBorder(BorderFactory.createLineBorder(Color.red));
                 SDViewMainPanel.add((JPanel) participantPanel);
-                SDViewMainPanel.add(Box.createRigidArea(new Dimension(100,0)));
+
+                //toto prida margin
+                SDViewMainPanel.add(Box.createRigidArea(new Dimension(10,0)));
+
+//                JPanel panel = new JPanel();
+//                panel.setBackground(Color.GRAY);
+//                SDViewMainPanel.add(panel);
             }
             SDViewMainPanel.setVisible(true);
+            SDView.setVisible(true);
         }
         if (e.getSource()==addSomething) {
             System.out.println("*beep boop* you are trying to add something");
+            UMLParticipant newParticipant = sequenceDiagram.createParticipant("nova:Mamka");
+            if(newParticipant != null) {
+                SDGuiParticipant participant = new SDGuiParticipant(newParticipant);
+                participant.setPreferredSize(new Dimension(100,100));
+                participant.setBorder(BorderFactory.createLineBorder(Color.red));
+                SDViewMainPanel.add((JPanel) participant);
+            }
+            SDView.setVisible(true);
         }
 
     }

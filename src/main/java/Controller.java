@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.io.File;
 import java.io.FileWriter;
 
 /**
@@ -180,6 +181,21 @@ public class Controller implements ActionListener {
             } catch (Exception i) {
                 i.printStackTrace();
             }
+        }
+        if (e.getSource() == view.loadSDButton) {
+//            JFileChooser fileChooser = new JFileChooser();
+//            int response = fileChooser.showOpenDialog(null);
+//
+//            if (response == JFileChooser.APPROVE_OPTION) {
+//
+//                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+//                String fileName = fileChooser.getSelectedFile().getName();
+//                System.out.println("*beep boop* with controller you loaded a file "+file);
+//                SDView newSDView = new SDView(fileName);
+//                newSDView.setVisible(true);
+//            } else System.out.println("you didn't load a file :/");
+
+//            new SDView("kokot");
         }
 
     }
