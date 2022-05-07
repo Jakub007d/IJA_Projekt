@@ -1,6 +1,7 @@
 package main.java;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class SDPopupMenu extends JPopupMenu implements ActionListener {
@@ -9,12 +10,16 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JMenuItem addSomething;
 
     JPopupMenu SDPopup;
+
     JPanel SDViewMainPanel;
 
+    SequenceDiagram sequenceDiagram;
+
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
-    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel) {
+    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel, SequenceDiagram sequenceDiagram) {
         this.SDPopup = new JPopupMenu();
         this.SDViewMainPanel = SDViewMainPanel;
+        this.sequenceDiagram = sequenceDiagram;
         //JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
@@ -51,11 +56,23 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==addParticipant) {
+        if (e.getSource() == addParticipant) {
             System.out.println("*beep boop* you are trying to add participant");
-//            PanelForClass classPanel = new PanelForClass(new UMLClass("test:test"));
-//            SDViewMainPanel.add((JPanel)classPanel);
+//            UMLParticipant participant = new UMLParticipant("moja:Mamka");
+//            SDGuiParticipant p = new SDGuiParticipant(12,12,participant);
+//            SDViewMainPanel.add(p);
+//            SDViewMainPanel.setVisible(true);
+//            p.setVisible(true);
 //            repaint();
+
+            for (int pos = 0 ; pos < sequenceDiagram.numberOfParticipants() ; pos++) {
+                System.out.println(pos);
+                UMLParticipant tmpParticipant = this.sequenceDiagram.participantAtPosition(pos);
+                SDGuiParticipant participantPanel = new SDGuiParticipant(10+100*pos,10,tmpParticipant);
+                SDViewMainPanel.add((JPanel) participantPanel);
+                SDViewMainPanel.add(Box.createRigidArea(new Dimension(100,0)));
+            }
+            SDViewMainPanel.setVisible(true);
         }
         if (e.getSource()==addSomething) {
             System.out.println("*beep boop* you are trying to add something");

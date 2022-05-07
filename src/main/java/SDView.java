@@ -5,17 +5,26 @@ import javax.swing.*;
 public class SDView extends JFrame {
 
     public JPanel SDViewMainPanel;
-    //static JPopupMenu SDPopupMenu;
 
     SDView(String name) {
-        //JFrame frame = new JFrame();
         this.setTitle("Sequence Diagram: "+name);
         this.setSize(420,420);
-        SDViewMainPanel = new JPanel();
-        this.add(SDViewMainPanel);
-        new SDPopupMenu(this,SDViewMainPanel);
-        new SDGuiMenuBar(this);
-        this.setVisible(true);
 
+        SDViewMainPanel = new JPanel();
+        SDViewMainPanel.setLayout(new BoxLayout(SDViewMainPanel, BoxLayout.X_AXIS));
+
+        /*----------------*/
+        SequenceDiagram sd = new SequenceDiagram("My Sequence Diagram");
+
+        sd.createParticipant("tvoja:Mamka");
+        sd.createParticipant("moja:Mamka");
+        sd.createParticipant("moja:Person");
+        /*----------------*/
+
+        new SDPopupMenu(this,SDViewMainPanel,sd);
+        new SDGuiMenuBar(this);
+
+        this.add(SDViewMainPanel);
+        this.setVisible(true);
     }
 }

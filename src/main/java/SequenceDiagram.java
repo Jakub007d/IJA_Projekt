@@ -45,6 +45,21 @@ public class SequenceDiagram extends Element {
         return newParticipant;
     }
 
+    public int numberOfParticipants()
+    {
+        return this.participantList.size();
+    }
+    public UMLParticipant participantAtPosition(int position)
+    {
+        if (position - 1 > numberOfParticipants()) {
+            System.err.println("Out of bounds in participantList");
+            return null;
+        }
+        else {
+            return this.participantList.get(position);
+        }
+    }
+
     /**
      * Testuje, či účastník zodpovedá inštancii triedy z diagramu tried.
      * Nastaví účastníkom sekvenčného diagramu atribút "isPresentInCD"
