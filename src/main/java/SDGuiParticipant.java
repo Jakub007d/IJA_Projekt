@@ -14,8 +14,8 @@ public class SDGuiParticipant extends JPanel {
 
     SDGuiParticipant(int x, int y, UMLParticipant participant)
     {
-        this.x = x;
-        this.y = y;
+        this.x = this.getX();
+        this.y = this.getY()+25;
         this.participant = participant;
         this.setBackground(Color.PINK);
         JLabel participantName = new JLabel(participant.getName());
@@ -33,6 +33,8 @@ public class SDGuiParticipant extends JPanel {
         repaint();
     }
     SDGuiParticipant(UMLParticipant participant) {
+        this.x = this.getX();
+        this.y = this.getY()+25;
         this.participant = participant;
         this.setBackground(Color.orange);
         JLabel participantName = new JLabel(participant.getName());
@@ -58,7 +60,7 @@ public class SDGuiParticipant extends JPanel {
         g2d.setStroke(dashed);
 
         // Draw to the copy
-        int offset = 10; //this.getWidth()/2;
+        int offset = this.getWidth()/2;
         g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+200);
         // Get rid of the copy
         g2d.dispose();
