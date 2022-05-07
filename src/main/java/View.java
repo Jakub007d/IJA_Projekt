@@ -28,6 +28,7 @@ public class View extends JFrame {
         checkButton = new JButton("Check Consistence");
         button.addActionListener(controller);
         saveButton.addActionListener(controller);
+        loadSDButton.addActionListener(controller);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         JPanel topMenu = new JPanel();
         topMenu.setLayout(new BoxLayout(topMenu, BoxLayout.X_AXIS));

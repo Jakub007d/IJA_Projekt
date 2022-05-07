@@ -13,12 +13,4 @@ public class SDGuiPanel extends JPanel {
 
     }
 
-
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paintComponent(g);
-//        super.paintChildren(g);
-//        Component[] components = this.getComponents();
-//
-//    }
 }
