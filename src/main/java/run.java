@@ -31,9 +31,6 @@ public class run {
         }
         ClassDiagram classs = new JsonParser().parse();
 
-        Gson gson2 = new Gson();
-        ClassDiagram cdFromJson = gson2.fromJson(classDiagramAsJson,ClassDiagram.class);
-
         //TEST KONIEC
         //TEST SD
 
