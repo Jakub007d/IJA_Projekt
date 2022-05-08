@@ -39,7 +39,6 @@ public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
 
         if(e.getSource() == addAttribute)
         {
-            System.out.println("LOL");
             this.panelForClass.addAttributeTextField(this.textField.getText());
         }
 

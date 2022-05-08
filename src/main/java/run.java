@@ -17,19 +17,19 @@ public class run {
      * @param args argumenty
      */
     public static void main(String[] args) {
-        new View();
+
 
         //TEST
         ClassDiagram d = new Parser().parse();
 
         Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter("data/testClassDiagram.json")) {
+        try (FileWriter writer = new FileWriter("data/ClassDiagram.json")) {
             gson.toJson(d, writer);
         } catch (Exception e) {
             e.printStackTrace();
         }
         ClassDiagram classs = new JsonParser().parse();
-
+        new View();
         //TEST KONIEC
         //TEST SD
 

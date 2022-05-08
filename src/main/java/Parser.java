@@ -76,7 +76,6 @@ public class Parser
                            {
                               if(!tokens1[i].equals("_") && !tokens1[i].equals(""))
                               {
-                                 System.out.println(tokens1);
                                  UMLAttribute arg = new UMLAttribute(tokens1[i+1],new UMLClassifier(tokens1[i]));
                                  op.addArgument(arg);
                               }

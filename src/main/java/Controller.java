@@ -75,6 +75,7 @@ public class Controller implements ActionListener {
                         if(!classNameDone)
                         {
                             classDiagram.UpdateRelationShip(classReference);
+                            classDiagram.updateInheritance(classReference);
                             classReference.rename(((JTextField) innerComponent).getText());
                             classNameDone=true;
                             component.setName(((JTextField) innerComponent).getText());
@@ -126,7 +127,6 @@ public class Controller implements ActionListener {
                                     else {
                                         String fromTextField = ((JTextField) operation).getText();
                                         String oldName = (((JTextField) operation).getName());
-                                        System.out.println(fromTextField);
                                         String operationArgs = fromTextField.substring(fromTextField.indexOf("(") + 1, fromTextField.indexOf(")"));
                                         operationArgs = operationArgs.replace(" ","");
                                         operationArgs = operationArgs.replace(","," ");
@@ -167,7 +167,6 @@ public class Controller implements ActionListener {
                                             }
                                             classReference.removeOperation(oldName);
                                             classReference.addOperation(operationReference);
-                                            System.out.println(operationReference.toString());
                                         }
 
                                     }
@@ -183,7 +182,7 @@ public class Controller implements ActionListener {
                 }
             }
             Gson gson = new Gson();
-            try (FileWriter writer = new FileWriter("data/testClassDiagramSave.json")) {
+            try (FileWriter writer = new FileWriter("data/ClassDiagram.json",false)) {
                 gson.toJson(classDiagram, writer);
             } catch (Exception i) {
                 i.printStackTrace();

@@ -23,7 +23,6 @@ public class NewClassPopUp extends JPopupMenu implements ActionListener {
 
         if(e.getSource() == addClass)
         {
-            System.out.println("LOL");
             this.classPanel.addClassWithName(this.textField.getText());
         }
 

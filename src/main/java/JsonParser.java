@@ -13,7 +13,7 @@ public class JsonParser {
         Gson gson = new Gson();
         try
         {
-            return gson.fromJson(new FileReader("data/testClassDiagram.json"),ClassDiagram.class);
+            return gson.fromJson(new FileReader("data/ClassDiagram.json"),ClassDiagram.class);
         }
         catch (Exception exception)
         {

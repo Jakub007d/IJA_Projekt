@@ -130,7 +130,6 @@ public class ClassPanel extends JPanel implements MouseListener {
                     UMLRelationship rel = (UMLRelationship) relation;
                     UMLClass leftClass = rel.getLeftClass();
                     UMLClass rightClass = rel.getRightClass();
-                    System.out.println(leftClass.getName());
 
                     if(leftClass.getName()==null)
                         continue;
@@ -148,7 +147,6 @@ public class ClassPanel extends JPanel implements MouseListener {
                             if(tmp.getName() != null)
                             {
                                 if (((PanelForClass) tmp).getClassName().equals(rightClass.getName())) {
-                                    rel.printRelation();
                                     x2 = tmp.getX();
                                     y2 = tmp.getY();
                                     Point textPosition = new Point(this.textPosition(x1,x2),this.textPosition(y1,y2));

@@ -14,7 +14,6 @@ public class View extends JFrame {
     public JPanel mainPanel;
     public JPanel classPanel;
     public JButton loadSDButton;
-    public JButton checkButton;
     /**
      * Konštruktor triedy View
      */
@@ -25,14 +24,13 @@ public class View extends JFrame {
         button = new JButton("Load Class Data");
         saveButton = new JButton("Save Data");
         loadSDButton = new JButton("Load Sequence Data");
-        checkButton = new JButton("Check Consistence");
         button.addActionListener(controller);
         saveButton.addActionListener(controller);
         loadSDButton.addActionListener(controller);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         JPanel topMenu = new JPanel();
         topMenu.setLayout(new BoxLayout(topMenu, BoxLayout.X_AXIS));
-        JLabel nadpis = new JLabel("Testovacie vykreslenie načítaných tried");
+        JLabel nadpis = new JLabel("Main Class Diagram View");
         nadpis.setAlignmentX(CENTER_ALIGNMENT);
         button.setAlignmentX(CENTER_ALIGNMENT);
         saveButton.setAlignmentX(CENTER_ALIGNMENT);
@@ -40,7 +38,6 @@ public class View extends JFrame {
         topMenu.add(button);
         topMenu.add(loadSDButton);
         topMenu.add(saveButton);
-        topMenu.add(checkButton);
         mainPanel.add(topMenu);
         mainPanel.add(classPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

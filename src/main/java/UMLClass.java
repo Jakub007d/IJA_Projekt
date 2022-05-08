@@ -32,6 +32,10 @@ public class UMLClass extends UMLClassifier {
 
     }
 
+    public void setParentClass(UMLClass parentClass) {
+        this.parentClass = parentClass;
+    }
+
     public UMLClass getParentClass() {
         return this.parentClass;
     }

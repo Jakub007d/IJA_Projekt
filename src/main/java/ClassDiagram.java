@@ -43,6 +43,18 @@ public class ClassDiagram extends Element{
         this.classList.add(newClass);
         return newClass;
     }
+    public void updateInheritance(UMLClass editedClass)
+    {
+        for(UMLClass umlClass : this.classList)
+        {
+            if(umlClass.getParentClass() != null) {
+                if (umlClass.getParentClass().getName().equals(editedClass.getName())) {
+                    umlClass.setParentClass(editedClass);
+                }
+            }
+        }
+    }
+
 
     /**
      * Pridá do class diagramu triedu umlClass
