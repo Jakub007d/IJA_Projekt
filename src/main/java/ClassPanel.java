@@ -78,11 +78,11 @@ public class ClassPanel extends JPanel implements MouseListener {
         g.fillPolygon(xs,ys,4);
         g.setColor(Color.black);
     }
+
     /**
      * Metóda paint sa stará o jednotlivé vykreslenie relácii medzi triedami
      * @param g Graficke rozhranie
      */
-
     public void paint(Graphics g)
     {
         super.paintComponent(g);

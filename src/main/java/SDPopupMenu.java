@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class SDPopupMenu extends JPopupMenu implements ActionListener {
-
     JMenuItem addParticipant;
     JMenuItem addSomething;
 
@@ -14,13 +13,16 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JPanel SDViewMainPanel;
     JFrame SDView;
 
+    SDController sdController;
     SequenceDiagram sequenceDiagram;
 
     //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
-    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel, SequenceDiagram sequenceDiagram) {
+    public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel, SDController sdController) {
         this.SDPopup = new JPopupMenu();
         this.SDViewMainPanel = SDViewMainPanel;
-        this.sequenceDiagram = sequenceDiagram;
+        this.sdController = sdController;
+        this.sequenceDiagram = sdController.sequenceDiagram;
+        System.out.println(this.sequenceDiagram);
         this.SDView = frame;
         //JLabel tmp = new JLabel();
 
@@ -60,41 +62,36 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addParticipant) {
             System.out.println("*beep boop* you are trying to add participant");
-//            UMLParticipant participant = new UMLParticipant("moja:Mamka");
-//            SDGuiParticipant p = new SDGuiParticipant(12,12,participant);
-//            SDViewMainPanel.add(p);
+//vykresli sa defaultne pomocou SDView
+//            for (int pos = 0 ; pos < sequenceDiagram.numberOfParticipants() ; pos++) {
+//                System.out.println(pos);
+//                UMLParticipant tmpParticipant = this.sequenceDiagram.participantAtPosition(pos);
+//                SDGuiParticipant participantPanel = new SDGuiParticipant(tmpParticipant);
+//                participantPanel.setPreferredSize(new Dimension(100,100));
+//                participantPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+//                SDViewMainPanel.add((JPanel) participantPanel);
+//
+//                //toto prida margin
+//                //SDViewMainPanel.add(Box.createRigidArea(new Dimension(10,0)));
+//
+//            }
 //            SDViewMainPanel.setVisible(true);
-//            p.setVisible(true);
-//            repaint();
-
-            for (int pos = 0 ; pos < sequenceDiagram.numberOfParticipants() ; pos++) {
-                System.out.println(pos);
-                UMLParticipant tmpParticipant = this.sequenceDiagram.participantAtPosition(pos);
-                SDGuiParticipant participantPanel = new SDGuiParticipant(10+100*pos,10,tmpParticipant);
-                participantPanel.setPreferredSize(new Dimension(100,100));
-                participantPanel.setBorder(BorderFactory.createLineBorder(Color.red));
-                SDViewMainPanel.add((JPanel) participantPanel);
-
-                //toto prida margin
-                SDViewMainPanel.add(Box.createRigidArea(new Dimension(10,0)));
-
-//                JPanel panel = new JPanel();
-//                panel.setBackground(Color.GRAY);
-//                SDViewMainPanel.add(panel);
-            }
-            SDViewMainPanel.setVisible(true);
-            SDView.setVisible(true);
+//            SDView.setVisible(true);
+            new SDGuiParticipantDialog(sdController);
         }
         if (e.getSource()==addSomething) {
-            System.out.println("*beep boop* you are trying to add something");
-            UMLParticipant newParticipant = sequenceDiagram.createParticipant("nova:Mamka");
-            if(newParticipant != null) {
-                SDGuiParticipant participant = new SDGuiParticipant(newParticipant);
-                participant.setPreferredSize(new Dimension(100,100));
-                participant.setBorder(BorderFactory.createLineBorder(Color.red));
-                SDViewMainPanel.add((JPanel) participant);
-            }
+            System.out.println("*beep boop* you are trying to add something (participant cnt = "+sdController.sequenceDiagram.numberOfParticipants()+")");
+//            UMLParticipant newParticipant = sequenceDiagram.createParticipant("nova:Mamka");
+//            if(newParticipant != null) {
+//                SDGuiParticipant participant = new SDGuiParticipant(newParticipant);
+//                participant.setPreferredSize(new Dimension(100,100));
+//                participant.setBorder(BorderFactory.createLineBorder(Color.red));
+//                SDViewMainPanel.add((JPanel) participant);
+//            }
             SDView.setVisible(true);
+
+            //SDGuiParticipantPopup pop = new SDGuiParticipantPopup(sequenceDiagram);
+            //pop.show(this,10,10);
         }
 
     }

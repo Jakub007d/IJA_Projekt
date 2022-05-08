@@ -28,6 +28,10 @@ public class SequenceDiagram extends Element {
         return participantList;
     }
 
+    public List<UMLMessage> getMessageList() {
+        return messageList;
+    }
+
     /**
      * Vytvorí inštanciu UML účastníka a vloží ju do diagramu.
      *
@@ -45,9 +49,50 @@ public class SequenceDiagram extends Element {
         return newParticipant;
     }
 
+    public void addMessage(UMLParticipant sender, UMLParticipant recipient, UMLMessage.UMLMessageType type, String message) {
+        UMLMessage newMessage = new UMLMessage(sender, recipient, type, message);
+        this.messageList.add(newMessage);
+    }
+    public int numberOfMessages()
+    {
+        return this.messageList.size();
+    }
+
+    /**
+     * Vracia pozíciu v zozname správ.
+     * Ak diagram danú správú neobsahuje, vráti -1.
+     *
+     * @param message Správa v sekvenčnom diagrame.
+     * @return Pozíca správy v zozname.
+     */
+    public int messagePosition(UMLMessage message) {
+        int len = numberOfMessages();
+        for (int i = 0 ; i < len ; i++) {
+            if(this.messageList.get(i).equals(message)) return i;
+        }
+        return -1;
+    }
+
     public int numberOfParticipants()
     {
         return this.participantList.size();
+    }
+
+    /**
+     * Vracia pozíciu v zozname účastníkov.
+     * Ak diagram účastníka neobsahuje, vráti -1.
+     *
+     * @param participant Účastník sekvenčného diagramu.
+     * @return Pozíca účastníka v zozname.
+     */
+    public int participantPosition(UMLParticipant participant) {
+        int len = numberOfParticipants();
+        //System.out.println("pocet "+len);
+        for (int i = 0 ; i < len ; i++) {
+            //System.out.println(this.participantList.get(i)+" -- ");
+            if(this.participantList.get(i).getName().equals(participant.getName())) return i;
+        }
+        return -1;
     }
     public UMLParticipant participantAtPosition(int position)
     {
@@ -73,7 +118,7 @@ public class SequenceDiagram extends Element {
         for (UMLParticipant participant : this.participantList) {
             // toto je na chvilku zamyslenia
             participant.setPresence(classDiagram.checkClassifierPresence(participant.getClassName()));
-
+            // nastavi referenciu na odpovedajucu triedu v CD
             UMLClass result = classDiagram.getClassByName(participant.getClassName());
             if (result != null)
             {
@@ -94,11 +139,12 @@ public class SequenceDiagram extends Element {
                     //                 "metoda(argumenty)"
                     String messageMethodName = tmp[0]; // "metoda"
                     String messageRecipient = message.getRecipient().getClassName();
+
                     try {
                         UMLClass tmpRecClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
-                        for (UMLAttribute attribute : tmpRecClass.getAttributes()) {
-                            if (!attribute.getName().equals(messageMethodName)) {
-                                message.setMethodExists(false);
+                        for (UMLOperation operation : tmpRecClass.getOperations()) {
+                            if (operation.getName().equals(messageMethodName)) {
+                                message.setMethodExists(true);
                                 break;
                             }
                         }

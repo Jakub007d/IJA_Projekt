@@ -7,6 +7,8 @@ import java.io.File;
 
 public class SDGuiMenuBar extends JPanel implements ActionListener {
 
+    SequenceDiagram sequenceDiagram;
+    SDController sdController;
     JMenuBar menuBar;
 
     JMenu fileMenu;
@@ -16,7 +18,9 @@ public class SDGuiMenuBar extends JPanel implements ActionListener {
     JMenuItem saveItem;
     JMenuItem helpItem;
 
-    SDGuiMenuBar(JFrame view){
+    SDGuiMenuBar(JFrame view, SDController sdController) {
+        this.sdController = sdController;
+
         /* create new menu bar */
         menuBar = new JMenuBar();
 
@@ -50,25 +54,18 @@ public class SDGuiMenuBar extends JPanel implements ActionListener {
         this.setVisible(true);
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==loadItem) {
-            JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showOpenDialog(null);
-
-            if (response == JFileChooser.APPROVE_OPTION) {
-                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                System.out.println("*beep boop* you loaded a file "+file);
-            } else System.out.println("you didn't load a file :/");
+            //TODO LOADSDFILE
+            System.out.println("--------"+sdController.classDiagram.getName());
+            SDController sdC = new SDController();
+            sdC.loadSDFile(sdController.classDiagram);
         }
         if (e.getSource()==saveItem) {
-            JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showSaveDialog(null);
-
-            if (response == JFileChooser.APPROVE_OPTION) {
-                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                System.out.println("*beep boop* you saved a file "+file);
-            } else System.out.println("*beep boop* you didn't save a file");
+            //SDController sdController = new SDController();
+            sdController.saveSDFile(sdController.sequenceDiagram);
         }
         if (e.getSource()==helpItem) {
             System.out.println("*beep boop* you need help :(");
