@@ -17,8 +17,6 @@ public class run {
      * @param args argumenty
      */
     public static void main(String[] args) {
-
-
         //TEST
         ClassDiagram d = new Parser().parse();
 
@@ -32,41 +30,6 @@ public class run {
 
         new View();
         //TEST KONIEC
-        //TEST SD
-
-//        SequenceDiagram sd = new SequenceDiagram("My Sequence Diagram");
-//
-//        UMLParticipant participant1 = sd.createParticipant("tvoja:Mamka");
-//        UMLParticipant participant2 = sd.createParticipant("moja:Mamka");
-//        UMLParticipant participant3 = sd.createParticipant("moja:Person");
-//        UMLParticipant participant4 = sd.createParticipant(":Element");
-//
-//        sd.addMessage(participant1,participant2, UMLMessage.UMLMessageType.SYN, "jebem()");
-//        sd.addMessage(participant2,participant3, UMLMessage.UMLMessageType.ASYN, "jebem()");
-//        sd.addMessage(participant1,participant3, UMLMessage.UMLMessageType.ASYN, "jebem()");
-//        sd.addMessage(participant3,participant2, UMLMessage.UMLMessageType.SYN, "jebem()");
-//        sd.addMessage(participant3,participant4, UMLMessage.UMLMessageType.SYN, "getName()");
-//
-//        sd.checkConsistence(d);
-//
-//        Gson gejson = new Gson();
-//
-//        try (FileWriter writer = new FileWriter("C:\\Users\\terezka\\Documents\\testMamaSD.json")) {
-//            gejson.toJson(sd, writer);
-//        } catch (Exception i) {
-//            i.printStackTrace();
-//        }
-//
-//
-//        for (UMLParticipant p : sd.getParticipantList()) {
-//            System.out.println(p.getName()+p.getPresence());
-//        }
-
-
-        //TEST SD KONIEC
-
-        UMLConstructor constructor = UMLConstructor.create("NAZOVTRIEDY", "+", new UMLAttribute("psicek", new UMLClassifier("dunco")));
-        System.out.println(constructor);
     }
 }
 

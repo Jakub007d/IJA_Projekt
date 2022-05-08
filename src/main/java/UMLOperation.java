@@ -22,7 +22,7 @@ public class UMLOperation extends UMLAttribute {
      * @param type Návratový typ operácie.
      * @param accessModifier Modifikátor prístupu.
      */
-    public UMLOperation(String name, UMLClassifier type, String accessModifier) /*TODO RENAME ACCES -> ACCESS*/
+    public UMLOperation(String name, UMLClassifier type, String accessModifier)
     {
         super(name, type, accessModifier);
     }
@@ -90,7 +90,7 @@ public class UMLOperation extends UMLAttribute {
      *
      * @return Zoznam typov argumentov.
      */
-    public java.util.List<UMLClassifier> getArgumentTypes() /*TODO: TOTO SA NIKDE NEPOUZIVA TEDA?*/
+    public java.util.List<UMLClassifier> getArgumentTypes()
     {
         java.util.List<UMLClassifier> argumentTypes = new ArrayList<>();
         for (UMLAttribute attr : this.argumentList) {

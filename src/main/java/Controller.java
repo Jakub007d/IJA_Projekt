@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 /**
- * Trieda implementuje Controller, ktorý sa stará o dáta načítané cez parser a stará sa o zmeny v zobrazení
+ * Trieda implementuje Controller, ktorý sa stará o dáta načítané cez parser a stará sa o zmeny v zobrazení.
  *
  * @author xdrobe01
  */
@@ -42,7 +42,6 @@ public class Controller implements ActionListener {
 
             for(int pos = 0 ;pos<= classDiagram.numberOfClasses() - 1; pos++)
             {
-                System.out.println(pos);
                 UMLClass tmpCLassReference = this.classDiagram.returnClassAtPos(pos);
                 PanelForClass classPanel = new PanelForClass(tmpCLassReference,classDiagram);
                 for(UMLAttribute attribute : tmpCLassReference.getAttributes())
@@ -189,29 +188,8 @@ public class Controller implements ActionListener {
             }
         }
         if (e.getSource() == view.loadSDButton) { /* nacitanie sekvencneho diagramu zo suboru */
-//            JFileChooser fileChooser = new JFileChooser();
-//            int response = fileChooser.showOpenDialog(null);
-//
-//            if (response == JFileChooser.APPROVE_OPTION) {
-//                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-//                String fileName = fileChooser.getSelectedFile().getName();
-//                System.out.println("*beep boop* with controller you loaded a file "+file);
-//
-//                Gson gson = new Gson();
-//                try {
-//                    SequenceDiagram sd = gson.fromJson(new FileReader(file), SequenceDiagram.class);
-//                    SDView newSDView = new SDView(fileName,sd);
-//                    newSDView.setVisible(true);
-//                } catch (Exception exception) {
-//                    System.err.println(exception);
-//                }
-//            } else System.out.println("you didn't load a file :/");
             SDController sdController = new SDController();
             sdController.loadSDFile(classDiagram);
         }
-
-//            new SDView("kokot");
-        }
-
-
+    }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class SequenceDiagram extends Element {
     /* zoznam účastníkov sekvenčného diagramu */
     private java.util.List<UMLParticipant> participantList = new ArrayList<>();
+    /* zoznam správ sekvenčného diagramu */
     private java.util.List<UMLMessage> messageList = new ArrayList<>();
 
     /**
@@ -73,6 +74,11 @@ public class SequenceDiagram extends Element {
         return -1;
     }
 
+    /**
+     * Sprístupňuje informáciu o počte účastníkov sekvenčného diagramu.
+     *
+     * @return Počet účastníkov dekvenčného diagramu.
+     */
     public int numberOfParticipants()
     {
         return this.participantList.size();
@@ -87,13 +93,17 @@ public class SequenceDiagram extends Element {
      */
     public int participantPosition(UMLParticipant participant) {
         int len = numberOfParticipants();
-        //System.out.println("pocet "+len);
         for (int i = 0 ; i < len ; i++) {
-            //System.out.println(this.participantList.get(i)+" -- ");
             if(this.participantList.get(i).getName().equals(participant.getName())) return i;
         }
         return -1;
     }
+
+    /**
+     * Vracia účastníka na danej pozícii. Ak je pozícia mimo medzí, vráti null.
+     * @param position Pozícia účastníka.
+     * @return Hľadaný účastník.
+     */
     public UMLParticipant participantAtPosition(int position)
     {
         if (position - 1 > numberOfParticipants()) {
@@ -104,6 +114,12 @@ public class SequenceDiagram extends Element {
             return this.participantList.get(position);
         }
     }
+
+    /**
+     * Premenuje účastníka na danej pozícii.
+     * @param index Pozícia v zozname účastníkov.
+     * @param name Nový názov účastníka.
+     */
     public void renameParticipant(int index, String name) {
         UMLParticipant p = participantAtPosition(index);
         if (p != null) {
@@ -133,7 +149,10 @@ public class SequenceDiagram extends Element {
         }
     }
 
-    // TODO: toto je dost zle, treba prerobit struktury pre SD
+    /**
+     * Testje, či správa v sekvenčnom diagrame zodpovedá metóde z diagramu tried.
+     * @param classDiagram Diagram tried.
+     */
     public void checkOperationPresence(ClassDiagram classDiagram)
     {
         for (UMLMessage message : this.messageList) {
@@ -156,7 +175,7 @@ public class SequenceDiagram extends Element {
                         }
                     }
                     catch (Exception e) {
-                        System.out.println(e);
+                        System.err.println(e);
                     }
                     break;
             }

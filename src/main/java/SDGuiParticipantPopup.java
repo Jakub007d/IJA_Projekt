@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Trieda implementuje rozhranie pre premenovanie alebo vymazanie účastníka diagramu.
+ */
 public class SDGuiParticipantPopup extends JPopupMenu implements ActionListener {
     JButton renameParticipant = new JButton("Rename");
     JButton deleteParticipant = new JButton("Delete");
@@ -13,6 +16,13 @@ public class SDGuiParticipantPopup extends JPopupMenu implements ActionListener 
     JLabel participantName;
     SDController sdController;
 
+    /**
+     * Konštruktor triedy SDGuiParticipantPopup.
+     *
+     * @param sdController Kontroler pre sekvenčný diagram.
+     * @param participant Účastník, pre ktorý sa má vykonať akcia.
+     * @param participantName Referencia na JLabel s názvom účastníka.
+     */
     public SDGuiParticipantPopup(SDController sdController, UMLParticipant participant, JLabel participantName){
         this.sdController = sdController;
         this.sequenceDiagram = sdController.sequenceDiagram;
@@ -30,12 +40,14 @@ public class SDGuiParticipantPopup extends JPopupMenu implements ActionListener 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == renameParticipant) {
             int index = sdController.sequenceDiagram.participantPosition(participant);
-            System.out.println("*** "+sdController.sequenceDiagram.participantAtPosition(index).getName());
+
             sdController.sequenceDiagram.renameParticipant(index, textField.getText());
 
             participantName.setText(textField.getText());
             sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
 
+            sdController.sdView.drawSD(sdController.sequenceDiagram);
+            sdController.sdView.setVisible(true);
         }
     }
 }

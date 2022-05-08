@@ -7,7 +7,7 @@ package main.java;
  * @author xstrak38
  */
 public class UMLParticipant extends UMLClassifier {
-    private boolean isActive = false; /* aktivace objektu TODO ! */
+    private boolean isActive = false; /* aktivace objektu */
     private String objectName; /* nazov objektu */
     private String className;  /* nazov triedy  */
     private boolean isPresentInCD; /* inicializovat na flase? */
@@ -21,7 +21,6 @@ public class UMLParticipant extends UMLClassifier {
     public UMLParticipant(String name)
     {
         super(name);
-        //https://www.baeldung.com/string/split
         try {
             String[] tmp = name.split(":", 2);
             this.objectName = tmp[0];
@@ -61,7 +60,7 @@ public class UMLParticipant extends UMLClassifier {
     /**
      * Zmení informáciu o tom, či je účastník aktívny
      *
-     * @param active Informácia o tom, či je účastník aktívny. (TODO neviem ako inak to pomenovat)
+     * @param active Informácia o tom, či je účastník aktívny.
      */
     public void setActive(boolean active)
     {
@@ -110,6 +109,6 @@ public class UMLParticipant extends UMLClassifier {
 
     public void setUmlClass(UMLClass umlClass) {
         this.umlClass = umlClass;
-        this.className = umlClass.getName(); /*TODO : METODA RENAME*/
+        this.className = umlClass.getName();
     }
 }

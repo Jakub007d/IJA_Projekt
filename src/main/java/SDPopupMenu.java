@@ -1,12 +1,14 @@
 package main.java;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Trieda reprezentuje JPopupMenu, ktoré umožňuje pridať účastníka alebo správu do sekvenčného diagramu.
+ */
 public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JMenuItem addParticipant;
-    JMenuItem addSomething;
+    JMenuItem addMessage;
 
     JPopupMenu SDPopup;
 
@@ -16,38 +18,40 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     SDController sdController;
     SequenceDiagram sequenceDiagram;
 
-    //https://www.zentut.com/java-swing/how-to-create-popup-menu-in-java-swing/
+    /**
+     * Konštruktor triedy SDPopupMenu.
+     *
+     * @param frame Okno aplikácie.
+     * @param SDViewMainPanel Hlavný panel, do ktorého sa vykresľuje sekvenčný diagram.
+     * @param sdController Kontroler pre sekvenčný diagram.
+     */
     public SDPopupMenu(JFrame frame, JPanel SDViewMainPanel, SDController sdController) {
         this.SDPopup = new JPopupMenu();
         this.SDViewMainPanel = SDViewMainPanel;
         this.sdController = sdController;
         this.sequenceDiagram = sdController.sequenceDiagram;
-        System.out.println(this.sequenceDiagram);
+
         this.SDView = frame;
-        //JLabel tmp = new JLabel();
 
         // Pridanie noveho ucastnika
         addParticipant = new JMenuItem("Add participant");
         addParticipant.addActionListener(this);
         SDPopup.add(addParticipant);
 
-        // New File menu item
-        addSomething = new JMenuItem("sth sth ...");
-        addSomething.addActionListener(this);
-        SDPopup.add(addSomething);
+        // Pridanie novej spravy
+        addMessage = new JMenuItem("Add message");
+        addMessage.addActionListener(this);
+        SDPopup.add(addMessage);
 
         frame.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 showPopup(e);
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
                 showPopup(e);
             }
-
             private void showPopup(MouseEvent e) {
                 if (e.isPopupTrigger()) {
                     SDPopup.show(e.getComponent(),
@@ -61,23 +65,10 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addParticipant) {
-            System.out.println("*beep boop* you are trying to add participant");
-
             new SDGuiParticipantDialog(sdController);
         }
-        if (e.getSource()==addSomething) {
-            System.out.println("*beep boop* you are trying to add something (participant cnt = "+sdController.sequenceDiagram.numberOfParticipants()+")");
-//            UMLParticipant newParticipant = sequenceDiagram.createParticipant("nova:Mamka");
-//            if(newParticipant != null) {
-//                SDGuiParticipant participant = new SDGuiParticipant(newParticipant);
-//                participant.setPreferredSize(new Dimension(100,100));
-//                participant.setBorder(BorderFactory.createLineBorder(Color.red));
-//                SDViewMainPanel.add((JPanel) participant);
-//            }
+        if (e.getSource()== addMessage) {
             SDView.setVisible(true);
-
-            //SDGuiParticipantPopup pop = new SDGuiParticipantPopup(sequenceDiagram);
-            //pop.show(this,10,10);
         }
 
     }

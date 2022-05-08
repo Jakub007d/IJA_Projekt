@@ -3,6 +3,7 @@ package main.java;
 import javax.swing.*;
 import java.awt.*;
 
+//nepouziva sa
 public class SDGuiPanelForParticipant extends JPanel {
     private UMLParticipant guiParticipant;
     private SequenceDiagram sequenceDiagram;

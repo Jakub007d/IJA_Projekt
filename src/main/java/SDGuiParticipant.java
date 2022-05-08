@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Trieda slúži na vykreslenie jedného účastníka diagramu. Rozširuje JPanel.
+ *
+ * @author xstrak38
+ */
 public class SDGuiParticipant extends JPanel {
     int x;
     int y;
@@ -14,9 +19,15 @@ public class SDGuiParticipant extends JPanel {
     int height;
     SDController sdController;
 
+    /**
+     * Konštruktor triedy SDGuiParticipant.
+     *
+     * @param participant Účastník, ktorý sa má vykresliť.
+     * @param sdController Kontroler pre sekvenčný diagram.
+     */
     SDGuiParticipant(UMLParticipant participant, SDController sdController) {
         this.x = this.getX();
-        this.y = this.getY()+25;
+        this.y = this.getY()+25; // offset pre vykreslenie lifeline
 
         this.sdController = sdController;
         this.participant = participant;
@@ -70,14 +81,10 @@ public class SDGuiParticipant extends JPanel {
                 0, new float[]{9}, 0);
         g2d.setStroke(dashed);
 
-        // Draw to the copy
         int offset = this.getWidth()/2;
         g2d.setColor(participantColor);
         g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+200);
 
-        // Get rid of the copy
         g2d.dispose();
-
-
     }
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+
 public class SDGuiMenuBar extends JPanel implements ActionListener {
 
     SequenceDiagram sequenceDiagram;
@@ -42,8 +43,7 @@ public class SDGuiMenuBar extends JPanel implements ActionListener {
         fileMenu.add(loadItem);
         fileMenu.add(saveItem);
 
-        helpMenu.add(helpItem); // https://stackoverflow.com/questions/9862165/jmenu-actionlistener
-                                // actionListener na helpItem nefunguje, ale da sa pouzit menuListener
+        helpMenu.add(helpItem);
 
         /* add menus to the menu bar */
         menuBar.add(fileMenu);
@@ -58,17 +58,14 @@ public class SDGuiMenuBar extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==loadItem) {
-            //TODO LOADSDFILE
-            System.out.println("--------"+sdController.classDiagram.getName());
             SDController sdC = new SDController();
             sdC.loadSDFile(sdController.classDiagram);
         }
         if (e.getSource()==saveItem) {
-            //SDController sdController = new SDController();
             sdController.saveSDFile(sdController.sequenceDiagram);
         }
         if (e.getSource()==helpItem) {
-            System.out.println("*beep boop* you need help :(");
+
         }
     }
 }

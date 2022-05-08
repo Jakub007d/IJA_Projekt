@@ -3,17 +3,26 @@ package main.java;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Trieda reprezentuje okno pre vykreslenie sekvenčného diagramu. Dedí z JFrame.
+ */
 public class SDView extends JFrame {
 
     public SDGuiPanel SDViewMainPanel;
     public SDController sdController;
 
+    /**
+     * Konštruktor triedy SDView
+     * @param name Názov súboru, ktorý sa otvára.
+     * @param sd Štruktúra vykresľovaného sekvenčného diagramu.
+     * @param cd Štruktúra diagramu tried, ku ktorému sa zobrazuje sekvenčný diagram.
+     */
     SDView(String name, SequenceDiagram sd, ClassDiagram cd) {
         this.setTitle("Sequence Diagram: "+name);
         this.setSize(720,520);
 
-        //
         sdController = new SDController(this);
+
         //nastavi SD na nacitany zo suboru
         sdController.setSequenceDiagram(sd);
         sdController.setClassDiagram(cd);
@@ -23,14 +32,10 @@ public class SDView extends JFrame {
         SDViewMainPanel = new SDGuiPanel(sd);
         SDViewMainPanel.setLayout(new BoxLayout(SDViewMainPanel, BoxLayout.X_AXIS));
 
-
-
         //vykresli SD zo suboru
         drawSD(sd);
         this.setVisible(true);
-        //
 
-        //
         new SDPopupMenu(this,SDViewMainPanel,sdController);
         new SDGuiMenuBar(this, sdController);
 
@@ -46,16 +51,11 @@ public class SDView extends JFrame {
     public void drawSD(SequenceDiagram sd) {
         SDViewMainPanel.removeAll();
         for (int pos = 0 ; pos < sd.numberOfParticipants() ; pos++) {
-            System.out.println(pos);
             UMLParticipant tmpParticipant = sd.participantAtPosition(pos);
             SDGuiParticipant participantPanel = new SDGuiParticipant(tmpParticipant, sdController);
             participantPanel.setPreferredSize(new Dimension(100,100));
-            //participantPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+
             SDViewMainPanel.add((JPanel) participantPanel);
-
-            //toto prida margin
-            //SDViewMainPanel.add(Box.createRigidArea(new Dimension(10,0)));
-
         }
         repaint();
         SDViewMainPanel.setVisible(true);

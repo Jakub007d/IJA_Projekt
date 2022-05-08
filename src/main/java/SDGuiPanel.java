@@ -33,18 +33,14 @@ public class SDGuiPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-//        toto neviem na co je
-//        super.paintComponent(g);
-//        super.paintChildren(g);
         Component[] components = this.getComponents();
         java.util.List<UMLMessage> messageList = sequenceDiagram.getMessageList();
 
         if (components.length != 0) {
-            //System.out.println("KOMPONENTY SU");
 
             // panel <- obsahuje participanta a jeho lifeline
             for (Component panel : components) {
-                System.out.println(panel.getName());
+
                 if (panel.getName() != null) {
 
                     // message <- sprava v sd
@@ -102,8 +98,6 @@ public class SDGuiPanel extends JPanel {
                     }
                 }
             }
-        } else {
-            System.out.println("NEMAM");
         }
 
 

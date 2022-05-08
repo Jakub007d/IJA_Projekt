@@ -34,7 +34,7 @@ public class UMLMessage {
         this.sender = sender;
         this.recipient = recipient;
         this.messageType = messageType;
-        this.message = message; // TODO toto by asi malo byt daco ine a mali by sme dedit operation alebo take nieco idk
+        this.message = message;
     }
 
     public void setMethodExists(boolean methodExists) {
