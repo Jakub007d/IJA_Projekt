@@ -183,28 +183,29 @@ public class Controller implements ActionListener {
                 i.printStackTrace();
             }
         }
-        if (e.getSource() == view.loadSDButton) {
-            JFileChooser fileChooser = new JFileChooser();
-            int response = fileChooser.showOpenDialog(null);
-
-            if (response == JFileChooser.APPROVE_OPTION) {
-
-                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-                String fileName = fileChooser.getSelectedFile().getName();
-                System.out.println("*beep boop* with controller you loaded a file "+file);
-
-                Gson gson = new Gson();
-                try {
-                    SequenceDiagram sd = gson.fromJson(new FileReader(file), SequenceDiagram.class);
-                } catch (Exception exception) {
-                    System.err.println(exception);
-                }
-
-                SDView newSDView = new SDView(fileName);
-                newSDView.setVisible(true);
-            } else System.out.println("you didn't load a file :/");
-
+        if (e.getSource() == view.loadSDButton) { /* nacitanie sekvencneho diagramu zo suboru */
+//            JFileChooser fileChooser = new JFileChooser();
+//            int response = fileChooser.showOpenDialog(null);
+//
+//            if (response == JFileChooser.APPROVE_OPTION) {
+//                File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+//                String fileName = fileChooser.getSelectedFile().getName();
+//                System.out.println("*beep boop* with controller you loaded a file "+file);
+//
+//                Gson gson = new Gson();
+//                try {
+//                    SequenceDiagram sd = gson.fromJson(new FileReader(file), SequenceDiagram.class);
+//                    SDView newSDView = new SDView(fileName,sd);
+//                    newSDView.setVisible(true);
+//                } catch (Exception exception) {
+//                    System.err.println(exception);
+//                }
+//            } else System.out.println("you didn't load a file :/");
+            SDController sdController = new SDController();
+            sdController.loadSDFile(classDiagram);
         }
 
     }
+
+
 }

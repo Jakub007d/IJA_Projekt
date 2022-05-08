@@ -22,9 +22,14 @@ public class UMLParticipant extends UMLClassifier {
     {
         super(name);
         //https://www.baeldung.com/string/split
-        String[] tmp = name.split(":",2);
-        this.objectName = tmp[0];
-        this.className = tmp[1];
+        try {
+            String[] tmp = name.split(":", 2);
+            this.objectName = tmp[0];
+            this.className = tmp[1];
+        } catch (Exception e) {
+            this.className = name;
+            System.err.println(e);
+        }
     }
     public UMLParticipant(String objectName, String className)
     {

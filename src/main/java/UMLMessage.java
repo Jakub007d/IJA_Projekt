@@ -20,7 +20,7 @@ public class UMLMessage {
     private UMLParticipant recipient;
     private UMLMessageType messageType;
     private String message;
-    private boolean methodExists = true;
+    private boolean methodExists = false;
 
     /**
      * Konštruktor pre UML správu.
@@ -41,7 +41,7 @@ public class UMLMessage {
         this.methodExists = methodExists;
     }
 
-    public boolean isMethodExists() {
+    public boolean getMethodExists() {
         return this.methodExists;
     }
 

@@ -2,7 +2,8 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SDGuiParticipant extends JPanel {
     int x;
@@ -11,33 +12,44 @@ public class SDGuiParticipant extends JPanel {
     private UMLParticipant participant;
     Color participantColor = Color.red;
     int height;
+    SDController sdController;
 
-    SDGuiParticipant(int x, int y, UMLParticipant participant)
-    {
+    SDGuiParticipant(UMLParticipant participant, SDController sdController) {
         this.x = this.getX();
         this.y = this.getY()+25;
-        this.participant = participant;
-        this.setBackground(Color.PINK);
-        JLabel participantName = new JLabel(participant.getName());
-        if(isPresentInCD) {
-            this.participantColor = Color.black;
-        }
-        participantName.setBorder(BorderFactory.createLineBorder(participantColor, 2));
-        participantName.setForeground(participantColor);
-        participantName.setOpaque(true);
-        height = participantName.getHeight();
-        this.add(participantName);
-        participantName.setVisible(true);
-        setVisible(true);
 
-        repaint();
-    }
-    SDGuiParticipant(UMLParticipant participant) {
-        this.x = this.getX();
-        this.y = this.getY()+25;
+        this.sdController = sdController;
         this.participant = participant;
-        this.setBackground(Color.orange);
+
+        //nastavi meno komponentu
+        this.setName(participant.getName());
+        //System.out.println(this.getName());
+
+        this.isPresentInCD = participant.getPresence();
         JLabel participantName = new JLabel(participant.getName());
+        JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController);
+
+        participantName.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    participantPopup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
+            }
+        });
+
+
         if(isPresentInCD) {
             this.participantColor = Color.black;
         }
@@ -61,9 +73,12 @@ public class SDGuiParticipant extends JPanel {
 
         // Draw to the copy
         int offset = this.getWidth()/2;
+        g2d.setColor(participantColor);
         g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+200);
+
         // Get rid of the copy
         g2d.dispose();
-        //repaint();
+
+
     }
 }
