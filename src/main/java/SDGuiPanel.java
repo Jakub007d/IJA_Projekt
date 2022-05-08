@@ -40,11 +40,11 @@ public class SDGuiPanel extends JPanel {
         java.util.List<UMLMessage> messageList = sequenceDiagram.getMessageList();
 
         if (components.length != 0) {
-            System.out.println("KOMPONENTY SU");
+            //System.out.println("KOMPONENTY SU");
 
             // panel <- obsahuje participanta a jeho lifeline
             for (Component panel : components) {
-                //System.out.println(panel.getName());
+                System.out.println(panel.getName());
                 if (panel.getName() != null) {
 
                     // message <- sprava v sd

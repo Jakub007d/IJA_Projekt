@@ -88,6 +88,26 @@ public class UMLParticipant extends UMLClassifier {
         return className;
     }
 
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public void setName(String name) {
+        this.rename(name);
+        if (name.contains(":")) {
+            String[] tmp = name.split(":", 2);
+            this.objectName = tmp[0];
+            this.className = tmp[1];
+        } else {
+            this.objectName = "";
+            this.className = name;
+        }
+    }
+
     public void setUmlClass(UMLClass umlClass) {
         this.umlClass = umlClass;
         this.className = umlClass.getName(); /*TODO : METODA RENAME*/

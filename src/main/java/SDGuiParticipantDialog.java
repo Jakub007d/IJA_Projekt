@@ -32,13 +32,8 @@ public class SDGuiParticipantDialog extends JPanel {
     private void addParticipant(String objectName, String className) {
         UMLParticipant newParticipant = sdController.sequenceDiagram.createParticipant(objectName+":"+className);
         if(newParticipant != null) {
-//            SDGuiParticipant participant = new SDGuiParticipant(newParticipant);
-//            participant.setPreferredSize(new Dimension(100,100));
-//            participant.setBorder(BorderFactory.createLineBorder(Color.red));
-//            sdController.sdView.SDViewMainPanel.add((JPanel) participant);
-//            sdController.sdView.setVisible(true);
             if (sdController.classDiagram != null) {
-                sdController.sequenceDiagram.checkParticipantPresence(sdController.classDiagram);
+                sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
             } else System.out.println("ADDPARTICIPANT - CD == NULL");
             sdController.sdView.drawSD(sdController.sequenceDiagram);
             sdController.sdView.setVisible(true);

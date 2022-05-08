@@ -29,6 +29,7 @@ public class run {
             e.printStackTrace();
         }
         ClassDiagram classs = new JsonParser().parse();
+
         new View();
         //TEST KONIEC
         //TEST SD

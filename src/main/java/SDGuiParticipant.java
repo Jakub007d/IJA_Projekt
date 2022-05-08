@@ -23,12 +23,11 @@ public class SDGuiParticipant extends JPanel {
 
         //nastavi meno komponentu
         this.setName(participant.getName());
-        //System.out.println(this.getName());
 
         this.isPresentInCD = participant.getPresence();
         JLabel participantName = new JLabel(participant.getName());
-        JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController);
 
+        JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController, participant, participantName);
         participantName.addMouseListener(new MouseAdapter() {
 
             @Override

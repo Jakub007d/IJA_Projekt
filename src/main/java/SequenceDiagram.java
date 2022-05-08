@@ -104,6 +104,12 @@ public class SequenceDiagram extends Element {
             return this.participantList.get(position);
         }
     }
+    public void renameParticipant(int index, String name) {
+        UMLParticipant p = participantAtPosition(index);
+        if (p != null) {
+            p.setName(name);
+        }
+    }
 
     /**
      * Testuje, či účastník zodpovedá inštancii triedy z diagramu tried.

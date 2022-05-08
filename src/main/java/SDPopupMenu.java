@@ -62,21 +62,7 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addParticipant) {
             System.out.println("*beep boop* you are trying to add participant");
-//vykresli sa defaultne pomocou SDView
-//            for (int pos = 0 ; pos < sequenceDiagram.numberOfParticipants() ; pos++) {
-//                System.out.println(pos);
-//                UMLParticipant tmpParticipant = this.sequenceDiagram.participantAtPosition(pos);
-//                SDGuiParticipant participantPanel = new SDGuiParticipant(tmpParticipant);
-//                participantPanel.setPreferredSize(new Dimension(100,100));
-//                participantPanel.setBorder(BorderFactory.createLineBorder(Color.red));
-//                SDViewMainPanel.add((JPanel) participantPanel);
-//
-//                //toto prida margin
-//                //SDViewMainPanel.add(Box.createRigidArea(new Dimension(10,0)));
-//
-//            }
-//            SDViewMainPanel.setVisible(true);
-//            SDView.setVisible(true);
+
             new SDGuiParticipantDialog(sdController);
         }
         if (e.getSource()==addSomething) {
