@@ -138,7 +138,9 @@ public class Controller implements ActionListener {
                                         String[] readyToOperation = fromTextField.split(" ");
                                         String accesibility = Character.toString(readyToOperation[0].charAt(0));
                                         String operationName = readyToOperation[0].substring(1);
-                                        String operationType = readyToOperation[1];
+                                        String operationType = operationName;
+                                        if(readyToOperation.length >= 2)
+                                            operationType = readyToOperation[1];
                                         UMLOperation operationReference = classReference.containOperation(operationName);
                                         if (operationReference != null) {
                                             if (!(operationReference.getType()).getName().equals(operationType))
@@ -148,16 +150,20 @@ public class Controller implements ActionListener {
                                             operationReference.deleteArguments();
                                             for(String argument : operationArgTokens)
                                             {
-                                                String[] argumentTokens = argument.split(":");
-                                                System.out.println(argumentTokens[0]+argumentTokens[1]+"________________________LOL________");
-                                                operationReference.addArgument(new UMLAttribute(argumentTokens[0],new UMLClassifier(argumentTokens[1])));
+
+                                                if(argument.length() >=2) {
+                                                    String[] argumentTokens = argument.split(":");
+                                                    operationReference.addArgument(new UMLAttribute(argumentTokens[0], new UMLClassifier(argumentTokens[1])));
+                                                }
                                             }
                                         } else {
                                             operationReference = new UMLOperation(operationName, new UMLClassifier(operationType), accesibility);
                                             for(String argument : operationArgTokens)
                                             {
-                                                String[] argumentTokens = argument.split(":");
-                                                operationReference.addArgument(new UMLAttribute(argumentTokens[0],new UMLClassifier(argumentTokens[1])));
+                                                if(argument.length() >=2) {
+                                                    String[] argumentTokens = argument.split(":");
+                                                    operationReference.addArgument(new UMLAttribute(argumentTokens[0], new UMLClassifier(argumentTokens[1])));
+                                                }
                                             }
                                             classReference.removeOperation(oldName);
                                             classReference.addOperation(operationReference);

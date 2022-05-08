@@ -109,8 +109,19 @@ public class UMLOperation extends UMLAttribute {
     {
         String operationName = super.getName();
         String operationReturnType = String.valueOf(this.getType());
+        if (operationReturnType.equals(operationName))
+            operationReturnType = "";
         String operationArguments = String.valueOf(this.argumentList);
         operationArguments = operationArguments.substring(1,operationArguments.length()-1); //odstrani [ ]
         return operationName+"("+operationArguments+") : "+operationReturnType;
+    }
+
+    /**
+     * Vracia true pokial je konštruktor
+     * @return boolean vracajúci true/flase
+     */
+    public boolean isConstructor()
+    {
+        return super.getName().equals(super.getType().getName());
     }
 }

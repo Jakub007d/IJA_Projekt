@@ -109,6 +109,17 @@ public class UMLClass extends UMLClassifier {
         }
         return null;
     }
+    public UMLConstructor containConstruktor(String name)
+    {
+        for (UMLOperation operation : this.operationList)
+        {
+            if(operation.getName().equals(name))
+            {
+                return (UMLConstructor) operation;
+            }
+        }
+        return null;
+    }
     public void removeAttribute(String name)
     {
         this.attributeList.remove(this.containAttribute(name));
