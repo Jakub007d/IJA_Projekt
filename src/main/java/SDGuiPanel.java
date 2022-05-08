@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class SDGuiPanel extends JPanel {
     private SequenceDiagram sequenceDiagram;
-    //private java.util.List<UMLMessage> messageList;
 
     SDGuiPanel(SequenceDiagram sequenceDiagram)
     {

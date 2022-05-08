@@ -205,7 +205,8 @@ public class Controller implements ActionListener {
             sdController.loadSDFile(classDiagram);
         }
 
-    }
+//            new SDView("kokot");
+        }
 
 
 }
