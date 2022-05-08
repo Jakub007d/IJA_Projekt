@@ -16,6 +16,11 @@ import java.util.ArrayList;
 public class ClassPanel extends JPanel implements MouseListener {
     private java.util.List<UMLRelationship> relationShipList = new ArrayList<UMLRelationship>();
     private ClassDiagram classDiagram;
+
+    /**
+     * Konštruktor panela pre vykreslovanie jednotlivých tied.
+     * @param classDiagram class diagram obsahujúci načítané triedy.
+     */
     ClassPanel(ClassDiagram classDiagram)
     {
         this.classDiagram = classDiagram;
@@ -24,10 +29,14 @@ public class ClassPanel extends JPanel implements MouseListener {
         this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         this.relationShipList=classDiagram.getRelationShipList();
     }
-    public void updateRelList(java.util.List<UMLRelationship> relationShipList)
-    {
-        this.relationShipList = relationShipList;
-    }
+
+    /**
+     * Metóda ktorá navracá súradnice pre výpis názvu Lavej/Pravej kardinality.
+     * @param x vstupná x-sová súradnica.
+     * @param y vstupná y-nová súradnica.
+     * @param firstPoint Súradnice stredového bodu kardinality
+     * @return
+     */
     private Point cardinalityTextPos(int x,int y,Point firstPoint)
     {
         Point secondPoint = new Point(x, y);
@@ -35,6 +44,13 @@ public class ClassPanel extends JPanel implements MouseListener {
         int newY= this.textPosition((int)firstPoint.getY(),(int)secondPoint.getY());
         return new Point(newX,newY);
     }
+
+    /**
+     * Medóda určujúca súradnice textu názvu kardinality
+     * @param firstValue jedna súradnica bodu prvého bodu
+     * @param secondValue   jedna súradnica bodu druhého bodu
+     * @return výsledná suradnica
+     */
     private int textPosition(int firstValue,int secondValue)
     {
         int retVal;
@@ -43,6 +59,14 @@ public class ClassPanel extends JPanel implements MouseListener {
         retVal=(int)tx;
         return retVal;
     }
+
+    /**
+     * Metóda vykreslí trojuholník
+     * @param g Graphics
+     * @param x Súradnica x
+     * @param y Súradnica Y
+     * @param isInheritance Určenie či trojuholník bude reprezentovať dedenie
+     */
     private void drawTriangle(Graphics g, int x,int y, boolean isInheritance)
     {
         int bottomY = y+10;
@@ -60,6 +84,13 @@ public class ClassPanel extends JPanel implements MouseListener {
         g.setColor(Color.black);
     }
 
+    /**
+     * Metóda ktorá vykreslí Diamant(Ktorý reprezentuje agregáciu / Kompozíciu)
+     * @param g Graphics
+     * @param x Súradnica x
+     * @param y Súradnica Y
+     * @param isFilled Nastavenie výplne
+     */
     private void drawDiamont(Graphics g, int x,int y, boolean isFilled)
     {
         int bottomY = y+10;
@@ -185,6 +216,11 @@ public class ClassPanel extends JPanel implements MouseListener {
             }
         }
     }
+
+    /**
+     * Metóda pridá do class diagramu triedu s názvom name. Používa sa pri pridávaní triedy z Popup
+     * @param name názov tredy
+     */
     public void addClassWithName(String name)
     {
         this.add(new PanelForClass(new UMLClass(name),classDiagram));

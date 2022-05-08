@@ -4,12 +4,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Trieda dedí z JPopupMenu a zaistuje popup okno pre danú triedu v gui.
+ * Trieda implementuje ActionListener.
+ */
 public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
     JButton addAttribute = new JButton("Add Attribute");
     JButton addOperation = new JButton("Add Operation");
     JButton deleteClass = new JButton("Delete Class");
     JTextField textField = new JTextField();
     PanelForClass panelForClass;
+
+    /**
+     * Konštruktor popup okna triedy v gui
+     * @param label názov popup okna
+     * @param panelForClass panel triedy
+     */
     public ClassDiagramPopUp(String label, PanelForClass panelForClass)
     {
         super(label);

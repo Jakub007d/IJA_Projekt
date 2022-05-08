@@ -59,6 +59,10 @@ public class PanelForClass extends JPanel implements MouseListener {
         this.setLocation((int)this.classCorner.getX(),(int)this.classCorner.getY());
     }
 
+    /**
+     * Metóda vráti referenciu triedy
+     * @return referencia na triedu
+     */
     public UMLClass getClassReference() {
         return classReference;
     }
@@ -116,10 +120,11 @@ public class PanelForClass extends JPanel implements MouseListener {
 
     }
     /**
-     * Metóda pridá do panela attribúty a operácie
+     * Metóda pridá do panela attribúty
      *
      * @param name Názov atribútu
      * @param type Typ atribútu
+     * @param attrName Názov atribútu
      */
     public void addAttribute(String name, String type,String attrName)
     {
@@ -132,6 +137,12 @@ public class PanelForClass extends JPanel implements MouseListener {
         this.repaint();
     }
 
+    /**
+     * Metóda pridá do panela operácie
+     * @param name názov operácie
+     * @param type návratový typ
+     * @param operationName názov operácie
+     */
     public void addOperation(String name, String type, String operationName)
     {
         JTextField op = new JTextField(type+name);
@@ -142,6 +153,11 @@ public class PanelForClass extends JPanel implements MouseListener {
         this.revalidate();
         this.repaint();
     }
+
+    /**
+     * Metóda vráti názov triedy
+     * @return
+     */
     public String getClassName()
     {
         String returnValue = classReference.getName();
@@ -156,6 +172,11 @@ public class PanelForClass extends JPanel implements MouseListener {
     {
         return this.nameOfPanel;
     }
+
+    /**
+     * Pridá attribút vytvorený uživatelom v popup okne
+     * @param toBeAdded pridávaný attribút
+     */
     public void addAttributeTextField(String toBeAdded)
     {
         if(toBeAdded != null && !toBeAdded.equals("")) {
@@ -169,6 +190,10 @@ public class PanelForClass extends JPanel implements MouseListener {
             this.repaint();
         }
     }
+    /**
+     * Pridá operáciu vytvorenú uživatelom v popup okne
+     * @param toBeAdded pridávaná operácia
+     */
     public void addOperationTextField(String toBeAdded)
     {
         if(toBeAdded != null && !toBeAdded.equals("")) {
@@ -182,6 +207,10 @@ public class PanelForClass extends JPanel implements MouseListener {
             this.repaint();
         }
     }
+
+    /**
+     * Vymaže triedu z class diagramu
+     */
     public void deleteClass()
     {
         classDiagram.deleteClass(classReference.getName());

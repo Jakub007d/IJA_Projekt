@@ -52,10 +52,16 @@ public class UMLAttribute extends Element {
         return nazev+": "+typ;
     }
 
+    /**
+     * Vráti modifikátor prístupu
+     * @return modifikátor prístupu
+     */
     public String getAccessModifier() {
         return accessModifier;
     }
-
+    /**
+     * Nastavý modifikátor prístupu
+     */
     public void setAccessModifier(String accessModifier) {
         this.accessModifier = accessModifier;
     }

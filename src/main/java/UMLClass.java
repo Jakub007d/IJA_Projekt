@@ -178,14 +178,26 @@ public class UMLClass extends UMLClassifier {
     {
         return Collections.unmodifiableList(this.attributeList);
     }
+
+    /**
+     * Metóda vracia zoznam operácii
+     * @return Nemodifikovateľný zoznam operácii.
+     */
     public java.util.List<UMLOperation> getOperations()
     {
         return Collections.unmodifiableList(this.operationList);
     }
+
+    /**
+     * Metóda odstráni všetky attribúty z listu atribútou
+     */
     public void deleteAttributes()
     {
         this.attributeList.clear();
     }
+    /**
+     * Metóda odstráni všetky operácie z listu operácii
+     */
     public void deleteOperations()
     {
         this.operationList.clear();

@@ -43,6 +43,11 @@ public class ClassDiagram extends Element{
         this.classList.add(newClass);
         return newClass;
     }
+
+    /**
+     * Pridá do class diagramu triedu umlClass
+     * @param umlClass pridávaná trieda
+     */
     public void addClass (UMLClass umlClass)
     {
         this.classList.add(umlClass);
@@ -128,14 +133,6 @@ public class ClassDiagram extends Element{
         return false;
     }
 
-    public void debugUMLRelationsVypis()
-    {
-        for (UMLClassifier rel : this.relationShipList)
-        {
-            UMLRelationship rsReference = (UMLRelationship) rel;
-            rsReference.printRelation();
-        }
-    }
 
     /**
      * Vyhľadá v diagrame triedu podľa pozície v zozname.
@@ -176,14 +173,10 @@ public class ClassDiagram extends Element{
         return this.classList.size();
     }
 
-    public void classDiagramDebug()
-    {
-        for (UMLClass trieda : this.classList)
-        {
-            System.out.println(trieda.getName()+"DEBUG");
-
-        }
-    }
+    /**
+     * Aktualizácia Relácií
+     * @param umlClass
+     */
     public void UpdateRelationShip(UMLClass umlClass)
     {
         for (UMLRelationship relation : this.relationShipList)
@@ -200,9 +193,10 @@ public class ClassDiagram extends Element{
         }
     }
 
-    public List<UMLClass> getClassList() {
-        return classList;
-    }
+    /**
+     * Vymaže z class diagramu triedu s názvom name
+     * @param name názov triedy
+     */
     public void deleteClass(String name)
     {
         this.classList.removeIf(umlClass -> umlClass.getName().equals(name));

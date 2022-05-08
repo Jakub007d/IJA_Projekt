@@ -30,7 +30,7 @@ public class Controller implements ActionListener {
     }
 
     /**
-     * Metóda, ktorá aktualizuje View po stlačení tlčítka.
+     * Metóda, ktorá sa stará o zobrazenie View po načítaní dát a ich uložení.
      *
      * @param e Event stlacenia tlačítka
      */
