@@ -14,7 +14,7 @@ public class SDGuiParticipant extends JPanel {
     int x;
     int y;
     private boolean isPresentInCD = true;
-    private UMLParticipant participant;
+    private UMLParticipant participantRef;
     Color participantColor = Color.red;
     int height;
     SDController sdController;
@@ -22,23 +22,23 @@ public class SDGuiParticipant extends JPanel {
     /**
      * Konštruktor triedy SDGuiParticipant.
      *
-     * @param participant Účastník, ktorý sa má vykresliť.
+     * @param participantRef Účastník, ktorý sa má vykresliť.
      * @param sdController Kontroler pre sekvenčný diagram.
      */
-    SDGuiParticipant(UMLParticipant participant, SDController sdController) {
+    SDGuiParticipant(UMLParticipant participantRef, SDController sdController) {
         this.x = this.getX();
         this.y = this.getY()+25; // offset pre vykreslenie lifeline
 
         this.sdController = sdController;
-        this.participant = participant;
+        this.participantRef = participantRef;
 
         //nastavi meno komponentu
-        this.setName(participant.getName());
+        this.setName(participantRef.getName());
 
-        this.isPresentInCD = participant.getPresence();
-        JLabel participantName = new JLabel(participant.getName());
+        this.isPresentInCD = participantRef.getPresence();
+        JLabel participantName = new JLabel(participantRef.getName());
 
-        JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController, participant, participantName);
+        JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController, participantRef, participantName, this);
         participantName.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -54,7 +54,7 @@ public class SDGuiParticipant extends JPanel {
             private void showPopup(MouseEvent e) {
                 if (e.isPopupTrigger()) {
                     participantPopup.show(e.getComponent(),
-                            e.getX(), e.getY());
+                            e.getComponent().getWidth(), e.getY()); //popup sa zobrazi vedla jlabel
                 }
             }
         });
@@ -78,7 +78,7 @@ public class SDGuiParticipant extends JPanel {
 //        this.setLocation(this.x,this.y); // <-- toto to totalne dokazilo
         Graphics2D g2d = (Graphics2D) g.create();
         Stroke dashed = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL,
-                0, new float[]{9}, 0);
+                0, new float[]{5}, 0);
         g2d.setStroke(dashed);
 
         int offset = this.getWidth()/2;
@@ -86,5 +86,16 @@ public class SDGuiParticipant extends JPanel {
         g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+200);
 
         g2d.dispose();
+    }
+
+    /**
+     * vymaze ucastnika z diagramu.
+     */
+    public void deleteParticipant()
+    {
+        sdController.sequenceDiagram.deleteParticipant(participantRef.getName());
+
+        sdController.sdView.drawSD(sdController.sequenceDiagram);
+        sdController.sdView.setVisible(true);
     }
 }

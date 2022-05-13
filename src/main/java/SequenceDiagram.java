@@ -166,8 +166,8 @@ public class SequenceDiagram extends Element {
                     String messageRecipient = message.getRecipient().getClassName();
 
                     try {
-                        UMLClass tmpRecClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
-                        for (UMLOperation operation : tmpRecClass.getOperations()) {
+                        UMLClass tmpRefClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
+                        for (UMLOperation operation : tmpRefClass.getOperations()) {
                             if (operation.getName().equals(messageMethodName)) {
                                 message.setMethodExists(true);
                                 break;
@@ -175,7 +175,7 @@ public class SequenceDiagram extends Element {
                         }
                     }
                     catch (Exception e) {
-                        System.err.println(e);
+                        //System.err.println("checkOperationPresence: "+e);
                     }
                     break;
             }
@@ -191,5 +191,15 @@ public class SequenceDiagram extends Element {
     {
         this.checkParticipantPresence(classDiagram); /* Nastaví účastníkom sekvenčného diagramu atribút "isPresentInCD" */
         this.checkOperationPresence(classDiagram);   /* Nastaví správam v sekvenčnom diagrame atribút "methodExists" */
+    }
+
+    /**
+     * Vymaze zo sekvencneho diagramu ucastnika s nazvom "name".
+     *
+     * @param name nazov mazaneho ucastnika.
+     */
+    public void deleteParticipant(String name)
+    {
+        this.participantList.removeIf(participant -> participant.getName().equals(name));
     }
 }

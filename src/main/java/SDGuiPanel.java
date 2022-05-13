@@ -59,8 +59,8 @@ public class SDGuiPanel extends JPanel {
                             // settings for message line type
                             switch (message.getMessageType()) {
                                 case RETURN:
-                                    Stroke dashed = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL,
-                                            0, new float[]{9}, 0);
+                                    Stroke dashed = new BasicStroke(2, BasicStroke.CAP_BUTT,
+                                            BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
                                     g2d.setStroke(dashed);
                                     break;
                                 default:
