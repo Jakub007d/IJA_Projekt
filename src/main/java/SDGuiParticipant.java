@@ -81,9 +81,11 @@ public class SDGuiParticipant extends JPanel {
                 0, new float[]{5}, 0);
         g2d.setStroke(dashed);
 
+        // vykreslenie lifeline
         int offset = this.getWidth()/2;
+        int lenght = sdController.sequenceDiagram.numberOfMessages() * 40;
         g2d.setColor(participantColor);
-        g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+200);
+        g2d.drawLine(this.x + offset, this.y, this.x + offset, this.y+lenght);
 
         g2d.dispose();
     }
