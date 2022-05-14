@@ -67,15 +67,24 @@ public class SDGuiPanel extends JPanel {
                                     g2d.setStroke(new BasicStroke(2));
                             }
 
-                            int offset = 40 + index * 50;
+                            int offset = 40 + index * 40;
                             int x = panel.getX() + panel.getWidth() / 2;
                             int y = panel.getY() + offset;
                             int sender = sequenceDiagram.participantPosition(message.getSender());
                             int recipient = sequenceDiagram.participantPosition(message.getRecipient());
 
+                            //dlzka spravy a smer
                             int direction = panel.getWidth() * (recipient-sender);
+                            //nakresli ciaru spojujucu ucastnikov medzi ktorymi je sprava
                             g2d.drawLine(x, y, x + direction, y);
-                            g2d.drawString(message.getMessage(),x+direction/2, y-10);
+                            //vypise text
+                            int strWidth = g2d.getFontMetrics().stringWidth(message.getMessage());
+                            g2d.drawString(message.getMessage(),x+direction/2-strWidth/2, y-10);
+
+                            // test jlabel
+                            JLabel label = new JLabel(message.getMessage());
+                            label.setBackground(Color.orange);
+                            // test jlabel
                             int dir;
                             if (direction > 0) {
                                 dir = -1;

@@ -201,5 +201,18 @@ public class SequenceDiagram extends Element {
     public void deleteParticipant(String name)
     {
         this.participantList.removeIf(participant -> participant.getName().equals(name));
+        this.messageList.removeIf(message -> message.getSender().getName().equals(name));
+        this.messageList.removeIf(message -> message.getRecipient().getName().equals(name));
     }
+
+    /**
+     * Vymaze zo sekvencneho diagramu ucastnika s nazvom "name".
+     *
+     * @param participant nazov mazaneho ucastnika.
+     */
+    public void deleteMessage(UMLParticipant participant)
+    {
+//TODO
+    }
+
 }
