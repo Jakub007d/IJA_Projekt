@@ -108,12 +108,5 @@ public class SDGuiPanel extends JPanel {
                 }
             }
         }
-
-
-
-
-
-
     }
-
 }

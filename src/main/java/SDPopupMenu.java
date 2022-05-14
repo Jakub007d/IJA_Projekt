@@ -9,6 +9,7 @@ import java.awt.event.*;
 public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JMenuItem addParticipant;
     JMenuItem addMessage;
+    JMenuItem reloadDiagram;
 
     JPopupMenu SDPopup;
 
@@ -43,6 +44,11 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         addMessage.addActionListener(this);
         SDPopup.add(addMessage);
 
+        // Reload
+        reloadDiagram = new JMenuItem("Reload");
+        reloadDiagram.addActionListener(this);
+        SDPopup.add(reloadDiagram);
+
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -67,9 +73,15 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         if (e.getSource() == addParticipant) {
             new SDGuiParticipantDialog(sdController);
         }
-        if (e.getSource()== addMessage) {
-            SDView.setVisible(true);
+        if (e.getSource() == addMessage) {
+            new SDGuiMessageDialog(sdController);
         }
-
+        if (e.getSource() == reloadDiagram) {
+            if (sdController.classDiagram != null) {
+                sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
+            }
+            sdController.sdView.drawSD(sdController.sequenceDiagram);
+            sdController.sdView.setVisible(true);
+        }
     }
 }
