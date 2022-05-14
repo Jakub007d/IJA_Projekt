@@ -8,7 +8,7 @@ import java.util.Collections;
  * Rozšiřuje triedu UMLClassifier.
  * Obsahuje zoznam atribútov a operácií (metód). Trieda môže byť abstraktná.
  *
- * @author xstrak38
+ * @author xstrak38, xdrobe01
  */
 public class UMLClass extends UMLClassifier {
     private UMLClass parentClass = null;

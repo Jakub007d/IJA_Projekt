@@ -159,26 +159,38 @@ public class SequenceDiagram extends Element {
             switch (message.getMessageType()) {
                 case ASYN:
                 case SYN:
-                    String[] tmp = message.getMessage().split("\\(",2);
-                    //                     ^
-                    //                 "metoda(argumenty)"
-                    String messageMethodName = tmp[0]; // "metoda"
                     String messageRecipient = message.getRecipient().getClassName();
-
-                    try {
-                        UMLClass tmpRefClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
-                        for (UMLOperation operation : tmpRefClass.getOperations()) {
-                            if (operation.getName().equals(messageMethodName)) {
-                                message.setMethodExists(true);
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception e) {
-                        //System.err.println("checkOperationPresence: "+e);
+                    UMLClass tmpRefClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
+                    if (tmpRefClass != null) {
+                        checkOperation(message, tmpRefClass);
                     }
                     break;
             }
+        }
+    }
+
+    public void checkOperation(UMLMessage message, UMLClass tmpRefClass) {
+        String[] tmp = message.getMessage().split("\\(",2);
+        //                     ^
+        //                 "metoda(argumenty)"
+        String messageMethodName = tmp[0]; // "metoda"
+        try {
+            // porovna kazdu operaciu triedy "tmpRefClass" so spravou
+            for (UMLOperation operation : tmpRefClass.getOperations()) {
+                if (operation.getName().equals(messageMethodName)) {
+                    message.setMethodExists(true);
+                    return; // zhoda najdena
+                }
+            }
+            // odpovedajuca metoda nebola najdena
+
+            // rekurzivne volanie funkcie pre triedu, z ktorej "tmpRefClass" dedi
+            if (tmpRefClass.isChild()) {
+                checkOperation(message,tmpRefClass.getParentClass());
+            }
+        }
+        catch (Exception e) {
+            /* System.err.println("checkOperationPresence: "+e); */
         }
     }
 
