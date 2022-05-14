@@ -94,8 +94,6 @@ public class SDGuiPanel extends JPanel {
                             switch (message.getMessageType()) {
                                 case RETURN:
                                 case ASYN:
-                                case ASYNCREATE:
-                                case ASYNDESTROY:
                                     drawArrow(g2d, x+direction, y, dir);
                                     break;
                                 default:

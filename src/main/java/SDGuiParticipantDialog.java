@@ -32,7 +32,7 @@ public class SDGuiParticipantDialog extends JPanel {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             /* pridanie ucastnika do diagramu */
-            addParticipant(objectNameField.getText(),classNameField.getText());
+            addParticipant(objectNameField.getText(), classNameField.getText());
         }
     }
 

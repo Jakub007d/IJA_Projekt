@@ -40,16 +40,27 @@ public class SequenceDiagram extends Element {
      * @return Objekt reprezentujúci účastníka. Ak účasník s daným názvom už existuje, vracia null.
      */
     public UMLParticipant createParticipant(String name) {
-        for (UMLClassifier participant : this.participantList) {
-            if (participant.getName().equals(name)) {
-                return null;
-            }
+//        for (UMLClassifier participant : this.participantList) {
+//            if (participant.getName().equals(name)) {
+//                return null;
+//            }
+//        }
+        if (participantWithName(name) == null) {
+            UMLParticipant newParticipant = new UMLParticipant(name);
+            this.participantList.add(newParticipant);
+            return newParticipant;
+        } else {
+            return null;
         }
-        UMLParticipant newParticipant = new UMLParticipant(name);
-        this.participantList.add(newParticipant);
-        return newParticipant;
     }
 
+    /**
+     * Prida spravu do sekvencneho diagramu.
+     * @param sender
+     * @param recipient
+     * @param type
+     * @param message
+     */
     public void addMessage(UMLParticipant sender, UMLParticipant recipient, UMLMessage.UMLMessageType type, String message) {
         UMLMessage newMessage = new UMLMessage(sender, recipient, type, message);
         this.messageList.add(newMessage);
@@ -113,6 +124,21 @@ public class SequenceDiagram extends Element {
         else {
             return this.participantList.get(position);
         }
+    }
+
+    /**
+     * vrati ucastnika diagramu podla nazvu, ak ucastnik s danym nazvom neexistuje, vrati null.
+     * @param name
+     * @return
+     */
+    public UMLParticipant participantWithName(String name)
+    {
+        for (UMLParticipant participant : this.participantList) {
+            if (participant.getName().equals(name)) {
+                return participant;
+            }
+        }
+        return null;
     }
 
     /**
@@ -218,9 +244,9 @@ public class SequenceDiagram extends Element {
     }
 
     /**
-     * Vymaze zo sekvencneho diagramu ucastnika s nazvom "name".
+     * Vymaze zo sekvencneho diagramu spravu.
      *
-     * @param participant nazov mazaneho ucastnika.
+     * @param participant
      */
     public void deleteMessage(UMLParticipant participant)
     {
