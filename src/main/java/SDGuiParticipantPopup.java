@@ -49,6 +49,8 @@ public class SDGuiParticipantPopup extends JPopupMenu implements ActionListener 
             participantName.setText(textField.getText());
             sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
 
+            //view.classPanel.removeAll();
+
             sdController.sdView.drawSD(sdController.sequenceDiagram);
             sdController.sdView.setVisible(true);
         }

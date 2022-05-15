@@ -119,9 +119,11 @@ public class UMLOperation extends UMLAttribute {
     /**
      * Vracia true pokial je konštruktor
      * @return boolean vracajúci true/flase
+     * @param tmpRefClass
      */
-    public boolean isConstructor()
+    public boolean isConstructor(UMLClass tmpRefClass)
     {
-        return super.getName().equals(super.getType().getName());
+        //System.out.println("super.getName(): "+super.getName()+" tmpRefClass.getName(): "+tmpRefClass.getName());
+        return this.getName().equals(tmpRefClass.getName());
     }
 }

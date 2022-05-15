@@ -35,7 +35,7 @@ public class UMLAttribute extends Element {
      *
      * @return Typ atribútu.
      */
-    public UMLClassifier getType() /*TOTO SA ASI NIKDE NEPOUZIVA*/
+    public UMLClassifier getType()
     {
         return this.type;
     }
