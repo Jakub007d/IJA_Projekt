@@ -40,11 +40,6 @@ public class SequenceDiagram extends Element {
      * @return Objekt reprezentujúci účastníka. Ak účasník s daným názvom už existuje, vracia null.
      */
     public UMLParticipant createParticipant(String name) {
-//        for (UMLClassifier participant : this.participantList) {
-//            if (participant.getName().equals(name)) {
-//                return null;
-//            }
-//        }
         if (participantWithName(name) == null) {
             UMLParticipant newParticipant = new UMLParticipant(name);
             this.participantList.add(newParticipant);
@@ -182,17 +177,49 @@ public class SequenceDiagram extends Element {
     public void checkOperationPresence(ClassDiagram classDiagram)
     {
         for (UMLMessage message : this.messageList) {
-            switch (message.getMessageType()) {
-                case ASYN:
-                case SYN:
-                    String messageRecipient = message.getRecipient().getClassName();
-                    UMLClass tmpRefClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
-                    if (tmpRefClass != null) {
-                        checkOperation(message, tmpRefClass);
-                    }
-                    break;
-            }
+            String messageRecipient = message.getRecipient().getClassName();
+            UMLClass tmpRefClass = (UMLClass) classDiagram.findClassifier(messageRecipient);
+                switch (message.getMessageType()) {
+                    case ASYN:
+                    case SYN:
+                        if (tmpRefClass != null) {
+                            checkOperation(message, tmpRefClass);
+                        }
+                        else message.setMethodExists(false);
+                        break;
+                    case CREATE:
+                        System.out.println("CREATE: "+message+" => "+message.getMessage());
+                        if (tmpRefClass != null) {
+                            checkConstructor(message, tmpRefClass);
+                        } else message.setMethodExists(false);
+                        break;
+                    case DESTROY:
+                    case RETURN:
+                        message.setMethodExists(true);
+                        break;
+                }
         }
+    }
+
+    public void checkConstructor(UMLMessage message, UMLClass tmpRefClass) {
+        try {
+            for (UMLOperation operation : tmpRefClass.getOperations()) {
+                if (operation.isConstructor(tmpRefClass)) { //TODO isConstructor
+                    message.setMethodExists(true);
+                    return; // konstruktor najdeny
+                }
+            }
+            // trieda neobsahuje konstruktor
+
+            // rekurzivne volanie funkcie pre triedu, z ktorej "tmpRefClass" dedi
+            if (tmpRefClass.isChild()) {
+                checkConstructor(message,tmpRefClass.getParentClass());
+                return;
+            }
+        } catch (Exception e) {
+            //
+        }
+        message.setMethodExists(false);
     }
 
     public void checkOperation(UMLMessage message, UMLClass tmpRefClass) {

@@ -80,6 +80,7 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
             if (sdController.classDiagram != null) {
                 sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
             }
+            sdController.sdView.SDViewMainPanel.removeAll();
             sdController.sdView.drawSD(sdController.sequenceDiagram);
             sdController.sdView.setVisible(true);
         }
