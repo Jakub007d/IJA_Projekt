@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="ija-app" default="compile">
 
     <property name="source.dir" location="src"/> <!-- zlozka so zdrojovymi subormi -->
@@ -25,7 +25,7 @@
 
     <!-- KOMPILÁCIA A VYTVORENIE SPUSTITEĽNÉHO .JAR -->
     <target name="compile" depends="clean, createFileStructure">
-        <javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false">
+        <javac srcdir="${source.dir}" destdir="${build.dir}" includeantruntime="false" encoding="utf-8">
             <classpath>
                 <pathelement path="${source.dir}"/>
                 <path refid="gson"/>
