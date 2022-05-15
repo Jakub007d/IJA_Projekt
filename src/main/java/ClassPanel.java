@@ -83,6 +83,28 @@ public class ClassPanel extends JPanel implements MouseListener {
         g.fillPolygon(xs,ys,3);
         g.setColor(Color.black);
     }
+    private void drawArrowLeft(Graphics g, int x,int y)
+    {
+        int lx = x-10;
+        int ly = y+10;
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawLine(x,y,lx,ly);
+        ly = y - 10;
+        g2.drawLine(x,y,lx,ly);
+        g2.setStroke(new BasicStroke(1));
+    }
+    private void drawArrowRight(Graphics g, int x,int y)
+    {
+        int lx = x+10;
+        int ly = y+10;
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawLine(x,y,lx,ly);
+        ly = y - 10;
+        g2.drawLine(x,y,lx,ly);
+        g2.setStroke(new BasicStroke(1));
+    }
 
     /**
      * Metóda ktorá vykreslí Diamant(Ktorý reprezentuje agregáciu / Kompozíciu)
@@ -123,6 +145,7 @@ public class ClassPanel extends JPanel implements MouseListener {
         int y1 = 0;
         int x2 = 0;
         int y2 = 0;
+        int modifier = 0;
         if(components.length != 0)
         {
             for (Component panel : components) {
@@ -143,7 +166,6 @@ public class ClassPanel extends JPanel implements MouseListener {
                         x1 = x1 + panel.getWidth();
                         y1 = y1 + panel.getHeight()/2;
                         for (Component tmp : components) {
-
                             if(tmp.getName() != null)
                             {
                                 if (((PanelForClass) tmp).getClassName().equals(rightClass.getName())) {
@@ -158,12 +180,12 @@ public class ClassPanel extends JPanel implements MouseListener {
                                     g2D.drawString(rel.getRightCardinality(),(int)rCardinalityPosition.getX(),(int)rCardinalityPosition.getY());
                                     if(rel.getLeftCardinality().equals("DirectedAsociation"))
                                     {
-                                        drawTriangle(g,x1,y1,false);
-                                        y1=y1+10;
+                                        drawArrowRight(g,x1,y1);
+
                                     }
                                     if(rel.getRightCardinality().equals("DirectedAsociation"))
                                     {
-                                        drawTriangle(g,x2,y2,false);
+                                        drawArrowLeft(g,x2,y2);
                                     }
                                     if(rel.getLeftCardinality().equals("Aggregation"))
                                     {
@@ -185,6 +207,7 @@ public class ClassPanel extends JPanel implements MouseListener {
                                     }
 
                                     g2D.drawLine(x1, y1, x2, y2);
+
                                 }
                             }
 
@@ -223,6 +246,42 @@ public class ClassPanel extends JPanel implements MouseListener {
     {
         this.add(new PanelForClass(new UMLClass(name),classDiagram));
         classDiagram.addClass(new UMLClass(name));
+        this.repaint();
+        this.revalidate();
+    }
+
+    /**
+     * Metóda pridá uživatelom vytvorenú relaciu do class diagramu
+     * @param rightCardinality
+     * @param leftClass
+     * @param rightClass
+     * @return
+     */
+    public int addRelation(String rightCardinality, String leftClass, String rightClass)
+    {
+
+        UMLClass classLeft = classDiagram.getClassByName(leftClass);
+        UMLClass classRight = classDiagram.getClassByName(rightClass);
+        if(classLeft == null && classRight != null)
+            return 1;
+        if (classRight == null && classLeft != null)
+            return 2;
+        if (classRight == null && classLeft == null)
+            return 3;
+        if(rightCardinality.equals("Inheritance"))
+        {
+            classLeft.setParentClass(classRight);
+            this.repaint();
+            this.revalidate();
+            return 0;
+        }
+        else
+        {
+            this.classDiagram.createRelation("","",rightCardinality,classLeft,classRight);
+            this.repaint();
+            this.revalidate();
+            return 0;
+        }
     }
 
     @Override

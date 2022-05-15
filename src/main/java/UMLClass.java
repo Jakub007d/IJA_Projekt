@@ -124,6 +124,7 @@ public class UMLClass extends UMLClassifier {
         }
         return null;
     }
+
     public void removeAttribute(String name)
     {
         this.attributeList.remove(this.containAttribute(name));

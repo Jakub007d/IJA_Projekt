@@ -24,7 +24,7 @@ class ClassDiagram extends Element {
 + op UMLCLass createClass <-String name
 + op UMLClassifier classifierForName <-String name
 }
-relation UMLAttribute _ DirectedAsociation UMLClassifier is
-relation UMLAttribute DirectedAsociation _ UMLCass is
-relation UMLClassifier DirectedAsociation _ ClassDiagram is
+relation UMLAttribute _ DirectedAsociation UMLClassifier _
+relation UMLAttribute DirectedAsociation _ UMLCass _
+relation UMLClassifier DirectedAsociation _ ClassDiagram _
 @enduml

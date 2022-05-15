@@ -15,6 +15,7 @@ public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
     JTextField textField = new JTextField();
     PanelForClass panelForClass;
 
+
     /**
      * Konštruktor popup okna triedy v gui
      * @param label názov popup okna
@@ -32,6 +33,9 @@ public class ClassDiagramPopUp extends JPopupMenu implements ActionListener {
         this.add(this.addAttribute);
         this.add(this.addOperation);
         this.add(this.deleteClass);
+
+
+
     }
 
     @Override

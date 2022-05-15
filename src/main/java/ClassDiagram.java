@@ -68,7 +68,7 @@ public class ClassDiagram extends Element{
     {
         for (UMLClass umlCLass : this.classList)
         {
-            if (umlCLass.getName() == name)
+            if (umlCLass.getName().equals(name))
                 return umlCLass;
         }
         return null;

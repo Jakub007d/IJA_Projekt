@@ -19,7 +19,6 @@ public class PanelForClass extends JPanel implements MouseListener {
     private String nameOfPanel;
     private JPanel operationsPanel = new JPanel();
     private JPanel attributesPanel = new JPanel();
-    private PanelForClass self = this;
     int width;
     int height;
     Point classCorner;
@@ -32,7 +31,6 @@ public class PanelForClass extends JPanel implements MouseListener {
         ClickListener clickListener = new ClickListener();
         DragListener dragListener = new DragListener();
         JTextField className = new JTextField(this.classReference.getName());
-
         classCorner = new Point(this.getX(),this.getY());
         operationsPanel.setLayout(new BoxLayout(operationsPanel,BoxLayout.Y_AXIS));
         operationsPanel.setBorder(BorderFactory.createLineBorder(Color.black, 3));
@@ -66,7 +64,6 @@ public class PanelForClass extends JPanel implements MouseListener {
     public UMLClass getClassReference() {
         return classReference;
     }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON3)
