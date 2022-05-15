@@ -196,12 +196,12 @@ public class ClassPanel extends JPanel implements MouseListener {
                                     {
                                         drawDiamont(g,x2,y2,true);
                                     }
-                                    if(rel.getLeftCardinality().equals("Composition"))
+                                    if(rel.getLeftCardinality().equals("composition"))
                                     {
                                         drawDiamont(g,x1,y1,false);
                                         y1=y1+20;
                                     }
-                                    if(rel.getRightCardinality().equals("Composition"))
+                                    if(rel.getRightCardinality().equals("composition"))
                                     {
                                         drawDiamont(g,x2,y2,false);
                                     }

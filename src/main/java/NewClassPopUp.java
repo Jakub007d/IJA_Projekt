@@ -12,8 +12,8 @@ public class NewClassPopUp extends JPopupMenu implements ActionListener {
     JTextField textFieldFrom = new JTextField();
     JTextField textFieldTo = new JTextField();
     JCheckBox inheritance = new JCheckBox("Inheritance");
-    JCheckBox composition = new JCheckBox("Agregation");
-    JCheckBox association = new JCheckBox("Association");
+    JCheckBox agregation = new JCheckBox("Agregation");
+    JCheckBox composition = new JCheckBox("Composition");
     JCheckBox directedAsociation = new JCheckBox("DirAssociation");
     JPanel checkBox = new JPanel();
     JButton addRelation = new JButton("Add Relation");
@@ -25,9 +25,9 @@ public class NewClassPopUp extends JPopupMenu implements ActionListener {
         this.addClass.addActionListener(this);
         this.add(textField);
         this.add(this.addClass);
-        this.composition.addActionListener(this);
+        this.agregation.addActionListener(this);
         this.directedAsociation.addActionListener(this);
-        this.association.addActionListener(this);
+        this.composition.addActionListener(this);
         this.addRelation.addActionListener(this);
         this.inheritance.addActionListener(this);
         this.add(new JLabel("Relation"));
@@ -36,8 +36,8 @@ public class NewClassPopUp extends JPopupMenu implements ActionListener {
         this.add(new JLabel("To"));
         this.add(this.textFieldTo);
         this.checkBox.setLayout(new BoxLayout(this.checkBox, BoxLayout.Y_AXIS));
+        this.checkBox.add(this.agregation);
         this.checkBox.add(this.composition);
-        this.checkBox.add(this.association);
         this.checkBox.add(this.directedAsociation);
         this.checkBox.add(this.inheritance);
         this.add(this.checkBox);
@@ -54,30 +54,30 @@ public class NewClassPopUp extends JPopupMenu implements ActionListener {
         if(e.getSource() == this.inheritance)
         {
             this.relationType="Inheritance";
+            this.agregation.setSelected(false);
             this.composition.setSelected(false);
-            this.association.setSelected(false);
-            this.directedAsociation.setSelected(false);
-        }
-        if(e.getSource() == this.association)
-        {
-            this.relationType="Composition";
-            this.composition.setSelected(false);
-            this.inheritance.setSelected(false);
             this.directedAsociation.setSelected(false);
         }
         if(e.getSource() == this.composition)
         {
+            this.relationType="composition";
+            this.agregation.setSelected(false);
+            this.inheritance.setSelected(false);
+            this.directedAsociation.setSelected(false);
+        }
+        if(e.getSource() == this.agregation)
+        {
             this.relationType="Aggregation";
-            this.association.setSelected(false);
+            this.composition.setSelected(false);
             this.inheritance.setSelected(false);
             this.directedAsociation.setSelected(false);
         }
         if(e.getSource() == this.directedAsociation)
         {
             this.relationType="DirectedAsociation";
-            this.composition.setSelected(false);
+            this.agregation.setSelected(false);
             this.inheritance.setSelected(false);
-            this.association.setSelected(false);
+            this.composition.setSelected(false);
         }
         if(e.getSource() == addRelation)
         {
