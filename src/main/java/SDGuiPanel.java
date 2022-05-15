@@ -30,6 +30,12 @@ public class SDGuiPanel extends JPanel {
         g.fillPolygon(xs,ys,3);
     }
 
+    private void drawDestroyArrow(Graphics g, int x, int y, int dir) {
+        drawFilledArrow(g,x+dir*10,y,dir);
+        g.drawLine(x+dir*10, y+dir*10, x-dir*10, y-dir*10);
+        g.drawLine(x+dir*10, y-dir*10, x-dir*10, y+dir*10);
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -75,8 +81,22 @@ public class SDGuiPanel extends JPanel {
 
                             //dlzka spravy a smer
                             int direction = panel.getWidth() * (recipient-sender);
+
+                            //smer spravy
+                            int dir;
+                            if (direction > 0) {
+                                dir = -1;
+                            } else {
+                                dir = 1;
+                            }
+
                             //nakresli ciaru spojujucu ucastnikov medzi ktorymi je sprava
-                            g2d.drawLine(x, y, x + direction, y);
+                            if (message.getMessageType() == UMLMessage.UMLMessageType.DESTROY) {
+                                g2d.drawLine(x, y, x + direction + dir*10, y);
+                            } else {
+                                g2d.drawLine(x, y, x + direction, y);
+                            }
+
                             //vypise text
                             int strWidth = g2d.getFontMetrics().stringWidth(message.getMessage());
                             g2d.drawString(message.getMessage(),x+direction/2-strWidth/2, y-10);
@@ -85,16 +105,15 @@ public class SDGuiPanel extends JPanel {
                             JLabel label = new JLabel(message.getMessage());
                             label.setBackground(Color.orange);
                             // test jlabel
-                            int dir;
-                            if (direction > 0) {
-                                dir = -1;
-                            } else {
-                                dir = 1;
-                            }
+
+                            // typ sipky
                             switch (message.getMessageType()) {
                                 case RETURN:
                                 case ASYN:
                                     drawArrow(g2d, x+direction, y, dir);
+                                    break;
+                                case DESTROY:
+                                    drawDestroyArrow(g2d, x + direction, y, dir);
                                     break;
                                 default:
                                     drawFilledArrow(g2d, x+direction, y, dir);
