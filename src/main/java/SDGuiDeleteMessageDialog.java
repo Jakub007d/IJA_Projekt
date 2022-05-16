@@ -26,7 +26,7 @@ public class SDGuiDeleteMessageDialog {
         panel.add(new JLabel("Message:"));
         panel.add(comboMessage);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Add message",
+        int result = JOptionPane.showConfirmDialog(null, panel, "Remove message",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             /* vymazanie spravy z diagramu */

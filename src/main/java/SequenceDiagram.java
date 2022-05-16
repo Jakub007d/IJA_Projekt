@@ -60,6 +60,11 @@ public class SequenceDiagram extends Element {
         UMLMessage newMessage = new UMLMessage(sender, recipient, type, message);
         this.messageList.add(newMessage);
     }
+
+    public void renameMessage(int index, String newMessage) {
+        messageAtPosition(index).setMessage(newMessage);
+    }
+
     public int numberOfMessages()
     {
         return this.messageList.size();
@@ -239,6 +244,7 @@ public class SequenceDiagram extends Element {
         //                 "metoda(argumenty)"
         String messageMethodName = tmp[0]; // "metoda"
         try {
+            message.setMethodExists(false);
             // porovna kazdu operaciu triedy "tmpRefClass" so spravou
             for (UMLOperation operation : tmpRefClass.getOperations()) {
                 if (operation.getName().equals(messageMethodName)) {

@@ -30,7 +30,7 @@ public class SDGuiRenameMessageDialog {
         panel.add(new JLabel("New message:"));
         panel.add(messageField);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Add message",
+        int result = JOptionPane.showConfirmDialog(null, panel, "Rename message",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             /* premenovanie spravy */
@@ -39,8 +39,8 @@ public class SDGuiRenameMessageDialog {
     }
 
     private void renameMessage(int selectedIndex, String text) {
-        UMLMessage ref = sdController.sequenceDiagram.messageAtPosition(selectedIndex);
-        ref.setMessage(text);
+        sdController.sequenceDiagram.renameMessage(selectedIndex,text);
+        sdController.sdView.SDViewMainPanel.removeAll();
         sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
         sdController.sdView.drawSD(sdController.sequenceDiagram);
         sdController.sdView.setVisible(true);

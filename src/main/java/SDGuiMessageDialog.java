@@ -66,6 +66,7 @@ public class SDGuiMessageDialog extends JPanel {
                sdController.sequenceDiagram.participantWithName(receiver),
                UMLMessage.UMLMessageType.values()[type],
                message);
+        sdController.sdView.SDViewMainPanel.removeAll();
         sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
         sdController.sdView.drawSD(sdController.sequenceDiagram);
         sdController.sdView.setVisible(true);
