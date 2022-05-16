@@ -15,6 +15,7 @@ public class SDGuiParticipant extends JPanel {
     int y;
     private boolean isPresentInCD = true;
     private UMLParticipant participantRef;
+    private JLabel participantName;
     Color participantColor = Color.red;
     int height;
     SDController sdController;
@@ -36,7 +37,7 @@ public class SDGuiParticipant extends JPanel {
         this.setName(participantRef.getName());
 
         this.isPresentInCD = participantRef.getPresence();
-        JLabel participantName = new JLabel(participantRef.getName());
+        this.participantName = new JLabel(participantRef.getName());
 
         JPopupMenu participantPopup = new SDGuiParticipantPopup(sdController, participantRef, participantName, this);
         participantName.addMouseListener(new MouseAdapter() {
@@ -99,5 +100,10 @@ public class SDGuiParticipant extends JPanel {
 
         sdController.sdView.drawSD(sdController.sequenceDiagram);
         sdController.sdView.setVisible(true);
+    }
+    public void updateName(){
+        this.setName(this.participantRef.getName());
+        this.revalidate();
+        this.repaint();
     }
 }

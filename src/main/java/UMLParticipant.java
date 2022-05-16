@@ -7,11 +7,16 @@ package main.java;
  * @author xstrak38
  */
 public class UMLParticipant extends UMLClassifier {
+    private String originalName;
     private boolean isActive = false; /* aktivace objektu */
     private String objectName; /* nazov objektu */
     private String className;  /* nazov triedy  */
     private boolean isPresentInCD; /* inicializovat na flase? */
     private UMLClass umlClass;
+
+    public String getOriginalName() {
+        return this.originalName;
+    }
 
     /**
      * Vytrvorí inštanciu reprezentujúcu účastníka sekvenčného diagramu.
@@ -21,10 +26,12 @@ public class UMLParticipant extends UMLClassifier {
     public UMLParticipant(String name)
     {
         super(name);
+        System.err.println(originalName);
         try {
             String[] tmp = name.split(":", 2);
             this.objectName = tmp[0];
             this.className = tmp[1];
+            System.out.println(this.objectName);
         } catch (Exception e) {
             this.className = name;
             System.err.println(e);
@@ -108,7 +115,25 @@ public class UMLParticipant extends UMLClassifier {
     }
 
     public void setUmlClass(UMLClass umlClass) {
+        this.originalName = super.getName();
         this.umlClass = umlClass;
         this.className = umlClass.getName();
+    }
+
+    public void actualization()
+    {
+        if (this.umlClass != null)
+            this.className = this.umlClass.getName();
+            super.rename(this.className);
+            System.out.println("Premenuvavam na "+super.getName());
+        if (this.objectName != null || !this.objectName.equals(""))
+        {
+            super.rename(this.objectName+":"+this.className);
+        }
+        else
+        {
+            super.rename(":"+this.className);
+        }
+        System.err.println(this.className);
     }
 }

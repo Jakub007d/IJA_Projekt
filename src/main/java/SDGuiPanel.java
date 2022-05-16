@@ -156,6 +156,8 @@ public class SDGuiPanel extends JPanel {
 
                     // message <- sprava v sd
                     for (UMLMessage message : messageList) {
+                        message.senderUpdate(sequenceDiagram.getParticipantList());
+                        message.recipientUpdate(sequenceDiagram.getParticipantList());
                         if (Objects.equals(panel.getName(), message.getSender().getName())) {
                             int index = sequenceDiagram.messagePosition(message);
                             Graphics2D g2d = (Graphics2D) g.create();

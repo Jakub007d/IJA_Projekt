@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.List;
+
 /**
  * Trieda reprezentuje UML správu.
  * Správa má typ, odosielateľa a prijímateľa.
@@ -45,6 +47,38 @@ public class UMLMessage {
 
     public UMLParticipant getSender() {
         return this.sender;
+    }
+    public void senderUpdate(List<UMLParticipant> participantList){
+        for(UMLParticipant participant: participantList)
+        {
+            try {
+                if (participant.getOriginalName().equals(sender.getName()))
+                {
+                    this.sender = participant;
+                }
+
+            }
+            catch (Exception ey)
+            {
+
+            }
+        }
+    }
+    public void recipientUpdate(List<UMLParticipant> participantList){
+        for(UMLParticipant participant: participantList)
+        {
+            try {
+                if (participant.getOriginalName().equals(recipient.getName()))
+                {
+                    this.recipient = participant;
+                }
+
+            }
+            catch (Exception ey)
+            {
+
+            }
+        }
     }
 
     public UMLParticipant getRecipient() {

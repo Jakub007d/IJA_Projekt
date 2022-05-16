@@ -189,7 +189,7 @@ public class Controller implements ActionListener {
         }
         if (e.getSource() == view.loadSDButton) { /* nacitanie sekvencneho diagramu zo suboru */
             SDController sdController = new SDController();
-            sdController.loadSDFile(classDiagram);
+            sdController.loadSDFile(this.classDiagram);
         }
     }
 }

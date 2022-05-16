@@ -14,7 +14,7 @@ class UMLAttribute extends Element {
 + UMLClassifier type
 + op UMLClassifier getType <-_
 }
-class UMLCass extends UMLClassifier {
+class UMLClass extends UMLClassifier {
 + List<UMLAttributes> attributes
 + op boolean addAttribute <-UMLAttribute attr
 + op int getAttrPosition <-UMLAttribute attr
@@ -25,6 +25,6 @@ class ClassDiagram extends Element {
 + op UMLClassifier classifierForName <-String name
 }
 relation UMLAttribute _ DirectedAsociation UMLClassifier _
-relation UMLAttribute DirectedAsociation _ UMLCass _
+relation UMLAttribute DirectedAsociation _ UMLClass _
 relation UMLClassifier DirectedAsociation _ ClassDiagram _
 @enduml

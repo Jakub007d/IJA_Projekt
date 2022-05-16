@@ -1,6 +1,7 @@
 package main.java;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 /**
@@ -78,7 +79,24 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         }
         if (e.getSource() == reloadDiagram) {
             if (sdController.classDiagram != null) {
-                sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
+                for (UMLParticipant participant : sdController.sequenceDiagram.getParticipantList())
+                {
+                    participant.actualization();
+                }
+                for(Component component : this.sdController.sdView.SDViewMainPanel.getComponents())
+                {
+
+                    try{
+                        ((SDGuiParticipant)component).updateName();
+                        System.out.println(((SDGuiParticipant)component).getName());
+                        component.revalidate();
+                        component.repaint();
+                    }
+                    catch (Exception eE)
+                    {
+
+                    }
+                }
             }
             sdController.sdView.SDViewMainPanel.removeAll();
             sdController.sdView.drawSD(sdController.sequenceDiagram);
