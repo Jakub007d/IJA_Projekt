@@ -65,6 +65,7 @@ public class SDGuiParticipant extends JPanel {
             this.participantColor = Color.black;
         }
         participantName.setBorder(BorderFactory.createLineBorder(participantColor, 2));
+        this.setBackground(Color.white);
         participantName.setForeground(participantColor);
         participantName.setOpaque(true);
         height = participantName.getHeight();

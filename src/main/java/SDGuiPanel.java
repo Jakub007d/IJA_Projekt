@@ -80,7 +80,7 @@ public class SDGuiPanel extends JPanel {
         }
     }
 
-    private void drawMessage(Graphics g, int index, Component panel, UMLMessage message) {
+    private void drawMessage(Graphics2D g, int index, Component panel, UMLMessage message) {
         int offset = 40 + index * 40;
         int x = panel.getX() + panel.getWidth() / 2;
         int y = panel.getY() + offset;
@@ -88,6 +88,7 @@ public class SDGuiPanel extends JPanel {
         int recipient = sequenceDiagram.participantPosition(message.getRecipient());
         int direction = panel.getWidth() * (recipient-sender);
         int dir = arrowDirection(direction);
+
 
         drawMessageLine(g,x,y,direction,dir,message.getMessageType());
         //nastavi text spravy
@@ -108,7 +109,6 @@ public class SDGuiPanel extends JPanel {
 
         g.drawString(messageString, x + direction / 2 - strWidth / 2, y - 10);
         drawMessageArrow(g,x,y,direction,dir,message.getMessageType());
-
     }
 
     private void drawMessageLine(Graphics g, int x, int y, int direction, int dir, UMLMessage.UMLMessageType type) {
@@ -161,6 +161,7 @@ public class SDGuiPanel extends JPanel {
                         if (Objects.equals(panel.getName(), message.getSender().getName())) {
                             int index = sequenceDiagram.messagePosition(message);
                             Graphics2D g2d = (Graphics2D) g.create();
+
                             //settings for message color
                             setMessageColor(g2d,message);
 

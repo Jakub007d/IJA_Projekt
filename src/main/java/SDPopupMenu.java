@@ -10,6 +10,8 @@ import java.awt.event.*;
 public class SDPopupMenu extends JPopupMenu implements ActionListener {
     JMenuItem addParticipant;
     JMenuItem addMessage;
+    JMenuItem renameMessage;
+    JMenuItem deleteMessage;
     JMenuItem reloadDiagram;
 
     JPopupMenu SDPopup;
@@ -44,6 +46,14 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         addMessage = new JMenuItem("Add message");
         addMessage.addActionListener(this);
         SDPopup.add(addMessage);
+        // Premenovanie spravy
+        renameMessage = new JMenuItem("Rename message");
+        renameMessage.addActionListener(this);
+        SDPopup.add(renameMessage);
+        // Odstranenie spravy
+        deleteMessage = new JMenuItem("Delete message");
+        deleteMessage.addActionListener(this);
+        SDPopup.add(deleteMessage);
 
         // Reload
         reloadDiagram = new JMenuItem("Reload");
@@ -76,6 +86,12 @@ public class SDPopupMenu extends JPopupMenu implements ActionListener {
         }
         if (e.getSource() == addMessage) {
             new SDGuiMessageDialog(sdController);
+        }
+        if (e.getSource() == renameMessage) {
+            new SDGuiRenameMessageDialog(sdController);
+        }
+        if (e.getSource() == deleteMessage) {
+            new SDGuiDeleteMessageDialog(sdController);
         }
         if (e.getSource() == reloadDiagram) {
             if (sdController.classDiagram != null) {
