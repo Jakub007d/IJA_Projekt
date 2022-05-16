@@ -121,6 +121,17 @@ public class SequenceDiagram extends Element {
         }
     }
 
+    public UMLMessage messageAtPosition(int position)
+    {
+        if (position - 1 > numberOfMessages()) {
+            System.err.println("Out of bounds in messageList");
+            return null;
+        }
+        else {
+            return this.messageList.get(position);
+        }
+    }
+
     /**
      * vrati ucastnika diagramu podla nazvu, ak ucastnik s danym nazvom neexistuje, vrati null.
      * @param name

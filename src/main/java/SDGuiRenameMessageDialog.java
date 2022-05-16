@@ -34,9 +34,15 @@ public class SDGuiRenameMessageDialog {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             /* premenovanie spravy */
-            renameMessage();
+            renameMessage(comboMessage.getSelectedIndex(),messageField.getText());
         }
     }
 
-    private void renameMessage(){}
+    private void renameMessage(int selectedIndex, String text) {
+        UMLMessage ref = sdController.sequenceDiagram.messageAtPosition(selectedIndex);
+        ref.setMessage(text);
+        sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
+        sdController.sdView.drawSD(sdController.sequenceDiagram);
+        sdController.sdView.setVisible(true);
+    }
 }
