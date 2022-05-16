@@ -290,11 +290,11 @@ public class SequenceDiagram extends Element {
     /**
      * Vymaze zo sekvencneho diagramu spravu.
      *
-     * @param participant
+     * @param index pozicia spravy
      */
-    public void deleteMessage(UMLParticipant participant)
+    public void deleteMessage(int index)
     {
-//TODO
+        this.messageList.remove(messageAtPosition(index));
     }
 
 }

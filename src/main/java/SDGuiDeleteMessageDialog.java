@@ -30,9 +30,14 @@ public class SDGuiDeleteMessageDialog {
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             /* vymazanie spravy z diagramu */
-            deleteMessage();
+            deleteMessage(comboMessage.getSelectedIndex());
         }
     }
 
-    private void deleteMessage(){}
+    private void deleteMessage(int selectedIndex) {
+        sdController.sequenceDiagram.deleteMessage(selectedIndex);
+        sdController.sequenceDiagram.checkConsistence(sdController.classDiagram);
+        sdController.sdView.drawSD(sdController.sequenceDiagram);
+        sdController.sdView.setVisible(true);
+    }
 }
