@@ -2,6 +2,7 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 public class SDGuiPanel extends JPanel {
@@ -11,7 +12,6 @@ public class SDGuiPanel extends JPanel {
     {
         this.sequenceDiagram = sequenceDiagram;
         this.setBackground(Color.gray);
-
     }
 
     public SequenceDiagram getSequenceDiagram() {
@@ -80,7 +80,7 @@ public class SDGuiPanel extends JPanel {
         }
     }
 
-    private void drawMessage(Graphics g,int index,Component panel, UMLMessage message) {
+    private void drawMessage(Graphics g, int index, Component panel, UMLMessage message) {
         int offset = 40 + index * 40;
         int x = panel.getX() + panel.getWidth() / 2;
         int y = panel.getY() + offset;
@@ -94,6 +94,18 @@ public class SDGuiPanel extends JPanel {
         String messageString = messageText(message);
         //vypise text
         int strWidth = g.getFontMetrics().stringWidth(messageString);
+
+        //pozadie rect
+        Color textColor = g.getColor();
+        g.setColor(Color.white);
+        Rectangle2D r = g.getFontMetrics().getStringBounds(messageString, g);
+        g.fillRect(x + direction / 2 - strWidth / 2,
+                y - 10 - g.getFontMetrics().getAscent(),
+                (int) r.getWidth(),
+                (int) r.getHeight());
+        g.setColor(textColor);
+
+
         g.drawString(messageString, x + direction / 2 - strWidth / 2, y - 10);
         drawMessageArrow(g,x,y,direction,dir,message.getMessageType());
 
@@ -160,7 +172,6 @@ public class SDGuiPanel extends JPanel {
                             JLabel label = new JLabel(message.getMessage());
                             label.setBackground(Color.orange);
                             // test jlabel
-
 
                             // Get rid of the copy
                             g2d.dispose();
