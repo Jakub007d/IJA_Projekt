@@ -17,8 +17,16 @@ public class run {
      * @param args argumenty
      */
     public static void main(String[] args) {
+        /*
         //TEST
-        ClassDiagram d = new Parser().parse();
+        ClassDiagram d;
+        try{
+            d = new Parser().parse();
+        }
+        catch (Exception lol)
+        {
+            d = new JsonParser().parse();
+        }
 
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter("data/ClassDiagram.json")) {
@@ -27,7 +35,7 @@ public class run {
             e.printStackTrace();
         }
         ClassDiagram classs = new JsonParser().parse();
-
+    */
         new View();
         //TEST KONIEC
 
