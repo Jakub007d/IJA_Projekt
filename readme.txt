@@ -24,7 +24,7 @@ Vygenerovanie programovej dokumentácie:
     Zadaním príkazu "ant doc" do terminálu v zložke, kde sa
     nachádza tento súbor.
 -------------------------------------------------------------------
-                              Englis
+                              English
 -------------------------------------------------------------------
 The aplication after launch will show a window with button witch
 after pressing it will load test data for the class diagram and
