@@ -24,3 +24,23 @@ Vygenerovanie programovej dokumentácie:
     Zadaním príkazu "ant doc" do terminálu v zložke, kde sa
     nachádza tento súbor.
 -------------------------------------------------------------------
+                              Englis
+-------------------------------------------------------------------
+The aplication after launch will show a window with button witch
+after pressing it will load test data for the class diagram and
+draw it on screen.
+-------------------------------------------------------------------
+Compile:
+        After inserting command "ant" to the terminal inside the 
+        root directory of this project.
+Run:    
+        After inserting command "ant run" to the terminal inside the 
+        root directory of this project.
+   OR
+        After inserting command "java -jar ija-app.jar" to the terminal 
+        inside the dest directory
+        
+Generating of app documentation:
+        After inserting command "ant doc" to the terminal inside the 
+        root directory of this project.
+
